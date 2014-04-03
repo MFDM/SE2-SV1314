@@ -1,0 +1,372 @@
+Archive member included because of file (symbol)
+
+/usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
+                              ./src/sysclk.o (__aeabi_uidiv)
+/usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_dvmd_tls.o)
+                              /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
+
+Discarded input sections
+
+ .text          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .data          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .bss           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .init          0x00000000        0xc /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .fini          0x00000000        0xc /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .ARM.attributes
+                0x00000000       0x16 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+ .text          0x00000000      0x128 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .data          0x00000000        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .bss           0x00000000       0x1c /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .init_array    0x00000000        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .fini_array    0x00000000        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .eh_frame      0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .jcr           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .tm_clone_table
+                0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .ARM.attributes
+                0x00000000       0x30 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+ .group         0x00000000        0x8 ./src/blinkLed.o
+ .group         0x00000000        0x8 ./src/blinkLed.o
+ .text          0x00000000        0x0 ./src/blinkLed.o
+ .data          0x00000000        0x0 ./src/blinkLed.o
+ .bss           0x00000000        0x0 ./src/blinkLed.o
+ .text.blink    0x00000000       0x38 ./src/blinkLed.o
+ .debug_info    0x00000000       0x6c ./src/blinkLed.o
+ .debug_abbrev  0x00000000       0x58 ./src/blinkLed.o
+ .debug_loc     0x00000000       0x2c ./src/blinkLed.o
+ .debug_aranges
+                0x00000000       0x20 ./src/blinkLed.o
+ .debug_ranges  0x00000000       0x10 ./src/blinkLed.o
+ .debug_macro   0x00000000       0x32 ./src/blinkLed.o
+ .debug_macro   0x00000000      0x7d2 ./src/blinkLed.o
+ .debug_macro   0x00000000       0x4c ./src/blinkLed.o
+ .debug_line    0x00000000       0x8d ./src/blinkLed.o
+ .debug_str     0x00000000     0x2310 ./src/blinkLed.o
+ .comment       0x00000000       0x31 ./src/blinkLed.o
+ .ARM.attributes
+                0x00000000       0x30 ./src/blinkLed.o
+ .debug_frame   0x00000000       0x2c ./src/blinkLed.o
+ .group         0x00000000        0x8 ./src/delay.o
+ .group         0x00000000        0x8 ./src/delay.o
+ .text          0x00000000        0x0 ./src/delay.o
+ .data          0x00000000        0x0 ./src/delay.o
+ .bss           0x00000000        0x0 ./src/delay.o
+ .text.delay_init
+                0x00000000       0x1c ./src/delay.o
+ .text.delay    0x00000000       0x40 ./src/delay.o
+ .text.TicksToMS
+                0x00000000       0x24 ./src/delay.o
+ .debug_info    0x00000000       0xb1 ./src/delay.o
+ .debug_abbrev  0x00000000       0x8c ./src/delay.o
+ .debug_loc     0x00000000       0x84 ./src/delay.o
+ .debug_aranges
+                0x00000000       0x30 ./src/delay.o
+ .debug_ranges  0x00000000       0x20 ./src/delay.o
+ .debug_macro   0x00000000       0x2e ./src/delay.o
+ .debug_macro   0x00000000      0x7d2 ./src/delay.o
+ .debug_macro   0x00000000       0x4c ./src/delay.o
+ .debug_line    0x00000000       0xaa ./src/delay.o
+ .debug_str     0x00000000     0x2332 ./src/delay.o
+ .comment       0x00000000       0x31 ./src/delay.o
+ .ARM.attributes
+                0x00000000       0x30 ./src/delay.o
+ .debug_frame   0x00000000       0x60 ./src/delay.o
+ .group         0x00000000        0x8 ./src/gpio.o
+ .group         0x00000000        0x8 ./src/gpio.o
+ .text          0x00000000        0x0 ./src/gpio.o
+ .data          0x00000000        0x0 ./src/gpio.o
+ .bss           0x00000000        0x0 ./src/gpio.o
+ .text.GPIO_InitInputPins
+                0x00000000       0x40 ./src/gpio.o
+ .text.GPIO_Read
+                0x00000000       0x24 ./src/gpio.o
+ .debug_macro   0x00000000      0x7d2 ./src/gpio.o
+ .debug_macro   0x00000000       0x4c ./src/gpio.o
+ .data          0x00000000        0x0 ./src/init.o
+ .bss           0x00000000        0x0 ./src/init.o
+ .group         0x00000000        0x8 ./src/interrupts.o
+ .group         0x00000000        0x8 ./src/interrupts.o
+ .text          0x00000000        0x0 ./src/interrupts.o
+ .data          0x00000000        0x0 ./src/interrupts.o
+ .bss           0x00000000        0x0 ./src/interrupts.o
+ .debug_macro   0x00000000      0x7d2 ./src/interrupts.o
+ .debug_macro   0x00000000       0x4c ./src/interrupts.o
+ .group         0x00000000        0x8 ./src/led.o
+ .group         0x00000000        0x8 ./src/led.o
+ .text          0x00000000        0x0 ./src/led.o
+ .data          0x00000000        0x0 ./src/led.o
+ .bss           0x00000000        0x0 ./src/led.o
+ .text.LED_GetState
+                0x00000000       0x24 ./src/led.o
+ .debug_macro   0x00000000      0x7d2 ./src/led.o
+ .debug_macro   0x00000000       0x4c ./src/led.o
+ .group         0x00000000        0x8 ./src/sysclk.o
+ .group         0x00000000        0x8 ./src/sysclk.o
+ .text          0x00000000        0x0 ./src/sysclk.o
+ .data          0x00000000        0x0 ./src/sysclk.o
+ .bss           0x00000000        0x0 ./src/sysclk.o
+ .text.SYSCLK_GetValue
+                0x00000000       0x24 ./src/sysclk.o
+ .text.SYSCLK_Elapsed
+                0x00000000       0x30 ./src/sysclk.o
+ .debug_macro   0x00000000      0x7d2 ./src/sysclk.o
+ .debug_macro   0x00000000       0x4c ./src/sysclk.o
+ .data          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
+ .bss           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
+ .data          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_dvmd_tls.o)
+ .bss           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_dvmd_tls.o)
+ .text          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .data          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .bss           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .eh_frame      0x00000000        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .jcr           0x00000000        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .tm_clone_table
+                0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .ARM.attributes
+                0x00000000       0x30 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+ .text          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+ .data          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+ .bss           0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+ .init          0x00000000        0xc /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+ .fini          0x00000000        0xc /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+ .ARM.attributes
+                0x00000000       0x18 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x00000000         0x00020000
+ram              0x40000000         0x00010000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crti.o
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+LOAD ./src/blinkLed.o
+LOAD ./src/delay.o
+LOAD ./src/gpio.o
+LOAD ./src/init.o
+LOAD ./src/interrupts.o
+LOAD ./src/led.o
+LOAD ./src/sysclk.o
+START GROUP
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/../../../../arm-none-eabi/lib/libc.a
+END GROUP
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtend.o
+LOAD /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtn.o
+
+.startup        0x40000000       0xc0
+ *(.startup*)
+ .startup       0x40000000       0xc0 ./src/init.o
+                0x40000040                _start
+
+.text           0x400000c0      0x570
+ *(.text*)
+ .text.GPIO_PinSelect
+                0x400000c0       0xe4 ./src/gpio.o
+                0x400000c0                GPIO_PinSelect
+ .text.GPIO_InitOutputPins
+                0x400001a4       0x40 ./src/gpio.o
+                0x400001a4                GPIO_InitOutputPins
+ .text.GPIO_Write
+                0x400001e4       0x50 ./src/gpio.o
+                0x400001e4                GPIO_Write
+ .text          0x40000234       0x44 ./src/init.o
+                0x4000024c                timer0ISRH
+                0x40000264                setEnableIntr
+ .text.blink_Led
+                0x40000278       0x24 ./src/interrupts.o
+                0x40000278                blink_Led
+ .text.timer0ISR
+                0x4000029c       0x7c ./src/interrupts.o
+                0x4000029c                timer0ISR
+ .text.main     0x40000318       0xd4 ./src/interrupts.o
+                0x40000318                main
+ .text.LED_Init
+                0x400003ec       0x58 ./src/led.o
+                0x400003ec                LED_Init
+ .text.LED_SetState
+                0x40000444       0x48 ./src/led.o
+                0x40000444                LED_SetState
+ .text.SYSCLK_Init
+                0x4000048c       0x8c ./src/sysclk.o
+                0x4000048c                SYSCLK_Init
+ .text          0x40000518      0x114 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
+                0x40000518                __udivsi3
+                0x40000518                __aeabi_uidiv
+                0x4000060c                __aeabi_uidivmod
+ .text          0x4000062c        0x4 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_dvmd_tls.o)
+                0x4000062c                __aeabi_ldiv0
+                0x4000062c                __aeabi_idiv0
+                0x40000630                end = .
+
+.glue_7         0x40000630        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x40000630        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x40000630        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x40000630        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x40000630        0x0
+ .iplt          0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+
+.rel.dyn        0x40000630        0x0
+ .rel.iplt      0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+
+.data           0x40000630       0x10
+                0x40000630                __data_start__ = ABSOLUTE (.)
+ *(.data*)
+ .data.timer0   0x40000630        0x4 ./src/interrupts.o
+                0x40000630                timer0
+ .data.vic      0x40000634        0x4 ./src/interrupts.o
+                0x40000634                vic
+ .data.VectAddr0
+                0x40000638        0x4 ./src/interrupts.o
+                0x40000638                VectAddr0
+ .data.VectCntl0
+                0x4000063c        0x4 ./src/interrupts.o
+                0x4000063c                VectCntl0
+                0x40000640                . = ALIGN (0x4)
+                0x40000640                __data_end__ = ABSOLUTE (.)
+                0x40000630                __rom_data_start__ = __data_start__
+
+.igot.plt       0x40000640        0x0
+ .igot.plt      0x00000000        0x0 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/crtbegin.o
+
+.bss            0x40000640        0x4
+                0x40000640                __bss_start__ = ABSOLUTE (.)
+ *(.bss*)
+ .bss.state     0x40000640        0x4 ./src/interrupts.o
+                0x40000640                state
+                0x40000644                . = ALIGN (0x4)
+                0x40000644                __bss_end__ = ABSOLUTE (.)
+
+.stack          0x40000644     0x1000
+ *(.stack*)
+ .stack         0x40000644     0x1000 ./src/init.o
+
+.rodata
+ *(.rodata*)
+
+.ARM.exidx
+ *(.ARM.exidx*)
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.comment        0x00000000       0x30
+ *(.comment)
+ .comment       0x00000000       0x30 ./src/gpio.o
+                                 0x31 (size before relaxing)
+ .comment       0x00000000       0x31 ./src/interrupts.o
+ .comment       0x00000000       0x31 ./src/led.o
+ .comment       0x00000000       0x31 ./src/sysclk.o
+OUTPUT(firstTry.axf elf32-littlearm)
+
+.ARM.attributes
+                0x00000000       0x2c
+ .ARM.attributes
+                0x00000000       0x30 ./src/gpio.o
+ .ARM.attributes
+                0x00000030       0x20 ./src/init.o
+ .ARM.attributes
+                0x00000050       0x30 ./src/interrupts.o
+ .ARM.attributes
+                0x00000080       0x30 ./src/led.o
+ .ARM.attributes
+                0x000000b0       0x30 ./src/sysclk.o
+ .ARM.attributes
+                0x000000e0       0x18 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000000f8       0x18 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_dvmd_tls.o)
+
+.debug_info     0x00000000      0x7e8
+ .debug_info    0x00000000      0x1c0 ./src/gpio.o
+ .debug_info    0x000001c0       0x57 ./src/init.o
+ .debug_info    0x00000217      0x31f ./src/interrupts.o
+ .debug_info    0x00000536       0xd9 ./src/led.o
+ .debug_info    0x0000060f      0x1d9 ./src/sysclk.o
+
+.debug_abbrev   0x00000000      0x3a7
+ .debug_abbrev  0x00000000       0xf0 ./src/gpio.o
+ .debug_abbrev  0x000000f0       0x12 ./src/init.o
+ .debug_abbrev  0x00000102      0x124 ./src/interrupts.o
+ .debug_abbrev  0x00000226       0xaf ./src/led.o
+ .debug_abbrev  0x000002d5       0xd2 ./src/sysclk.o
+
+.debug_loc      0x00000000      0x268
+ .debug_loc     0x00000000       0xdc ./src/gpio.o
+ .debug_loc     0x000000dc       0x84 ./src/interrupts.o
+ .debug_loc     0x00000160       0x84 ./src/led.o
+ .debug_loc     0x000001e4       0x84 ./src/sysclk.o
+
+.debug_aranges  0x00000000       0xf8
+ .debug_aranges
+                0x00000000       0x40 ./src/gpio.o
+ .debug_aranges
+                0x00000040       0x28 ./src/init.o
+ .debug_aranges
+                0x00000068       0x30 ./src/interrupts.o
+ .debug_aranges
+                0x00000098       0x30 ./src/led.o
+ .debug_aranges
+                0x000000c8       0x30 ./src/sysclk.o
+
+.debug_ranges   0x00000000       0xb0
+ .debug_ranges  0x00000000       0x30 ./src/gpio.o
+ .debug_ranges  0x00000030       0x20 ./src/init.o
+ .debug_ranges  0x00000050       0x20 ./src/interrupts.o
+ .debug_ranges  0x00000070       0x20 ./src/led.o
+ .debug_ranges  0x00000090       0x20 ./src/sysclk.o
+
+.debug_macro    0x00000000       0xbe
+ .debug_macro   0x00000000       0x24 ./src/gpio.o
+ .debug_macro   0x00000024       0x48 ./src/interrupts.o
+ .debug_macro   0x0000006c       0x2e ./src/led.o
+ .debug_macro   0x0000009a       0x24 ./src/sysclk.o
+
+.debug_line     0x00000000      0x395
+ .debug_line    0x00000000       0xcf ./src/gpio.o
+ .debug_line    0x000000cf       0x8c ./src/init.o
+ .debug_line    0x0000015b       0xcd ./src/interrupts.o
+ .debug_line    0x00000228       0xd2 ./src/led.o
+ .debug_line    0x000002fa       0x9b ./src/sysclk.o
+
+.debug_str      0x00000000     0x2584
+ .debug_str     0x00000000     0x23bb ./src/gpio.o
+                               0x23c8 (size before relaxing)
+ .debug_str     0x000023bb      0x131 ./src/interrupts.o
+                               0x2425 (size before relaxing)
+ .debug_str     0x000024ec       0x4a ./src/led.o
+                               0x234d (size before relaxing)
+ .debug_str     0x00002536       0x4e ./src/sysclk.o
+                               0x235d (size before relaxing)
+
+.debug_frame    0x00000000      0x1dc
+ .debug_frame   0x00000000       0x90 ./src/gpio.o
+ .debug_frame   0x00000090       0x64 ./src/interrupts.o
+ .debug_frame   0x000000f4       0x64 ./src/led.o
+ .debug_frame   0x00000158       0x64 ./src/sysclk.o
+ .debug_frame   0x000001bc       0x20 /usr/local/arm-tools/arm-2012.09/bin/../lib/gcc/arm-none-eabi/4.7.2/libgcc.a(_udivsi3.o)
