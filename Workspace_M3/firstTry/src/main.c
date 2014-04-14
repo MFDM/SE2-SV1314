@@ -14,19 +14,36 @@
 
 #include <cr_section_macros.h>
 
-// TODO: insert other include files here
+int state=1;
+int LED_PIN = 22;
+unsigned int * GPIO_FIO0DIR = 0x2009C000;
+unsigned int * GPIO_FIO0MASK = 0x2009C010;
+unsigned int * GPIO_FIO0SET = 0x2009C018;
+unsigned int * GPIO_FIO0CLR =  0x2009C01C;
 
-// TODO: insert other definitions and declarations here
 
+void local_gpio_Init(){
+	*GPIO_FIO0DIR = 1<<LED_PIN;//1 de output
+	*GPIO_FIO0CLR = 1 <<LED_PIN;
+	*GPIO_FIO0SET = state <<LED_PIN;
+}
+
+void blinkLed() {
+	if(state){
+		state = 0;
+		*GPIO_FIO0CLR = 1 <<LED_PIN;
+	}else{
+		state=1;
+		*GPIO_FIO0SET = state <<LED_PIN;
+	}
+
+}
 int main(void) {
 
-    // TODO: insert code here
+	local_gpio_Init();
 
-    // Force the counter to be placed into memory
-    volatile static int i = 0 ;
-    // Enter an infinite loop, just incrementing a counter
     while(1) {
-        i++ ;
+        blinkLed();
     }
     return 0 ;
 }

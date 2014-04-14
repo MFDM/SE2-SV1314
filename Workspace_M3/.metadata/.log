@@ -1528,3 +1528,24 @@ Binding(CTRL+SHIFT+H,
 
 !ENTRY org.eclipse.ui 4 4 2014-04-14 15:14:41.145
 !MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY com.crt.log 1 0 2014-04-14 15:49:43.721
+!MESSAGE Drivers loaded in 4331 milliseconds
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 15:49:51.369
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand@acc607} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 15:53:01.825
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand@acc607} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY com.crt.log 1 0 2014-04-14 16:00:11.760
+!MESSAGE Drivers loaded in 2722 milliseconds
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 16:00:53.858
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand@acc607} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 16:03:39.824
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand@acc607} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 16:04:54.526
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand@acc607} vs {com.crt.dsfdebug.commands.RestartCommand}

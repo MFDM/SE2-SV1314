@@ -32,6 +32,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/main.o
  .data          0x00000000        0x0 ./src/main.o
  .bss           0x00000000        0x0 ./src/main.o
+ .data.GPIO_FIO0MASK
+                0x00000000        0x4 ./src/main.o
  .debug_macro   0x00000000      0x856 ./src/main.o
  .text          0x00000000        0x0 c:/nxp/lpcxpresso_7.1.1_125/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
  .data          0x00000000        0x0 c:/nxp/lpcxpresso_7.1.1_125/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
@@ -58,7 +60,7 @@ END GROUP
                 0x10008000                __top_RamLoc32 = 0x10008000
                 0x20084000                __top_RamAHB32 = 0x20084000
 
-.text           0x00000000      0x1a8
+.text           0x00000000      0x228
  FILL mask 0xff
                 0x00000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -67,16 +69,16 @@ END GROUP
                 0x000000cc                . = ALIGN (0x4)
                 0x000000cc                __section_table_start = .
                 0x000000cc                __data_section_table = .
-                0x000000cc        0x4 LONG 0x1a8 LOADADDR (.data)
+                0x000000cc        0x4 LONG 0x228 LOADADDR (.data)
                 0x000000d0        0x4 LONG 0x10000000 ADDR (.data)
-                0x000000d4        0x4 LONG 0x0 SIZEOF (.data)
-                0x000000d8        0x4 LONG 0x1a8 LOADADDR (.data_RAM2)
+                0x000000d4        0x4 LONG 0x14 SIZEOF (.data)
+                0x000000d8        0x4 LONG 0x228 LOADADDR (.data_RAM2)
                 0x000000dc        0x4 LONG 0x2007c000 ADDR (.data_RAM2)
                 0x000000e0        0x4 LONG 0x0 SIZEOF (.data_RAM2)
                 0x000000e4                __data_section_table_end = .
                 0x000000e4                __bss_section_table = .
-                0x000000e4        0x4 LONG 0x10000000 ADDR (.bss)
-                0x000000e8        0x4 LONG 0x4 SIZEOF (.bss)
+                0x000000e4        0x4 LONG 0x10000014 ADDR (.bss)
+                0x000000e8        0x4 LONG 0x0 SIZEOF (.bss)
                 0x000000ec        0x4 LONG 0x2007c000 ADDR (.bss_RAM2)
                 0x000000f0        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
                 0x000000f4                __bss_section_table_end = .
@@ -133,43 +135,49 @@ END GROUP
                 0x00000138                bss_init
                 0x0000014c                ResetISR
  *(.text*)
- .text.main     0x00000194       0x10 ./src/main.o
-                0x00000194                main
+ .text.local_gpio_Init
+                0x00000194       0x40 ./src/main.o
+                0x00000194                local_gpio_Init
+ .text.blinkLed
+                0x000001d4       0x44 ./src/main.o
+                0x000001d4                blinkLed
+ .text.main     0x00000218        0xc ./src/main.o
+                0x00000218                main
  .text.__weak_main
-                0x000001a4        0x4 c:/nxp/lpcxpresso_7.1.1_125/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
-                0x000001a4                __weak_main
-                0x000001a4                __main
+                0x00000224        0x4 c:/nxp/lpcxpresso_7.1.1_125/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
+                0x00000224                __weak_main
+                0x00000224                __main
  *(.rodata .rodata.* .constdata .constdata.*)
-                0x000001a8                . = ALIGN (0x4)
+                0x00000228                . = ALIGN (0x4)
 
-.glue_7         0x000001a8        0x0
+.glue_7         0x00000228        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x000001a8        0x0
+.glue_7t        0x00000228        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x000001a8        0x0
+.vfp11_veneer   0x00000228        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x000001a8        0x0
+.v4_bx          0x00000228        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x000001a8        0x0
+.iplt           0x00000228        0x0
  .iplt          0x00000000        0x0 ./src/cr_startup_lpc175x_6x.o
 
-.rel.dyn        0x000001a8        0x0
+.rel.dyn        0x00000228        0x0
  .rel.iplt      0x00000000        0x0 ./src/cr_startup_lpc175x_6x.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x000001a8                __exidx_start = .
+                0x00000228                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x000001a8                __exidx_end = .
-                0x000001a8                _etext = .
+                0x00000228                __exidx_end = .
+                0x00000228                _etext = .
 
-.data_RAM2      0x2007c000        0x0 load address 0x000001a8
+.data_RAM2      0x2007c000        0x0 load address 0x00000228
  FILL mask 0xff
  *(.ramfunc.$RAM2)
  *(.ramfunc.$RamAHB32)
@@ -183,16 +191,29 @@ END GROUP
                 0x10000000                . = ALIGN (0x4)
                 0x10000000                _end_uninit_RESERVED = .
 
-.data           0x10000000        0x0 load address 0x000001a8
+.data           0x10000000       0x14 load address 0x00000228
  FILL mask 0xff
                 0x10000000                _data = .
  *(vtable)
  *(.ramfunc*)
  *(.data*)
-                0x10000000                . = ALIGN (0x4)
-                0x10000000                _edata = .
+ .data.state    0x10000000        0x4 ./src/main.o
+                0x10000000                state
+ .data.GPIO_FIO0SET
+                0x10000004        0x4 ./src/main.o
+                0x10000004                GPIO_FIO0SET
+ .data.GPIO_FIO0CLR
+                0x10000008        0x4 ./src/main.o
+                0x10000008                GPIO_FIO0CLR
+ .data.GPIO_FIO0DIR
+                0x1000000c        0x4 ./src/main.o
+                0x1000000c                GPIO_FIO0DIR
+ .data.LED_PIN  0x10000010        0x4 ./src/main.o
+                0x10000010                LED_PIN
+                0x10000014                . = ALIGN (0x4)
+                0x10000014                _edata = .
 
-.igot.plt       0x10000000        0x0 load address 0x000001a8
+.igot.plt       0x10000014        0x0 load address 0x0000023c
  .igot.plt      0x00000000        0x0 ./src/cr_startup_lpc175x_6x.o
 
 .bss_RAM2       0x2007c000        0x0
@@ -200,49 +221,48 @@ END GROUP
  *(.bss.$RamAHB32*)
                 0x2007c000                . = ALIGN (0x4)
 
-.bss            0x10000000        0x4
-                0x10000000                _bss = .
+.bss            0x10000014        0x0
+                0x10000014                _bss = .
  *(.bss*)
- .bss.i.3613    0x10000000        0x4 ./src/main.o
  *(COMMON)
-                0x10000004                . = ALIGN (0x4)
-                0x10000004                _ebss = .
-                0x10000004                PROVIDE (end, .)
+                0x10000014                . = ALIGN (0x4)
+                0x10000014                _ebss = .
+                0x10000014                PROVIDE (end, .)
 
 .noinit_RAM2    0x2007c000        0x0
  *(.noinit.$RAM2*)
  *(.noinit.$RamAHB32*)
                 0x2007c000                . = ALIGN (0x4)
 
-.noinit         0x10000004        0x0
-                0x10000004                _noinit = .
+.noinit         0x10000014        0x0
+                0x10000014                _noinit = .
  *(.noinit*)
-                0x10000004                . = ALIGN (0x4)
-                0x10000004                _end_noinit = .
-                0x10000004                PROVIDE (_pvHeapStart, .)
+                0x10000014                . = ALIGN (0x4)
+                0x10000014                _end_noinit = .
+                0x10000014                PROVIDE (_pvHeapStart, .)
                 0x10008000                PROVIDE (_vStackTop, (__top_RamLoc32 - 0x0))
 OUTPUT(firstTry.axf elf32-littlearm)
 
-.debug_info     0x00000000      0x2d6
+.debug_info     0x00000000      0x369
  .debug_info    0x00000000      0x277 ./src/cr_startup_lpc175x_6x.o
- .debug_info    0x00000277       0x5f ./src/main.o
+ .debug_info    0x00000277       0xf2 ./src/main.o
 
-.debug_abbrev   0x00000000      0x165
+.debug_abbrev   0x00000000      0x195
  .debug_abbrev  0x00000000      0x111 ./src/cr_startup_lpc175x_6x.o
- .debug_abbrev  0x00000111       0x54 ./src/main.o
+ .debug_abbrev  0x00000111       0x84 ./src/main.o
 
 .debug_loc      0x00000000      0x1d1
  .debug_loc     0x00000000      0x1d1 ./src/cr_startup_lpc175x_6x.o
 
-.debug_aranges  0x00000000       0xa0
+.debug_aranges  0x00000000       0xb0
  .debug_aranges
                 0x00000000       0x80 ./src/cr_startup_lpc175x_6x.o
  .debug_aranges
-                0x00000080       0x20 ./src/main.o
+                0x00000080       0x30 ./src/main.o
 
-.debug_ranges   0x00000000       0x80
+.debug_ranges   0x00000000       0x90
  .debug_ranges  0x00000000       0x70 ./src/cr_startup_lpc175x_6x.o
- .debug_ranges  0x00000070       0x10 ./src/main.o
+ .debug_ranges  0x00000070       0x20 ./src/main.o
 
 .debug_macro    0x00000000      0x90f
  .debug_macro   0x00000000       0x1d ./src/cr_startup_lpc175x_6x.o
@@ -250,15 +270,15 @@ OUTPUT(firstTry.axf elf32-littlearm)
  .debug_macro   0x00000873       0x1a ./src/main.o
  .debug_macro   0x0000088d       0x82 ./src/main.o
 
-.debug_line     0x00000000      0x143
+.debug_line     0x00000000      0x168
  .debug_line    0x00000000       0xaa ./src/cr_startup_lpc175x_6x.o
- .debug_line    0x000000aa       0x99 ./src/main.o
+ .debug_line    0x000000aa       0xbe ./src/main.o
 
-.debug_str      0x00000000     0x2a36
+.debug_str      0x00000000     0x2a92
  .debug_str     0x00000000     0x25a4 ./src/cr_startup_lpc175x_6x.o
                                0x25b7 (size before relaxing)
- .debug_str     0x000025a4      0x492 ./src/main.o
-                               0x281e (size before relaxing)
+ .debug_str     0x000025a4      0x4ee ./src/main.o
+                               0x2887 (size before relaxing)
 
 .comment        0x00000000       0xe0
  .comment       0x00000000       0x70 ./src/cr_startup_lpc175x_6x.o
@@ -276,6 +296,6 @@ OUTPUT(firstTry.axf elf32-littlearm)
  .ARM.attributes
                 0x00000066       0x33 c:/nxp/lpcxpresso_7.1.1_125/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7-m\libcr_c.a(__weak__main.o)
 
-.debug_frame    0x00000000      0x114
+.debug_frame    0x00000000      0x13c
  .debug_frame   0x00000000       0xf4 ./src/cr_startup_lpc175x_6x.o
- .debug_frame   0x000000f4       0x20 ./src/main.o
+ .debug_frame   0x000000f4       0x48 ./src/main.o
