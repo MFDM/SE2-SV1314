@@ -1,0 +1,69 @@
+!SESSION 2014-04-12 11:08:47.040 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=pt_PT
+Framework arguments:  -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:09:32.990
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.core.net 1 0 2014-04-12 11:09:33.272
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:09:35.663
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:09:35.664
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator
+!SESSION 2014-04-12 11:16:23.748 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=pt_PT
+Framework arguments:  -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:16:27.696
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.core.net 1 0 2014-04-12 11:16:28.043
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:16:30.583
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:16:30.583
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:16:32.035
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.ui 4 4 2014-04-12 11:16:32.479
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+!SESSION 2014-04-14 14:12:21.572 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86, WS=cocoa, NL=pt_PT
+Framework arguments:  -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86 -keyring /Users/mfdiasmarques/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 14:12:27.516
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.core.net 1 0 2014-04-14 14:12:27.929
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 14:12:30.837
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Duplicate id found: org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 14:12:30.837
+!MESSAGE Plugin org.eclipse.cdt.ui, extension org.eclipse.ui.decorators, id org.eclipse.cdt.internal.ui.CustomBuildSettingsDecorator: Unknown extension tag found: decorator
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 14:12:32.881
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
+
+!ENTRY org.eclipse.ui 4 4 2014-04-14 14:12:33.354
+!MESSAGE Conflicting handlers for com.crt.dsfdebug.RestartCommand: {com.crt.dsfdebug.commands.RestartCommand} vs {com.crt.dsfdebug.commands.RestartCommand}
