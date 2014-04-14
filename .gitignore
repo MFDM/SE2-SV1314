@@ -1,3 +1,9 @@
-
 Workspace_M3/.metadata
+Workspace_M3/.metadata/*
 
+
+*.resources
+
+*.xmi
+
+*.xmi
