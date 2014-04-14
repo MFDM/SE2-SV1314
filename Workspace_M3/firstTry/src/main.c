@@ -21,7 +21,6 @@ unsigned int * GPIO_FIO0MASK = 0x2009C010;
 unsigned int * GPIO_FIO0SET = 0x2009C018;
 unsigned int * GPIO_FIO0CLR =  0x2009C01C;
 
-
 void local_gpio_Init(){
 	*GPIO_FIO0DIR = 1<<LED_PIN;//1 de output
 	*GPIO_FIO0CLR = 1 <<LED_PIN;
