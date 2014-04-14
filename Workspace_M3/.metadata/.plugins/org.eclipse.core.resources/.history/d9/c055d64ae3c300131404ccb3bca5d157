@@ -1,0 +1,35 @@
+/*
+===============================================================================
+ Name        : main.c
+ Author      : $(author)
+ Version     :
+ Copyright   : $(copyright)
+ Description : main definition
+===============================================================================
+*/
+
+#ifdef __USE_CMSIS
+#include "LPC17xx.h"
+#endif
+
+#include <cr_section_macros.h>
+
+int state=0;
+int LED_PIN = 22;
+unsigned int * GPIO_FIO0DIR = 0x2009C000;
+unsigned int * GPIO_FIO0MASK = 0x2009C010;
+
+
+void local_gpio_init(){
+	*GPIO_FIO0DIR = 1<<LED_PIN;//1 de output
+}
+
+int main(void) {
+
+	local_gpio_Init();
+
+    while(1) {
+        blickLed(state);
+    }
+    return 0 ;
+}
