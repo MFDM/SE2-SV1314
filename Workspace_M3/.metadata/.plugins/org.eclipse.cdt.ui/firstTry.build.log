@@ -1,4 +1,4 @@
-15:14:33 **** Incremental Build of configuration Debug for project firstTry ****
+15:34:26 **** Incremental Build of configuration Debug for project firstTry ****
 make all 
 Building file: ../src/main.c
 Invoking: MCU C Compiler
@@ -17,5 +17,5 @@ arm-none-eabi-size "firstTry.axf"; # arm-none-eabi-objcopy -v -O binary "firstTr
     424	      0	      4	    428	    1ac	firstTry.axf
  
 
-15:14:34 Build Finished (took 1s.243ms)
+15:34:26 Build Finished (took 122ms)
 
