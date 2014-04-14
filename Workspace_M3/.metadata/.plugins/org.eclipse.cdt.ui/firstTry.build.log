@@ -1,6 +1,21 @@
-16:04:19 **** Incremental Build of configuration Debug for project firstTry ****
+15:34:26 **** Incremental Build of configuration Debug for project firstTry ****
 make all 
-make: Nothing to be done for `all'.
+Building file: ../src/main.c
+Invoking: MCU C Compiler
+arm-none-eabi-gcc -D__REDLIB__ -DDEBUG -D__CODE_RED -DCORE_M3 -D__LPC17XX__ -Og -g3 -Wall -c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections -mcpu=cortex-m3 -mthumb -specs=redlib.specs -MMD -MP -MF"src/main.d" -MT"src/main.d" -o "src/main.o" "../src/main.c"
+Finished building: ../src/main.c
+ 
+Building target: firstTry.axf
+Invoking: MCU Linker
+arm-none-eabi-gcc -nostdlib -Xlinker -Map="firstTry.map" -Xlinker --gc-sections -mcpu=cortex-m3 -mthumb -T "firstTry_Debug.ld" -o "firstTry.axf"  ./src/cr_startup_lpc175x_6x.o ./src/crp.o ./src/main.o   
+Finished building target: firstTry.axf
+ 
+make --no-print-directory post-build
+Performing post-build steps
+arm-none-eabi-size "firstTry.axf"; # arm-none-eabi-objcopy -v -O binary "firstTry.axf" "firstTry.bin" ; # checksum -p LPC1769 -d "firstTry.bin";
+   text	   data	    bss	    dec	    hex	filename
+    424	      0	      4	    428	    1ac	firstTry.axf
+ 
 
-16:04:19 Build Finished (took 432ms)
+15:34:26 Build Finished (took 122ms)
 
