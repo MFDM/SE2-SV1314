@@ -33,6 +33,9 @@
 								</option>
 								<option id="gnu.c.compiler.option.misc.other.1195030758" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0 -fno-builtin -ffunction-sections -fdata-sections" valueType="string"/>
 								<option id="com.crt.advproject.gcc.hdrlib.1036612892" name="Library headers" superClass="com.crt.advproject.gcc.hdrlib" value="Redlib" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.include.paths.1753937403" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/My_Includes}&quot;"/>
+								</option>
 								<inputType id="com.crt.advproject.compiler.input.436874689" superClass="com.crt.advproject.compiler.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gas.exe.debug.1612840276" name="MCU Assembler" superClass="com.crt.advproject.gas.exe.debug">

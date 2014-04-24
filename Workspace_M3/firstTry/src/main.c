@@ -13,27 +13,26 @@
 #endif
 
 #include <cr_section_macros.h>
+#include "gpio.h"
+#include "LPC1769.h"
 
 int state=1;
 int LED_PIN = 22;
-unsigned int * GPIO_FIO0DIR = 0x2009C000;
-unsigned int * GPIO_FIO0MASK = 0x2009C010;
-unsigned int * GPIO_FIO0SET = 0x2009C018;
-unsigned int * GPIO_FIO0CLR =  0x2009C01C;
+LPC1769_GPIO* gpio = LPC1769_BASE_GPIO0;
 
 void local_gpio_Init(){
-	*GPIO_FIO0DIR = 1<<LED_PIN;//1 de output
-	*GPIO_FIO0CLR = 1 <<LED_PIN;
-	*GPIO_FIO0SET = state <<LED_PIN;
+	gpio->GPIO_FIODIR = 1<<LED_PIN;//1 de output
+	gpio->GPIO_FIOCLR = 1 <<LED_PIN;
+	gpio->GPIO_FIOSET = state <<LED_PIN;
 }
 
 void blinkLed() {
 	if(state){
 		state = 0;
-		*GPIO_FIO0CLR = 1 <<LED_PIN;
+		gpio->GPIO_FIOCLR = 1 <<LED_PIN;
 	}else{
 		state=1;
-		*GPIO_FIO0SET = state <<LED_PIN;
+		gpio->GPIO_FIOSET = state <<LED_PIN;
 	}
 
 }
