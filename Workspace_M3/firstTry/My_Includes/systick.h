@@ -1,11 +1,12 @@
 #ifndef systick
 #define systick
-#include cortex.h
+#include LPC1769.h
+
 typedef struct {
-	CORTEX_Reg STCTRL;
-	CORTEX_Reg STRELOAD;
-	CORTEX_Reg STCURR;
-	CORTEX_Reg STCALIB;
+LPC1769_Reg STCTRL;
+LPC1769_Reg STRELOAD;
+LPC1769_Reg STCURR;
+LPC1769_Reg STCALIB;
 
 }CORTEX_SYSTICK;
 #endif
