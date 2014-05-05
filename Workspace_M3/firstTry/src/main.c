@@ -18,30 +18,32 @@
 
 int state=1;
 int LED_PIN = 22;
-LPC1769_GPIO* gpio = LPC1769_BASE_GPIO0;
 
-void local_gpio_Init(){
-	gpio->GPIO_FIODIR = 1<<LED_PIN;//1 de output
-	gpio->GPIO_FIOCLR = 1 <<LED_PIN;
-	gpio->GPIO_FIOSET = state <<LED_PIN;
+
+void local_gpio_Init(LPC1769_GPIO * _gpio){
+	_gpio->FIODIR = (1<<LED_PIN);//1 de output
+	_gpio->FIOCLR = (1<<LED_PIN);
+	_gpio->FIOSET = (state <<LED_PIN);
 }
 
-void blinkLed() {
+void blinkLed(LPC1769_GPIO * _gpio) {
 	if(state){
 		state = 0;
-		gpio->GPIO_FIOCLR = 1 <<LED_PIN;
+		_gpio->FIOCLR = (1 <<LED_PIN);
 	}else{
 		state=1;
-		gpio->GPIO_FIOSET = state <<LED_PIN;
+		_gpio->FIOSET = (state <<LED_PIN);
 	}
 
 }
-int main(void) {
 
-	local_gpio_Init();
+int main(void) {
+	LPC1769_GPIO * _gpio = LPC1769_BASE_GPIO0;
+
+	local_gpio_Init(_gpio);
 
     while(1) {
-        blinkLed();
+        blinkLed(_gpio);
     }
     return 0 ;
 }
