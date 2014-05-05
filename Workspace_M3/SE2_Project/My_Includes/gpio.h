@@ -14,4 +14,5 @@ typedef struct {
 
 }LPC1769_GPIO;
 
+int GPIO_READ();
 #endif
