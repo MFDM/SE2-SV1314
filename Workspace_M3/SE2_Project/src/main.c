@@ -14,19 +14,18 @@
 
 #include <cr_section_macros.h>
 
-// TODO: insert other include files here
-
-// TODO: insert other definitions and declarations here
-
 int main(void) {
 
-    // TODO: insert code here
+	Inits();
 
-    // Force the counter to be placed into memory
-    volatile static int i = 0 ;
-    // Enter an infinite loop, just incrementing a counter
-    while(1) {
-        i++ ;
-    }
+	while(1){
+		buttons = check_buttons();
+		if(buttons){
+			if((buttons&BUTTON_U )== BUTTON_U )
+				TEA5767_SearchUp();
+			if((buttons&BUTTON_D )== BUTTON_D )
+				TEA5767_SearchUp();
+		}
+	}
     return 0 ;
 }
