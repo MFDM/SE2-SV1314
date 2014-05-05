@@ -23,3 +23,17 @@ typedef struct {
 
 }LPC1769_I2C;
 #endif
+
+#define I2C_AA (1<<2)
+#define I2C_SI (1<<3)
+#define I2C_STOP (1<<4)
+#define I2C_START (1<<5)
+#define I2C_EN (1<<6)
+
+#define set(mask) (LPC1769_I2C->I2CONSET = mask)
+
+#define clear(mask) (LPC1769_I2C->I2CONCLR = mask)
+
+void I2C_Init(void);
+
+unsigned int I2C_Transfer(unsigned char addr, int read, void *data, unsigned int size, int freq);
