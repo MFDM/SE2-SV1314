@@ -22,4 +22,9 @@ typedef struct {
 	LPC1769_Reg I2MAKS3;
 
 }LPC1769_I2C;
+
+void I2C_Init(void);
+
+unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int size, int freq);
+
 #endif
