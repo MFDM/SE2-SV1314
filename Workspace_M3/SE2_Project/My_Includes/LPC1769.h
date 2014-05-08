@@ -18,4 +18,22 @@ typedef volatile unsigned int LPC1769_Reg;
 #define LPC1769_BASE_I2C1 ((LPC1769_I2C *)0x4005C000)	// I2C1 address
 #define LPC1769_BASE_I2C2 ((LPC1769_I2C *)0x400AC000)	// I2C2 address
 
+//--------- Clock and Power Control ----------
+//Phase Locked Loop (PLL0, Main PLL)
+#define LPC1769_PLL0CON 		0x400FC080
+#define LPC1769_PLL0CFG 		0x400FC084
+#define LPC1769_PLL0STAT 		0x400FC088
+#define LPC1769_PLL0FEED 		0x400FC08C
+
+//Clock dividers
+#define LPC1769_CCLKCFG 		0x400FC104
+#define LPC1769_USBCLKCFG 		0x400FC108
+#define LPC1769_PCLKSEL0  		0x400FC1A8
+
+//Power control
+#define LPC1769_PCON 			0x400FC0C0
+#define LPC1769_PCONP 			0x400FC0C4
+#define LPC1769_CLKOUTCFG 		0x400FC1C8
+//-------------------------------------------
+
 #endif
