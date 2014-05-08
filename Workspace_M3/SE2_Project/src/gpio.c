@@ -1,52 +1,63 @@
 #include "gpio.h"
+#include "LPC1769.h"
 
-LPC1769_GPIO0* ptr_GPIO0 = LPC1769_BASE_GPIO0;
-LPC1769_PCB* ptr_PCB = LPC2106_BASE_PCB;
+LPC1769_GPIO* ptr_GPIO0 = LPC1769_BASE_GPIO0;
+LPC1769_PCB* ptr_PCB = LPC1769_BASE_PCB;
 
 
-// Faz o Pin Select, recebendo um pinMap e usando como parametros de outup sel0 e sel1
-void pinSelect(int pinMap, int sel0, int sel1){
+/**
+ *adjust a 32bit pinMap to set the pinsel0 and pinsel1
+ */
+void pinSelect(int pinMap, int* sel0, int* sel1){
 	int i;
 	for(i=0;i<32;i++)
 	{
 		if(pinMap%2 == 1){
 			if(i<16)
-				sel0 |= 3<<i*2;
+				*sel0 |= 3<<i*2;
 			else
-				sel1 |= 3<<(32-(i*2));
+				*sel1 |= 3<<(32-(i*2));
 		}
 		pinMap= pinMap/2;
 	}
 }
 
-void GPIO_Init(unsigned int pinMap){//pinMap usa idx de pins mascaras para pins USADOS!
+/**
+ * set the GPIO port for the pinMap
+ */
+void GPIO_Init(unsigned int pinMap){
 	int auxSel0=0;
 	int auxSel1=0;
 
-	pinSelect(pinMap, auxSel0, auxSel1);
-	ptr_PCB->PinSel0&=~auxSel0;	//selecciona todos os primeiros 16 bits => 32 bits, 2 bits por pino
-	ptr_PCB->PinSel1&=~auxSel1;	//selecciona todos os segundos 16 bits => 32 bits, 2 bits por pino
+	pinSelect(pinMap, &auxSel0, &auxSel1);
+	ptr_PCB->PINSEL0&=~auxSel0;	//coloca a 0's os bits seleccionados como GPIO
+	ptr_PCB->PINSEL1&=~auxSel1;	//coloca a 0's os bits seleccionados como GPIO
 }
 
-unsigned int GPIO_Read(){
-	return ptr_GPIO0->IOPin;
+/**
+ * read from the GPIO PIN
+ */
+unsigned int GPIO_Read(void){
+	return ptr_GPIO0->FIOPIN;
 }
 
-/*
-*dir: 0 = read; 1 = write;
-*/
-void GPIO_SetDir(unsigned int pinDirectionMap){ // actualiza apenas de 0 para 1 a direccao do pino
-	ptr_GPIO->IODir |=pinDirectionMap;
+/**
+ *set pin direction for the specific pinMap
+ *dir: 0 = input; 1 = output;
+ */
+void GPIO_SetDir(unsigned int pinMap, unsigned int pinDirectionMap){
+	ptr_GPIO0->FIODIR &=(~pinMap);//to clean previous direction
+	ptr_GPIO0->FIODIR |=pinDirectionMap;
 }
 
-/*
-* IOSET: 1 ->HIGH
-* IOClr: 1->LOW and clear IOSET bit, ptt tem mais peso que o IOSet
-*/
-void GPIO_Write(unsigned int preparedValue, unsigned int mask){
-	unsigned int valueToWriteSET = ((ptr_GPIO->IOSet & ~mask) | preparedValue) ;
-	LPC1769_BASE_GPIO->IOSet = valueToWriteSET & ptr_GPIO->IODir;
-	unsigned int valueToWriteCLR = ((ptr_GPIO->IOClr & ~mask) | (~preparedValue & mask)) ;
-	LPC1769_BASE_GPIO->IOClr = (valueToWriteCLR) & ptr_GPIO->IODir;
+/**
+ * write the preparedValue into the specific pinMap
+ */
+void GPIO_Write(unsigned int preparedValue, unsigned int pinMap){
+	unsigned int valueToWriteSET = ((ptr_GPIO0->FIOPIN & ~pinMap) | preparedValue) ;
+	ptr_GPIO0->FIOSET = valueToWriteSET;
+
+	unsigned int valueToWriteCLR = ((ptr_GPIO0->FIOPIN & ~pinMap) | (~preparedValue & pinMap)) ;
+	ptr_GPIO0->FIOCLR = valueToWriteCLR;
 }
 

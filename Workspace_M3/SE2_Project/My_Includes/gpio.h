@@ -14,5 +14,9 @@ typedef struct {
 
 }LPC1769_GPIO;
 
-int GPIO_READ();
+unsigned int GPIO_Read(void);
+void GPIO_Init(unsigned int pinMap);
+void GPIO_SetDir(unsigned int pinMap, unsigned int pinDirectionMap);
+void GPIO_Write(unsigned int preparedValue, unsigned int pinMap);
+
 #endif
