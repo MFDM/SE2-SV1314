@@ -1,5 +1,5 @@
-#include "../../../INCLUDES/tea5767.h"
-#include "../../../INCLUDES/i2c.h"
+#include "tea5767.h"
+#include "i2c.h"
 
 char c [TEA_SIZE_OF_ARRAY];
 unsigned int init_pll,end_pll,pll_value,next_pll;

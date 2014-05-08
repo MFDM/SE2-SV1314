@@ -1,7 +1,7 @@
 #ifndef i2c
 #define i2c
 
-#include "LPC1769.h"
+#include "LPC1769_Types.h"
 
 typedef struct {
 	LPC1769_Reg I2CONSET;

@@ -1,7 +1,8 @@
 #ifndef pcb
 #define pcb
 
-#include "LPC1769.h"
+
+#include "LPC1769_Types.h"
 
 typedef struct {
 

@@ -1,7 +1,7 @@
 #ifndef systick
 #define systick
 
-#include "LPC1769.h"
+#include "LPC1769_Types.h"
 
 typedef struct {
 

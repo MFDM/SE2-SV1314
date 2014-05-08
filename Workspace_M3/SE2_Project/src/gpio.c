@@ -1,5 +1,5 @@
 #include "gpio.h"
-#include "LPC1769.h"
+#include "LPC1769_Addresses.h"
 
 LPC1769_GPIO* ptr_GPIO0 = LPC1769_BASE_GPIO0;
 LPC1769_PCB* ptr_PCB = LPC1769_BASE_PCB;

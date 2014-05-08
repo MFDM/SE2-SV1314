@@ -38,7 +38,7 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/My_Includes}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/CMSIS_CORE_LPC17xx/inc}&quot;"/>
 								</option>
-								<option id="gnu.c.compiler.option.include.files.1235006518" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files" valueType="includeFiles"/>
+								<option id="gnu.c.compiler.option.include.files.1235006518" name="Include files (-include)" superClass="gnu.c.compiler.option.include.files"/>
 								<inputType id="com.crt.advproject.compiler.input.338818353" superClass="com.crt.advproject.compiler.input"/>
 							</tool>
 							<tool id="com.crt.advproject.gas.exe.debug.1641504054" name="MCU Assembler" superClass="com.crt.advproject.gas.exe.debug">
@@ -46,7 +46,7 @@
 								<option id="com.crt.advproject.gas.thumb.1116595651" name="Thumb mode" superClass="com.crt.advproject.gas.thumb" value="true" valueType="boolean"/>
 								<option id="gnu.both.asm.option.flags.crt.1679768713" name="Assembler flags" superClass="gnu.both.asm.option.flags.crt" value="-c -x assembler-with-cpp -D__REDLIB__ -DDEBUG -D__CODE_RED" valueType="string"/>
 								<option id="com.crt.advproject.gas.hdrlib.716648970" name="Library headers" superClass="com.crt.advproject.gas.hdrlib" value="Redlib" valueType="enumerated"/>
-								<option id="gnu.both.asm.option.include.paths.229148363" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath"/>
+								<option id="gnu.both.asm.option.include.paths.229148363" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths"/>
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1760247727" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 								<inputType id="com.crt.advproject.assembler.input.1781032647" name="Additional Assembly Source Files" superClass="com.crt.advproject.assembler.input"/>
 							</tool>

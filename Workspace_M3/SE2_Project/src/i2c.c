@@ -1,4 +1,4 @@
-#include "LPC1769.h"
+#include "LPC1769_Addresses.h"
 #include "i2c.h"
 #include "pinsel.h"
 #include "LPC17xx.h"
