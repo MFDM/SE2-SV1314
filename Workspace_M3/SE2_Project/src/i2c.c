@@ -44,11 +44,11 @@ void I2C_Init(){
 
 unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int size, int freq){
 	SystemCoreClockUpdate();
-	unsigned div = (SystemCoreClock/4) / (freq * 1000);
+	unsigned div = (SystemCoreClock/8) / (freq * 1000);
 	char * cdata = data;
 	unsigned idx = 0;
-	LPC1769_BASE_I2C->I2SCLH = div / 2;
-	LPC1769_BASE_I2C->I2SCLL = div - (LPC1769_BASE_I2C->I2SCLH);
+	i2c0Regs->I2SCLH = div / 2;
+	i2c0Regs->I2SCLL = div - (i2c0Regs->I2SCLH);
 
 	// MASTER CONFIGURATION
 	clear(I2C_SI | I2C_START | I2C_AA);
@@ -57,15 +57,15 @@ unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int siz
 
 
 	while(1){
-		while(!(LPC1769_BASE_I2C->I2CONSET & I2C_SI));
-		switch(LPC1769_BASE_I2C->I2STAT){
+		while(!(i2c0Regs->I2CONSET & I2C_SI));
+		switch(i2c0Regs->I2STAT){
 			case 0x8:
 				// MASTER MODE
 				// A condição de start foi enviada
 			case 0x10:
 				// Repetida a condição de start
 				clear(I2C_START);
-				LPC1769_BASE_I2C->I2DAT = (addr << 1) | (read? 0x1 : 0x0);
+				i2c0Regs->I2DAT = (addr << 1) | (read? 0x1 : 0x0);
 				break;
 
 			case 0x18:
@@ -74,7 +74,7 @@ unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int siz
 			case 0x28:
 				// MASTER TRANSMITTER
 				// I2DAT byte de Data foi transmitido; ACK foi recebido.
-				LPC1769_BASE_I2C->I2DAT = cdata[idx++];
+				i2c0Regs->I2DAT = cdata[idx++];
 				if(idx == size){
 					 set(I2C_STOP);
 					 clear(I2C_SI);
@@ -93,7 +93,7 @@ unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int siz
 			case 0x50:
 				// MASTER RECEIVER
 				// Byte de Data recebido; ACK foi recebido.
-				cdata[idx++] = LPC1769_BASE_I2C->I2DAT;
+				cdata[idx++] = i2c0Regs->I2DAT;
 				if(idx < (size - 1)){
 					set(I2C_AA);
 				}else{
@@ -103,7 +103,7 @@ unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int siz
 			case 0x58:
 				// MASTER RECEIVER
 				// Ultimo byte
-				cdata[idx] = LPC1769_BASE_I2C->I2DAT;
+				cdata[idx] = i2c0Regs->I2DAT;
 				set(I2C_STOP);
 				clear(I2C_SI);
 				return 0;
