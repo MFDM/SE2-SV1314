@@ -35,7 +35,7 @@ void GPIO_Init(unsigned int pinMap){
 	ptr_PCB->PINSEL0&=~auxSel0;	//coloca a 0's os bits seleccionados como GPIO
 	ptr_PCB->PINSEL1&=~auxSel1;	//coloca a 0's os bits seleccionados como GPIO
 	ptr_PINMODE->PINMODE0 = auxSel0;
-	ptr_PINMODE->PINMODE1 = auxSel1;
+ptr_PINMODE->PINMODE1 = auxSel1;
 }
 
 /**

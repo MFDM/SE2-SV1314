@@ -1,6 +1,7 @@
 #include "i2c.h"
 #include "pinsel.h"
 #include "LPC1769_Addresses.h"
+#include "LPC1769_Types.h"
 #include "LPC17xx.h"
 
 #define pcompPins 	(1<<7)
@@ -22,16 +23,16 @@
 
 #define clear(mask) (LPC1769_BASE_I2C0->I2CONCLR = mask)
 
-
-
+LPC1769_Reg* ptr_pconp = LPC1769_PCONP;
+LPC1769_Reg* ptr_pclk0 = LPC1769_PCLKSEL0;
 LPC1769_I2C* i2c0Regs = LPC1769_BASE_I2C0;
 LPC1769_PCB* pcbRegs = LPC1769_BASE_PCB;
 
 void I2C_Init(){
 	// Setting up the I2C0
-	LPC1769_PCONP &= pcompPins;
-	LPC1769_PCLKSEL0 &= ~pclksel0_15;
-	LPC1769_PCLKSEL0 &= ~pclksel0_14;
+	*ptr_pconp &= pcompPins;
+	*ptr_pclk0 &= ~pclksel0_15;
+	*ptr_pclk0 &= ~pclksel0_14;
 	pcbRegs->I2CPADCFG &= i2cpadcfg;
 
 	// Setting up the Pin Select
