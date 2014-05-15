@@ -3,7 +3,6 @@
 
 #include "LPC1769_Types.h"
 
-
 typedef struct {
 
 	LPC1769_Reg FIODIR;

@@ -1,4 +1,5 @@
 #include "gpio.h"
+#include "pinsel.h"
 #include "LPC1769_Addresses.h"
 
 LPC1769_GPIO* ptr_GPIO0 = LPC1769_BASE_GPIO0;

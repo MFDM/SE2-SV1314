@@ -1,6 +1,6 @@
-#include "LPC1769_Addresses.h"
 #include "i2c.h"
 #include "pinsel.h"
+#include "LPC1769_Addresses.h"
 #include "LPC17xx.h"
 
 #define pcompPins 	(1<<7)

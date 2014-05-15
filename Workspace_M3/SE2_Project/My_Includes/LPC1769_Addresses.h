@@ -1,7 +1,6 @@
 #ifndef LPC1769
 #define LPC1769
 
-
 //SYSCLK Pointers
 #define LPC1769_BASE_SYSTICK 	((LPC1769_SYSTICK*)0xE000E010)	// SYSTICK address
 
