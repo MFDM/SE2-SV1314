@@ -10,34 +10,36 @@
 
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_U | MASK_BUTTONS_D);
-	TEA5767_Init();
+//	TEA5767_Init();
 }
 
 int main(void) {
+	short _changes = 0;
+	unsigned int _buttons =0;
 
-	short changes = 0;
 	Inits();
 
 	while (1) {
 
-		if (changes) {
+		if (_changes!=0) {
 			//LCD_Clear();
 			//display_freq(stt);
-			changes = 0;
+			_changes = 0;
 		}
 
-		buttons = BUTTONS_Read(MASK_BUTTONS_ALL);
+		_buttons = BUTTONS_Read(MASK_BUTTONS_ALL);
 
-		if (buttons) {
-			if ((buttons&MASK_BUTTONS_U) == MASK_BUTTONS_U){
-				TEA5767_SearchUp();
-				changes = 1;
+		if (_buttons!=0) {
+			if ((_buttons&MASK_BUTTONS_U) == MASK_BUTTONS_U){
+				//TEA5767_SearchUp(0);
+				_changes = 1;
 			}
-			else if ((buttons&MASK_BUTTONS_D) == MASK_BUTTONS_D){
-				TEA5767_SearchDown();
-				changes = 1;
+			else if ((_buttons&MASK_BUTTONS_D) == MASK_BUTTONS_D){
+				//TEA5767_SearchDown(0);
+				_changes = 1;
 			}
 		}
+		else _buttons =-1;
 	}
 	return 0;
 }
