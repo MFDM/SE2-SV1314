@@ -21,7 +21,7 @@ int main(void) {
 
 	while (1) {
 
-		if (_changes!=0) {
+		if (_changes) {
 			//LCD_Clear();
 			//display_freq(stt);
 			_changes = 0;
@@ -29,7 +29,7 @@ int main(void) {
 
 		_buttons = BUTTONS_Read(MASK_BUTTONS_ALL);
 
-		if (_buttons!=0) {
+		if (_buttons) {
 			if ((_buttons&MASK_BUTTONS_U) == MASK_BUTTONS_U){
 				//TEA5767_SearchUp(0);
 				_changes = 1;
@@ -39,7 +39,6 @@ int main(void) {
 				_changes = 1;
 			}
 		}
-		else _buttons =-1;
 	}
 	return 0;
 }

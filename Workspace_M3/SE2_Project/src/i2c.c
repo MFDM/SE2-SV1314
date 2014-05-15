@@ -1,5 +1,5 @@
 #include "i2c.h"
-#include "pinsel.h"
+#include "pcb.h"
 #include "LPC1769_Addresses.h"
 #include "LPC1769_Types.h"
 #include "LPC17xx.h"
@@ -113,5 +113,5 @@ unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int siz
 		clear(I2C_SI);
 	}
 
-
+	return 0;
 }

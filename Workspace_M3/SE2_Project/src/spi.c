@@ -1,4 +1,6 @@
 #include "LPC1769_Addresses.h"
+#include "LPC1769_Types.h"
+#include "pcb.h"
 #include "spi.h"
 
 
@@ -14,32 +16,32 @@
 #define mosi_05 	(1<<5)
 #define mosi_04		(1<<4)
 
-LPC1769_Reg* ptr_pconp = LPC1769_PCONP;
-LPC1769_Reg* ptr_pclk0 = LPC1769_PCLKSEL0;
-LPC1769_PCB* pcbRegs = LPC1769_BASE_PCB;
+LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
+LPC1769_Reg* ptr_pclksel0 = LPC1769_PCLKSEL0;
+LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
 
 void SPI_Init(){
-	*ptr_pconp &= pcompPins;
-	*ptr_pclk0 &= ~pclksel0_17;
-	*ptr_pclk0 &= ~pclksel0_16;
+	*ptr_pcnp &= pcompPins;
+	*ptr_pclksel0 &= ~pclksel0_17;
+	*ptr_pclksel0 &= ~pclksel0_16;
 
 	// SCK reseted
-	pcbRegs->PINSEL0 &= ~sck_31;
-	pcbRegs->PINSEL0 &= ~sck_30;
+	pcb_Regs->PINSEL0 &= ~sck_31;
+	pcb_Regs->PINSEL0 &= ~sck_30;
 
 	// SSEL reseted
-	pcbRegs->PINSEL1 &= ~ssel_01;
-	pcbRegs->PINSEL1 &= ~ssel_00;
+	pcb_Regs->PINSEL1 &= ~ssel_01;
+	pcb_Regs->PINSEL1 &= ~ssel_00;
 
 	// MISO mode denied
-	pcbRegs->PINSEL1 &= miso_03;
-	pcbRegs->PINSEL1 &= miso_02;
+	pcb_Regs->PINSEL1 &= miso_03;
+	pcb_Regs->PINSEL1 &= miso_02;
 
 	// MOSI mode
-	pcbRegs->PINSEL1 &= ~mosi_05;
-	pcbRegs->PINSEL1 &= ~mosi_04;
+	pcb_Regs->PINSEL1 &= ~mosi_05;
+	pcb_Regs->PINSEL1 &= ~mosi_04;
 }
 
 int SPI_Tranfer(){
-
+ return 0;
 }
