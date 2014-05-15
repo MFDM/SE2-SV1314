@@ -6,9 +6,10 @@
 #include <cr_section_macros.h>
 #include "buttons.h"
 #include "tea5767.h"
+#include "SE2_specific.h"
 
 void Inits(void) {
-	BUTTONS_Init(BUTTON_U | BUTTON_D);
+	BUTTONS_Init(MASK_BUTTONS_U | MASK_BUTTONS_D);
 	TEA5767_Init();
 }
 
@@ -25,14 +26,14 @@ int main(void) {
 			changes = 0;
 		}
 
-		buttons = BUTTONS_Read(BUTTONS_ALL);
+		buttons = BUTTONS_Read(MASK_BUTTONS_ALL);
 
 		if (buttons) {
-			if ((buttons&BUTTONS_U) == BUTTONS_U){
+			if ((buttons&MASK_BUTTONS_U) == MASK_BUTTONS_U){
 				TEA5767_SearchUp();
 				changes = 1;
 			}
-			else if ((buttons&BUTTONS_D) == BUTTONS_D){
+			else if ((buttons&MASK_BUTTONS_D) == MASK_BUTTONS_D){
 				TEA5767_SearchDown();
 				changes = 1;
 			}

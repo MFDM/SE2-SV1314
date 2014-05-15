@@ -4,6 +4,7 @@
 
 LPC1769_GPIO* ptr_GPIO0 = LPC1769_BASE_GPIO0;
 LPC1769_PCB* ptr_PCB = LPC1769_BASE_PCB;
+LPC1769_PINMODE * ptr_PINMODE = LPC1769_BASE_PINMODE;
 
 
 /**
@@ -33,6 +34,7 @@ void GPIO_Init(unsigned int pinMap){
 	pinSelect(pinMap, &auxSel0, &auxSel1);
 	ptr_PCB->PINSEL0&=~auxSel0;	//coloca a 0's os bits seleccionados como GPIO
 	ptr_PCB->PINSEL1&=~auxSel1;	//coloca a 0's os bits seleccionados como GPIO
+	ptr_PINMODE->PINMODE0 =
 }
 
 /**

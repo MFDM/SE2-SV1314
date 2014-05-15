@@ -18,6 +18,7 @@
 
 //PCB Pointers
 #define LPC1769_BASE_PCB		((LPC1769_PCB *)0x4002C000) 	// PCB address
+#define LPC1769_BASE_PINMODE		((LPC1769_PINMODE *)0x4002C040) 	// PINMODE address
 
 
 //--------- Clock and Power Control ----------
