@@ -31,12 +31,14 @@ int main(void) {
 
 		if (_buttons) {
 			if ((_buttons&MASK_BUTTONS_U) == MASK_BUTTONS_U){
-				TEA5767_SearchUp(0);
+				TEA5767_SearchUp(10);
 				_changes = 1;
+				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 			else if ((_buttons&MASK_BUTTONS_D) == MASK_BUTTONS_D){
-				TEA5767_SearchDown(0);
+				TEA5767_SearchDown(10);
 				_changes = 1;
+				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 		}
 	}

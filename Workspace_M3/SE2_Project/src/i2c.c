@@ -5,12 +5,12 @@
 #include "LPC17xx.h"
 
 #define pcompPins 	(1<<7)
-#define pclksel0_15 (1<<14)//NUNO estava 15 o qe da bit 16
-#define pclksel0_14 (1<<13)//NUNO estava 14 o qe da bit 15
-#define sda0_23 	(1<<22)
-#define sda0_22		(1<<21)
-#define scl0_25 	(1<<24)
-#define scl0_24		(1<<23)
+#define pclksel0_15 (1<<15)//NUNO estava 15 o qe da bit 16
+#define pclksel0_14 (1<<14)//NUNO estava 14 o qe da bit 15
+#define sda0_23 	(1<<23)
+#define sda0_22		(1<<22)
+#define scl0_25 	(1<<25)
+#define scl0_24		(1<<24)
 #define i2cpadcfg	0xf
 
 #define I2C_AA (1<<2)
@@ -54,7 +54,6 @@ unsigned int I2C_Transfer(unsigned char addr, int read, void *data, unsigned int
 	 */
 
 //	LER PAGINA 440 MANUAL
-
 
 	clear(I2C_SI | I2C_START | I2C_AA | I2C_STOP | I2C_EN);
 	SystemCoreClockUpdate();
