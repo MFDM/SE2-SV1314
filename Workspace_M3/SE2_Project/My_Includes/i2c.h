@@ -25,6 +25,6 @@ typedef struct {
 
 void I2C_Init(void);
 
-unsigned I2C_Transfer(unsigned char addr, int read, void *data, unsigned int size, int freq);
+unsigned int I2C_Transfer(unsigned char addr, int read, void *data, unsigned int size, int freq);
 
 #endif
