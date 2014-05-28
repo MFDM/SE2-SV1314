@@ -14,6 +14,6 @@ typedef struct{
 
 void SPI_Init(void);
 
-int SPI_Transfer();
+int SPI_Transfer(char data,char DnC);
 
 #endif

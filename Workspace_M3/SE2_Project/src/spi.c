@@ -59,7 +59,8 @@ void SPI_Init(){
 	pcb_Regs->PINSEL1 |= mosi_04;
 
 	// SPI0 SCK = : PCLK_SPI / SPCCR0
-			falta faer set do count
+	spiRegs->SOSPCCR &= (~0xff);
+	spiRegs->SOSPCCR |= (0x8);
 
 	// Setting up master mode
 	set( BE | CPHA | CPOL | MSTR | B8 | B11 );
@@ -70,7 +71,7 @@ void SPI_Init(){
 	unsigned int val = spiRegs->SOSPCR; // for debug
 }
 
-int SPI_Tranfer(char data, char DnC){
+int SPI_Transfer(char data, char DnC){
 	// Setting up clock frequency
 	SystemCoreClockUpdate();
 	unsigned div = (SystemCoreClock/4) / spi_freq;
