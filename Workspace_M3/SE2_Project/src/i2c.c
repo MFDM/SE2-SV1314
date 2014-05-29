@@ -38,8 +38,10 @@ void I2C_Init(){
 	pcbRegs->I2CPADCFG &= ~i2cpadcfg; // NUNO estava 0x0  e ptt limpava os outros
 
 	// Setting up the Pin Select
+	// 22 23 = SDA0
 	pcbRegs->PINSEL1 &= ~sda0_23;
 	pcbRegs->PINSEL1 |= sda0_22; // NUNO estava AND
+	// 24 25 = SCL0
 	pcbRegs->PINSEL1 &= ~(scl0_25);
 	pcbRegs->PINSEL1 |= scl0_24; //NUNO AND
 

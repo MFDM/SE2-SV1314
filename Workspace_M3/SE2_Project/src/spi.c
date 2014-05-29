@@ -2,6 +2,7 @@
 #include "LPC1769_Types.h"
 #include "pcb.h"
 #include "spi.h"
+#include "system_LPC17xx.h"
 
 #define spi_freq 400000
 
@@ -19,7 +20,7 @@
 
 #define BE 		(1<<2)
 #define CPHA 	(1<<3)
-#define CPOC 	(1<<4)
+#define CPOL 	(1<<4)
 #define MSTR	(1<<5)
 #define LSBF	(1<<6)
 #define SPIE	(1<<7)
@@ -34,10 +35,10 @@ LPC1769_Reg* ptr_pclksel0 = LPC1769_PCLKSEL0;
 LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
 LPC1769_SPI* spiRegs = LPC1769_BASE_SPI;
 
-#define set(mask) (spiRegs->SOSPCR = mask)
-#define clear(mask) (spiRegs->SOSPCR = mask)
+#define set(mask) (spiRegs->SOSPCR |= mask)
+#define clear(mask) (spiRegs->SOSPCR &= mask)
 
-void SPI_Init(){
+void SPI_Init(void){
 	*ptr_pcnp |= pcompPins;
 	*ptr_pclksel0 |= pclksel0_17;
 	*ptr_pclksel0 |= pclksel0_16;
@@ -63,7 +64,10 @@ void SPI_Init(){
 	spiRegs->SOSPCCR |= (0x8);
 
 	// Setting up master mode
-	set( BE | CPHA | CPOL | MSTR | B8 | B11 );
+	//set( BE | CPHA | CPOL | MSTR | B8 | B11 );
+	unsigned int v;
+	v = ( BE | CPHA | CPOL | MSTR | B8 | B11 );
+	spiRegs->SOSPCR |= v;
 	spiRegs->SOSPCR &= (~LSBF);
 	spiRegs->SOSPCR &= (~SPIE);
 	spiRegs->SOSPCR &= (~B9);

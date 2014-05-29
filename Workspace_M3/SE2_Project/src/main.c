@@ -7,10 +7,12 @@
 #include "buttons.h"
 #include "tea5767.h"
 #include "SE2_specific.h"
+#include "lcd.h"
 
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_U | MASK_BUTTONS_D);
 	TEA5767_Init();
+	LCD_Init();
 }
 
 int main(void) {
@@ -41,6 +43,7 @@ int main(void) {
 				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 		}
+		LCD_WriteChar('a');
 	}
 	return 0;
 }
