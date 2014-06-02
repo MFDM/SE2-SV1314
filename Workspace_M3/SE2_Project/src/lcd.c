@@ -122,7 +122,7 @@ int LCD_Init() {
 	SPI_Init();
 	GPIO_Init(LCD_CS);
 	GPIO_SetDir(LCD_CS, LCD_CS);
-	GPIO_Write(LCD_CS,LCD_CS);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// Hardware reset
 //	LCD_RESET_LOW;
 //	Delay(20000);
@@ -131,48 +131,82 @@ int LCD_Init() {
 
 	// Display control
 	//WriteSpiCommand(DISCTL);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(DISPLAY_CONTROL, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x00); // P1: 0x00 = 2 divisions, switching period=8 (default)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x00, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x20); // P2: 0x20 = nlines/4 - 1 = 132/4 - 1 = 32)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x20, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x00); // P3: 0x00 = no inversely highlighted lines
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x00, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// COM scan
 	//WriteSpiCommand(COMSCN);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(COMMON_SCAN_DIRECTION, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x01);  // P1: 0x01 = Scan 1->80, 160<-81
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x01, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// Power control
 	//WriteSpiCommand(PWRCTR);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(POWER_CONTROL, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x0f); // reference voltage regulator on, circuit voltage follower on, BOOST ON
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x0f, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// Inverse display
 	//WriteSpiCommand(DISINV);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(INVERSE_DISPLAY, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// Data control
 	//WriteSpiCommand(DATCTL);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(DATA_SCAN_DIRECTION, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x01); // P1: 0x01 = page address inverted, col address normal, address scan in col direction
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x01, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x00); // P2: 0x00 = RGB sequence (default value)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x00, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(0x02); // P3: 0x02 = Grayscale -> 16 (selects 12-bit color, type A)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(0x02, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// Voltage control (contrast setting)
 	//WriteSpiCommand(VOLCTR);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(ELECTRONIC_VOLUME_CONTROL, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(32); // P1 = 32  volume value  (adjust this setting for your display  0 .. 63)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(32, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	//WriteSpiData(3);  // P2 = 3    resistance ratio  (determined by experiment)
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(3, 1);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	// allow power supply to stabilize
 	//Delay(100000);
 
 	// turn on the display
 	//WriteSpiCommand(DISON);
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(DISPLAY_ON, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	return 0;
 }
 
@@ -193,8 +227,11 @@ int LCD_WriteChar(char data) {
 	bytes = *(pFont + 2);
 	pChar = pFont + (bytes * (data - 0x1F)) + bytes - 1;
 
-	if (!ram_writable)
+	if (!ram_writable){
+		GPIO_Write(LCD_CS,LCD_CS);
 		SPI_Transfer(RAM_WRITE, 0);
+		GPIO_Write(~LCD_CS,LCD_CS);
+	}
 
 	for (i = 0; i < bytes; i++) {
 		pixelRow = *pChar--;
@@ -204,19 +241,29 @@ int LCD_WriteChar(char data) {
 			Word1 = ((pixelRow & 0x1) != 0) ? WHITE : BLACK;
 			pixelRow >>= 1;
 //			LCDData((Word0 >> 4) & 0xFF);
+			GPIO_Write(LCD_CS,LCD_CS);
 			SPI_Transfer((Word0 >> 4) & 0xFF,1);
+			GPIO_Write(~LCD_CS,LCD_CS);
 //			LCDData(((Word0 & 0xF) << 4) | ((Word1 >> 8) & 0xF));
+			GPIO_Write(LCD_CS,LCD_CS);
 			SPI_Transfer(((Word0 & 0xF) << 4) | ((Word1 >> 8) & 0xF),1);
+			GPIO_Write(~LCD_CS,LCD_CS);
 //			LCDData(Word1 & 0xFF);
+			GPIO_Write(LCD_CS,LCD_CS);
 			SPI_Transfer(Word1 & 0xFF,1);
+			GPIO_Write(~LCD_CS,LCD_CS);
 		}
 	}
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(NOP, 0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	return 0;
 }
 
 int LCD_WriteString(char * data) {
+	GPIO_Write(LCD_CS,LCD_CS);
 	SPI_Transfer(RAM_WRITE,0);
+	GPIO_Write(~LCD_CS,LCD_CS);
 	ram_writable =1;
 	while (*data != '\0') {
 		LCD_WriteChar(*data);
