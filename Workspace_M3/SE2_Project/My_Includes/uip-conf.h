@@ -55,7 +55,7 @@
 #ifndef __UIP_CONF_H__
 #define __UIP_CONF_H__
 
-#include <inttypes.h>
+#include <stdint.h>
 
 /**
  * 8 bit datatype

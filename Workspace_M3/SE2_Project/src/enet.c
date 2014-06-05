@@ -73,9 +73,10 @@ int ENET_checkBuffer(){
 	InitDescriptors();
 	void* buffer = ENET_RXGet(bytes);
 
-	if(bytes != 0) return 1;
-
-	ENET_RXBuffClaim();
+	if(bytes != 0) {
+		ENET_RXBuffClaim();
+		return 1;
+	}
 
 	return 0;
 }

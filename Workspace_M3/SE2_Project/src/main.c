@@ -53,7 +53,7 @@ int main(void) {
 		LCD_WriteString(a,30,30);
 
 
-		ENET_checkBuffer();
+		int debug = ENET_checkBuffer();
 	}
 	return 0;
 }
