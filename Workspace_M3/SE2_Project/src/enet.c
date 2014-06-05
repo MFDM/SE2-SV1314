@@ -66,7 +66,7 @@ STATIC void ENET_RXBuffClaim(void)
 	rxConsumeIdx = Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
 }
 
-STATIC int ENET_checkBuffer(){
+int ENET_checkBuffer(){
 	int32_t* bytes;
 	InitDescriptors();
 	void* buffer = ENET_RXGet(bytes);

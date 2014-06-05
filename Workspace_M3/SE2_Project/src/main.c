@@ -8,6 +8,7 @@
 #include "tea5767.h"
 #include "SE2_specific.h"
 #include "lcd.h"
+#include "enet.h"
 
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_U | MASK_BUTTONS_D);
@@ -17,7 +18,7 @@ void Inits(void) {
 
 int main(void) {
 	short _changes = 0;
-	unsigned int _buttons =0;
+	unsigned int _buttons = 0;
 
 	Inits();
 
@@ -44,6 +45,7 @@ int main(void) {
 			}
 		}
 		LCD_WriteChar('a');
+		ENET_checkBuffer();
 	}
 	return 0;
 }

@@ -1,8 +1,11 @@
 #include "LPC1769_Types.h"
-#include "enet_17xx_40xx.h"
+#include "chip.h"
+
+#define ENET_NUM_TX_DESC 4
+#define ENET_NUM_RX_DESC 4
 
 #define ENET_RX_DESC_BASE        (0x2007C000)
-#define ENET_RX_STAT_BASE        (ENET_RX_DESC_BASE + ENET_NUM_RX_DESC * sizeof(ENET_RXDESC_T))
+#define ENET_RX_STAT_BASE		 (ENET_RX_DESC_BASE + ENET_NUM_RX_DESC * sizeof(ENET_RXDESC_T))
 #define ENET_TX_DESC_BASE        (ENET_RX_STAT_BASE + ENET_NUM_RX_DESC * sizeof(ENET_RXSTAT_T))
 #define ENET_TX_STAT_BASE        (ENET_TX_DESC_BASE + ENET_NUM_TX_DESC * sizeof(ENET_TXDESC_T))
 #define ENET_RX_BUF_BASE         (ENET_TX_STAT_BASE + ENET_NUM_TX_DESC * sizeof(ENET_TXSTAT_T))
@@ -21,4 +24,4 @@ STATIC void *ENET_RXGet(int32_t *bytes);
 STATIC void ENET_RXBuffClaim(void);
 
 // Debugging purposes
-STATIC int ENET_checkBuffer();
+int ENET_checkBuffer();
