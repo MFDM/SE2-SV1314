@@ -66,6 +66,8 @@ STATIC void ENET_RXBuffClaim(void)
 	rxConsumeIdx = Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
 }
 
+// ping = 0x0806
+
 int ENET_checkBuffer(){
 	int32_t* bytes;
 	InitDescriptors();
