@@ -6,6 +6,7 @@
 #define MASK_BUTTONS_M 		1<<2
 #define MASK_BUTTONS_ALL (MASK_BUTTONS_U|MASK_BUTTONS_D|MASK_BUTTONS_M)
 #define LCD_CS				1<<3
+#define LCD_RESET			1<<4
 
 #endif
 

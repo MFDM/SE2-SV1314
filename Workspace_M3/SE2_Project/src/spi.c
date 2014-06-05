@@ -35,55 +35,57 @@ LPC1769_Reg* ptr_pclksel0 = LPC1769_PCLKSEL0;
 LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
 LPC1769_SPI* spiRegs = LPC1769_BASE_SPI;
 
-#define set(mask) (spiRegs->SOSPCR |= mask)
-#define clear(mask) (spiRegs->SOSPCR &= mask)
-
 void SPI_Init(void){
-	*ptr_pcnp |= pcompPins;
-	*ptr_pclksel0 |= pclksel0_17;
-	*ptr_pclksel0 |= pclksel0_16;
+	*ptr_pcnp |= pcompPins;//#define pcompPins 	(1<<8)
+	*ptr_pclksel0 |= (pclksel0_17|pclksel0_16);
 
 	// SCK reseted
-	pcb_Regs->PINSEL0 |= sck_31;
-	pcb_Regs->PINSEL0 |= sck_30;
+	pcb_Regs->PINSEL0 |= (sck_31|sck_30);
+	// In master mode, the
+	//clock must be an even number
+	//greater than or equal to 8 (see Section 17.7.4).
 
 	// SSEL reseted
-	pcb_Regs->PINSEL1 |= ssel_01;
-	pcb_Regs->PINSEL1 |= ssel_00;
+	//pcb_Regs->PINSEL1 |= (ssel_01|ssel_00);
+	//supostamente desnecessario porqe so vamos ter 1 slave
 
 	// MISO mode denied
-	pcb_Regs->PINSEL1 |= miso_03;
-	pcb_Regs->PINSEL1 |= miso_02;
+//	pcb_Regs->PINSEL1 |= miso_03;
+//	pcb_Regs->PINSEL1 |= miso_02;
 
 	// MOSI mode
-	pcb_Regs->PINSEL1 |= mosi_05;
-	pcb_Regs->PINSEL1 |= mosi_04;
+	pcb_Regs->PINSEL1 |= (mosi_05|mosi_04);
+
+	//PINMODE
+//	falta pinmode
+//	saber se sck e mosi sao pull up ou open drain
+
 
 	// SPI0 SCK = : PCLK_SPI / SPCCR0
-	spiRegs->SOSPCCR &= (~0xff);
-	spiRegs->SOSPCCR |= (0x8);
+	spiRegs->SOSPCCR &= (~0xff);// counter a 0?
+	spiRegs->SOSPCCR = 8;
 
 	// Setting up master mode
-	//set( BE | CPHA | CPOL | MSTR | B8 | B11 );
-	unsigned int v;
+	unsigned int v=0;
 	v = ( BE | CPHA | CPOL | MSTR | B8 | B11 );
+	//v = ( BE | MSTR | B8 | B11 );
 	spiRegs->SOSPCR |= v;
-	spiRegs->SOSPCR &= (~LSBF);
-	spiRegs->SOSPCR &= (~SPIE);
-	spiRegs->SOSPCR &= (~B9);
-	spiRegs->SOSPCR &= (~B10);
-	unsigned int val = spiRegs->SOSPCR; // for debug
+	//v=((~LSBF) & (~SPIE) & (~B9) & (~B10));
+	//spiRegs->SOSPCR &= v;
+	v = spiRegs->SOSPCR; // for debug
 }
 
 int SPI_Transfer(char data, char DnC){
 	// Setting up clock frequency
-	SystemCoreClockUpdate();
-	unsigned div = (SystemCoreClock/4) / spi_freq;
+	//SystemCoreClockUpdate();
+	unsigned int div;
 	short first_bit = 0x1;
 	DnC &= first_bit;
 
 	//transfer
-	spiRegs->SOSPDR =((DnC<<7)|data);
+	div = ((DnC<<8)|data);
+	spiRegs->SOSPDR = div;
+
 	while((spiRegs->SOSPSR & SPIF) != SPIF);
 	spiRegs->SOSPDR;// This bit is cleared by first reading this
 	//register, then accessing the SPI Data Register.

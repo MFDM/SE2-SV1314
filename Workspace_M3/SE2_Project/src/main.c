@@ -10,7 +10,7 @@
 #include "lcd.h"
 
 void Inits(void) {
-	BUTTONS_Init(MASK_BUTTONS_U | MASK_BUTTONS_D);
+	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
 	LCD_Init();
 }
@@ -43,7 +43,15 @@ int main(void) {
 				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 		}
-		LCD_WriteChar('a');
+		LCD_CleanDisplay(0x0);
+		LCD_WriteChar('a',70,70);
+		LCD_WriteChar('b',80,80);
+		LCD_WriteChar('c',60,90);
+		char * a;
+		a = "ola mundo";
+		LCD_WriteString(a,30,30);
+
+
 	}
 	return 0;
 }
