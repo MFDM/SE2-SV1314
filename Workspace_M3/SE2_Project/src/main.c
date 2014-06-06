@@ -10,6 +10,8 @@
 #include "lcd.h"
 #include "enet.h"
 
+#define BLACK				0x0
+
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
@@ -44,16 +46,18 @@ int main(void) {
 				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 		}
-		LCD_CleanDisplay(0x0);
-		LCD_WriteChar('a',70,70);
-		LCD_WriteChar('b',80,80);
-		LCD_WriteChar('c',60,90);
+		LCD_CleanDisplay(BLACK);
 		char * a;
-		a = "ola mundo";
-		LCD_WriteString(a,30,30);
+		a = "HELLO WORLD!";
+		LCD_WriteString(a,10,50);
+		a = "PRESS ANY ";
+		LCD_WriteString(a,10,70);
+		a="BUTTON TO";
+		LCD_WriteString(a,20,80);
+		a="START RADIO";
+		LCD_WriteString(a,14,90);
 
-
-		int debug = ENET_checkBuffer();
+		//int debug = ENET_checkBuffer();
 	}
 	return 0;
 }

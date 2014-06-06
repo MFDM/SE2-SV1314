@@ -15,13 +15,13 @@
 
 
 /* Initialize MAC descriptors for simple packet receive/transmit */
-STATIC void InitDescriptors(void);
+void InitDescriptors(void);
 
 /* Get the pointer to the Rx buffer storing new received frame */
-STATIC void *ENET_RXGet(int32_t *bytes);
+void *ENET_RXGet(int32_t *bytes);
 
 /* Release Rx Buffer */
-STATIC void ENET_RXBuffClaim(void);
+void ENET_RXBuffClaim(void);
 
 // Debugging purposes
-int ENET_checkBuffer();
+int ENET_checkBuffer(void);

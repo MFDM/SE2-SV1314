@@ -37,7 +37,7 @@ LPC1769_SPI* spiRegs = LPC1769_BASE_SPI;
 
 void SPI_Init(void){
 	*ptr_pcnp |= pcompPins;//#define pcompPins 	(1<<8)
-	*ptr_pclksel0 |= (pclksel0_17|pclksel0_16);
+	*ptr_pclksel0 &= ((~pclksel0_17)&(~pclksel0_16));
 
 	// SCK reseted
 	pcb_Regs->PINSEL0 |= (sck_31|sck_30);
@@ -45,21 +45,9 @@ void SPI_Init(void){
 	//clock must be an even number
 	//greater than or equal to 8 (see Section 17.7.4).
 
-	// SSEL reseted
-	//pcb_Regs->PINSEL1 |= (ssel_01|ssel_00);
-	//supostamente desnecessario porqe so vamos ter 1 slave
-
-	// MISO mode denied
-//	pcb_Regs->PINSEL1 |= miso_03;
-//	pcb_Regs->PINSEL1 |= miso_02;
 
 	// MOSI mode
 	pcb_Regs->PINSEL1 |= (mosi_05|mosi_04);
-
-	//PINMODE
-//	falta pinmode
-//	saber se sck e mosi sao pull up ou open drain
-
 
 	// SPI0 SCK = : PCLK_SPI / SPCCR0
 	spiRegs->SOSPCCR &= (~0xff);// counter a 0?

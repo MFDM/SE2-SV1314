@@ -121,17 +121,17 @@ const unsigned char font8x8[97][8] = {
 0x3B,0x6E,0x00,0x00,0x00,0x00,0x00,0x00, // ~
 0x1C,0x36,0x36,0x1C,0x00,0x00,0x00,0x00}; // DEL
 
-void LCD_WriteToSpi(char byte,char DnC){
+static void LCD_WriteToSpi(char byte,char DnC){
 	GPIO_Write(~LCD_CS,LCD_CS);
 	SPI_Transfer(byte, DnC);
 	GPIO_Write(LCD_CS,LCD_CS);
 }
 
-void LCD_WriteCommand(char command){
+static void LCD_WriteCommand(char command){
 	LCD_WriteToSpi(command,0);
 }
 
-void LCD_WriteData(char data){
+static void LCD_WriteData(char data){
 	LCD_WriteToSpi(data,1);
 }
 
@@ -142,7 +142,7 @@ int LCD_Init() {
 	GPIO_SetDir(LCD_CS|LCD_RESET, LCD_CS|LCD_RESET);
 
 	GPIO_Write(LCD_CS|(~LCD_RESET),LCD_CS|LCD_RESET);
-	for(i =0;i<100000;i++); //delay
+	for(i =0;i<1000000;i++); //delay
 	GPIO_Write(LCD_RESET,LCD_RESET);
 	// Display control
 	LCD_WriteCommand(DISPLAY_CONTROL);
@@ -156,22 +156,11 @@ int LCD_Init() {
 	LCD_WriteCommand(INTERNAL_OSCILATOR_ON);
 	// Sleep out
 	LCD_WriteCommand(SLEEP_OUT);
-//	// Power control
+	// Power control
 	LCD_WriteCommand(POWER_CONTROL);
 	LCD_WriteData(0x0f);
-	// Inverse display
-	//WriteSpiCommand(DISINV);
-//	LCD_WriteCommand(INVERSE_DISPLAY);
-//	// Data control
-//	//WriteSpiCommand(DATCTL);
-//	LCD_WriteCommand(DATA_SCAN_DIRECTION);
-//	//WriteSpiData(0x01); // P1: 0x01 = page address inverted, col address normal, address scan in col direction
-//	LCD_WriteData(0x01);
-//	//WriteSpiData(0x00); // P2: 0x00 = RGB sequence (default value)
-//	LCD_WriteData(0x0);
-//	//WriteSpiData(0x02); // P3: 0x02 = Grayscale -> 16 (selects 12-bit color, type A)
-//	LCD_WriteData(0x02);
-	for( i =0;i<100000;i++);//delay
+
+	for( i =0;i<1000000;i++);//delay
 	// turn on the display
 	LCD_WriteCommand(DISPLAY_ON);
 	return 0;
@@ -190,8 +179,8 @@ int LCD_WriteChar(char data, int x, int y) {
 	pFont = (unsigned char *) font8x8;
 	cols = *pFont;
 	bytes = *(pFont + 2);
-	pChar = pFont + (bytes * (data - 0x1F)) + bytes - 1;
-
+	//pChar = pFont + (bytes * (data - 0x1F)) + bytes - 1;
+	pChar = pFont + (bytes * (data - 0x1F));
 	LCD_WriteCommand(PASET);
 	LCD_WriteData(x);
 	LCD_WriteData(x+7);
@@ -202,7 +191,8 @@ int LCD_WriteChar(char data, int x, int y) {
 	LCD_WriteCommand(RAM_WRITE);
 
 	for (i = 0; i < bytes; i++) {
-		pixelRow = *pChar--;
+		//pixelRow = *pChar--;
+		pixelRow = *pChar++;
 		for (j = 0; j < cols / 2; j++) {
 			Word0 = ((pixelRow & 0x1) != 0) ? WHITE : BLACK;
 			pixelRow >>= 1;
@@ -218,11 +208,19 @@ int LCD_WriteChar(char data, int x, int y) {
 	return 0;
 }
 
+static int strlen(char * string){
+	int a = 0;
+	while(*(string++) != '\0') {a++;}
+	return a;
+}
+
 int LCD_WriteString(char * data,int x, int y) {
-	int e =8;
-	while (*data != '\0') {
+
+	int size = strlen(data);
+	int e =8*size;
+	while (*data != '\0'){
 		LCD_WriteChar(*data,x+e,y);
-		e+=8;
+		e-=8;
 		data++;
 	}
 	return 0;
@@ -237,8 +235,8 @@ int LCD_CleanDisplay(char color){
 		LCD_WriteData(131);
 		LCD_WriteCommand(RAM_WRITE);
 		int i,j;
-		for(i =0;i<131;i++){
-			for(j =0;j<131;j++){
+		for(i =0;i<132;i++){
+			for(j =0;j<132;j++){
 				LCD_WriteData(color);
 				LCD_WriteData(color);
 			}
