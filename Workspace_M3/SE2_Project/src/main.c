@@ -16,8 +16,8 @@ void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
 //	LCD_Init();
-	Chip_ENET_Init(LPC_ETHERNET,TRUE);
 	InitDescriptors();
+	Chip_ENET_Init(LPC_ETHERNET,TRUE);
 }
 
 int main(void) {

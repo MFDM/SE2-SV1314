@@ -56,7 +56,6 @@ void *ENET_RXGet(int32_t *bytes)
 		*bytes = 0;
 //		buffer = NULL;
 	}
-
 	return buffer;
 }
 
@@ -77,7 +76,6 @@ int ENET_checkBuffer(void){
 		ENET_RXBuffClaim();
 		return 1;
 	}
-
 	return 0;
 }
 

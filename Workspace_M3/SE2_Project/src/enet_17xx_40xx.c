@@ -30,7 +30,22 @@
  */
 
 #include "chip.h"
+#include "LPC1769_Addresses.h"
+#include "LPC1769_Types.h"
+#include "pcb.h"
 
+#define ENET_TXD0 		(1<<0)
+#define ENET_TXD1 		(1<<2)
+#define ENET_TX_EN 		(1<<8)
+#define ENET_CRS 		(1<<16)
+#define ENET_RXD0 		(1<<18)
+#define ENET_RXD1 		(1<<20)
+#define ENET_RX_ER 		(1<<28)
+#define ENET_REF_CLK 	(1<<30)
+#define ENET_MDC 		(1<<0)
+#define ENET_MDIO 		(1<<2)
+#define ENET_PINSEL2	(ENET_TXD0|ENET_TXD1|ENET_TX_EN|ENET_CRS|ENET_RXD0|ENET_RXD1|ENET_RX_ER|ENET_REF_CLK|ENET_REF_CLK)
+#define ENET_PINSEL3	(ENET_MDC|ENET_MDIO)
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
@@ -70,6 +85,17 @@ STATIC INLINE void resetENET(LPC_ENET_T *pENET)
 /* Basic Ethernet interface initialization */
 void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII)
 {
+	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
+	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
+	unsigned int valueToReg= 0;
+	*ptr_pcnp |= (1<<30);// In the PCONP register, set bit PCENET.
+	valueToReg = (ENET_PINSEL2);
+	pcb_Regs->PINSEL2 &=(~valueToReg);
+	pcb_Regs->PINSEL2 |=valueToReg;
+	valueToReg = (ENET_PINSEL3);
+	pcb_Regs->PINSEL3 &=(~valueToReg);
+	pcb_Regs->PINSEL3 |=valueToReg;
+
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ENET);
 	resetENET(pENET);
 

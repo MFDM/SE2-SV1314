@@ -2,9 +2,6 @@
 #include "LPC1769_Types.h"
 #include "pcb.h"
 #include "spi.h"
-#include "system_LPC17xx.h"
-
-#define spi_freq 400000
 
 #define pcompPins 	(1<<8)
 #define pclksel0_17 (1<<17)
@@ -35,35 +32,31 @@ LPC1769_Reg* ptr_pclksel0 = LPC1769_PCLKSEL0;
 LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
 LPC1769_SPI* spiRegs = LPC1769_BASE_SPI;
 
-void SPI_Init(void){
-	*ptr_pcnp |= pcompPins;//#define pcompPins 	(1<<8)
-	*ptr_pclksel0 &= ((~pclksel0_17)&(~pclksel0_16));
+void SPI_Init(void) {
+	*ptr_pcnp |= pcompPins;
+	*ptr_pclksel0 &= ((~pclksel0_17) & (~pclksel0_16));
 
 	// SCK reseted
-	pcb_Regs->PINSEL0 |= (sck_31|sck_30);
+	pcb_Regs->PINSEL0 |= (sck_31 | sck_30);
 	// In master mode, the
 	//clock must be an even number
 	//greater than or equal to 8 (see Section 17.7.4).
 
-
 	// MOSI mode
-	pcb_Regs->PINSEL1 |= (mosi_05|mosi_04);
+	pcb_Regs->PINSEL1 |= (mosi_05 | mosi_04);
 
 	// SPI0 SCK = : PCLK_SPI / SPCCR0
-	spiRegs->SOSPCCR &= (~0xff);// counter a 0?
+	spiRegs->SOSPCCR &= (~0xff);	// counter a 0?
 	spiRegs->SOSPCCR = 8;
 
 	// Setting up master mode
-	unsigned int v=0;
-	v = ( BE | CPHA | CPOL | MSTR | B8 | B11 );
-	//v = ( BE | MSTR | B8 | B11 );
+	unsigned int v = 0;
+	v = ( BE | CPHA | CPOL | MSTR | B8 | B11);
 	spiRegs->SOSPCR |= v;
-	//v=((~LSBF) & (~SPIE) & (~B9) & (~B10));
-	//spiRegs->SOSPCR &= v;
 	v = spiRegs->SOSPCR; // for debug
 }
 
-int SPI_Transfer(char data, char DnC){
+int SPI_Transfer(char data, char DnC) {
 	// Setting up clock frequency
 	//SystemCoreClockUpdate();
 	unsigned int div;
@@ -71,13 +64,13 @@ int SPI_Transfer(char data, char DnC){
 	DnC &= first_bit;
 
 	//transfer
-	div = ((DnC<<8)|data);
+	div = ((DnC << 8) | data);
 	spiRegs->SOSPDR = div;
 
-	while((spiRegs->SOSPSR & SPIF) != SPIF);
-	spiRegs->SOSPDR;// This bit is cleared by first reading this
+	while ((spiRegs->SOSPSR & SPIF) != SPIF)
+		;
+	spiRegs->SOSPDR;	// This bit is cleared by first reading this
 	//register, then accessing the SPI Data Register.
-
 	return 0;
 }
 
