@@ -42,7 +42,7 @@ void InitDescriptors(void)
 void *ENET_RXGet(int32_t *bytes)
 {
 	uint16_t produceIdx;
-	void *buffer;
+	void *buffer=NULL;
 
 	produceIdx = Chip_ENET_GetRXProduceIndex(LPC_ETHERNET);
 	/* This doesn't check status of the received packet */
@@ -54,7 +54,7 @@ void *ENET_RXGet(int32_t *bytes)
 	else {
 		/* Nothing received */
 		*bytes = 0;
-		buffer = NULL;
+//		buffer = NULL;
 	}
 
 	return buffer;
@@ -69,9 +69,9 @@ void ENET_RXBuffClaim(void)
 // ping = 0x0806
 
 int ENET_checkBuffer(void){
-	int32_t* bytes;
-	InitDescriptors();
-	void* buffer = ENET_RXGet(bytes);
+	int32_t bytes;
+	void* buffer;
+	buffer= ENET_RXGet(&bytes);
 
 	if(bytes != 0) {
 		ENET_RXBuffClaim();

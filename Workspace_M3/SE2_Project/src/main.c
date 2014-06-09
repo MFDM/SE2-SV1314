@@ -15,7 +15,9 @@
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
-	LCD_Init();
+//	LCD_Init();
+	Chip_ENET_Init(LPC_ETHERNET,TRUE);
+	InitDescriptors();
 }
 
 int main(void) {
@@ -23,6 +25,17 @@ int main(void) {
 	unsigned int _buttons =0;
 
 	Inits();
+
+//	LCD_CleanDisplay(BLACK);
+//	char * a;
+//	a = "HELLO WORLD!";
+//	LCD_WriteString(a,10,50);
+//	a = "PRESS ANY ";
+//	LCD_WriteString(a,10,70);
+//	a="BUTTON TO";
+//	LCD_WriteString(a,20,80);
+//	a="START RADIO";
+//	LCD_WriteString(a,14,90);
 
 	while (1) {
 
@@ -46,18 +59,8 @@ int main(void) {
 				while(BUTTONS_Read(MASK_BUTTONS_ALL));
 			}
 		}
-		LCD_CleanDisplay(BLACK);
-		char * a;
-		a = "HELLO WORLD!";
-		LCD_WriteString(a,10,50);
-		a = "PRESS ANY ";
-		LCD_WriteString(a,10,70);
-		a="BUTTON TO";
-		LCD_WriteString(a,20,80);
-		a="START RADIO";
-		LCD_WriteString(a,14,90);
 
-		//int debug = ENET_checkBuffer();
+		int debug = ENET_checkBuffer();
 	}
 	return 0;
 }

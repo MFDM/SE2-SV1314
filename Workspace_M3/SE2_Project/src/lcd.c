@@ -142,7 +142,7 @@ int LCD_Init() {
 	GPIO_SetDir(LCD_CS|LCD_RESET, LCD_CS|LCD_RESET);
 
 	GPIO_Write(LCD_CS|(~LCD_RESET),LCD_CS|LCD_RESET);
-	for(i =0;i<1000000;i++); //delay
+	for(i =0;i<100000;i++); //delay
 	GPIO_Write(LCD_RESET,LCD_RESET);
 	// Display control
 	LCD_WriteCommand(DISPLAY_CONTROL);
@@ -160,7 +160,7 @@ int LCD_Init() {
 	LCD_WriteCommand(POWER_CONTROL);
 	LCD_WriteData(0x0f);
 
-	for( i =0;i<1000000;i++);//delay
+	for( i =0;i<100000;i++);//delay
 	// turn on the display
 	LCD_WriteCommand(DISPLAY_ON);
 	return 0;
