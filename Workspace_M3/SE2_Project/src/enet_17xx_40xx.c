@@ -54,8 +54,8 @@
 STATIC uint32_t phyAddr;
 
 /* Divider index values for the MII PHY clock */
-STATIC const uint8_t EnetClkDiv[] = {4, 6, 8, 10, 14, 20, 28, 36, 40, 44,
-									 48, 52, 56, 60, 64};
+STATIC const uint8_t EnetClkDiv[] = { 4, 6, 8, 10, 14, 20, 28, 36, 40, 44, 48,
+		52, 56, 60, 64 };
 
 /*****************************************************************************
  * Public types/enumerations/variables
@@ -65,8 +65,7 @@ STATIC const uint8_t EnetClkDiv[] = {4, 6, 8, 10, 14, 20, 28, 36, 40, 44,
  * Private functions
  ****************************************************************************/
 
-STATIC INLINE void resetENET(LPC_ENET_T *pENET)
-{
+STATIC INLINE void resetENET(LPC_ENET_T *pENET) {
 	volatile uint32_t i;
 
 #if defined(CHIP_LPC177X_8X) || defined(CHIP_LPC40XX)
@@ -75,40 +74,72 @@ STATIC INLINE void resetENET(LPC_ENET_T *pENET)
 
 	/* Reset ethernet peripheral */
 	Chip_ENET_Reset(pENET);
-	for (i = 0; i < 100; i++) {}
+	for (i = 0; i < 100; i++) {
+	}
 }
 
 /*****************************************************************************
  * Public functions
  ****************************************************************************/
-
-/* Basic Ethernet interface initialization */
-void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII)
-{
+STATIC void Board_Enet_Init(LPC_ENET_T *pENET) {
 	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
 	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
-	unsigned int valueToReg= 0;
-	*ptr_pcnp |= (1<<30);// In the PCONP register, set bit PCENET.
+	unsigned int valueToReg = 0;
+	*ptr_pcnp |= (1 << 30); // In the PCONP register, set bit PCENET.
 	valueToReg = (ENET_PINSEL2);
-	pcb_Regs->PINSEL2 &=(~valueToReg);
-	pcb_Regs->PINSEL2 |=valueToReg;
+	pcb_Regs->PINSEL2 &= (~valueToReg);
+	pcb_Regs->PINSEL2 |= valueToReg;
 	valueToReg = (ENET_PINSEL3);
-	pcb_Regs->PINSEL3 &=(~valueToReg);
-	pcb_Regs->PINSEL3 |=valueToReg;
+	pcb_Regs->PINSEL3 &= (~valueToReg);
+	pcb_Regs->PINSEL3 |= valueToReg;
+
+	//enet initialization
+
+}
+
+/* Returns the MAC address assigned to this board */
+void Board_ENET_GetMacADDR(uint8_t *mcaddr)
+{
+	const uint8_t boardmac[] = {0x00, 0x60, 0x37, 0x12, 0x34, 0x56};
+
+	memcpy(mcaddr, boardmac, 6);
+}
+
+/* Basic Ethernet interface initialization */
+void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
+	unsigned int macaddr[6];
+	Board_Enet_Init(pENET);
 
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ENET);
 	resetENET(pENET);
 
+	/* Setup MII clock rate and PHY address */
+	Chip_ENET_SetupMII(LPC_ETHERNET,
+			Chip_ENET_FindMIIDiv(LPC_ETHERNET, 2500000), 1);
+
+	/* Setup MAC address for device */
+	Board_ENET_GetMacADDR(macaddr);
+	Chip_ENET_SetADDR(LPC_ETHERNET, macaddr);
+
+	/* Setup descriptors */
+	InitDescriptors();
+
+	/* Enable RX/TX after descriptors are setup */
+	Chip_ENET_TXEnable(LPC_ETHERNET);
+	Chip_ENET_RXEnable(LPC_ETHERNET);
+
 	/* Initial MAC configuration for  full duplex,
-	   100Mbps, inter-frame gap use default values */
+	 100Mbps, inter-frame gap use default values */
 	pENET->MAC.MAC1 = ENET_MAC1_PARF;
-	pENET->MAC.MAC2 = ENET_MAC2_FULLDUPLEX | ENET_MAC2_CRCEN | ENET_MAC2_PADCRCEN;
+	pENET->MAC.MAC2 = ENET_MAC2_FULLDUPLEX | ENET_MAC2_CRCEN
+			| ENET_MAC2_PADCRCEN;
 
 	if (useRMII) {
-		pENET->CONTROL.COMMAND = ENET_COMMAND_FULLDUPLEX | ENET_COMMAND_PASSRUNTFRAME | ENET_COMMAND_RMII;
-	}
-	else {
-		pENET->CONTROL.COMMAND = ENET_COMMAND_FULLDUPLEX | ENET_COMMAND_PASSRUNTFRAME;
+		pENET->CONTROL.COMMAND = ENET_COMMAND_FULLDUPLEX
+				| ENET_COMMAND_PASSRUNTFRAME | ENET_COMMAND_RMII;
+	} else {
+		pENET->CONTROL.COMMAND = ENET_COMMAND_FULLDUPLEX
+				| ENET_COMMAND_PASSRUNTFRAME;
 	}
 
 	pENET->MAC.IPGT = ENET_IPGT_FULLDUPLEX;
@@ -128,8 +159,7 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII)
 }
 
 /* Ethernet interface shutdown */
-void Chip_ENET_DeInit(LPC_ENET_T *pENET)
-{
+void Chip_ENET_DeInit(LPC_ENET_T *pENET) {
 	/* Disable packet reception */
 	pENET->MAC.MAC1 &= ~ENET_MAC1_RXENABLE;
 	pENET->CONTROL.COMMAND = 0;
@@ -144,8 +174,7 @@ void Chip_ENET_DeInit(LPC_ENET_T *pENET)
 }
 
 /* Sets up the PHY link clock divider and PHY address */
-void Chip_ENET_SetupMII(LPC_ENET_T *pENET, uint32_t div, uint8_t addr)
-{
+void Chip_ENET_SetupMII(LPC_ENET_T *pENET, uint32_t div, uint8_t addr) {
 	/* Save clock divider and PHY address in MII address register */
 	phyAddr = ENET_MADR_PHYADDR(addr);
 
@@ -157,15 +186,15 @@ void Chip_ENET_SetupMII(LPC_ENET_T *pENET, uint32_t div, uint8_t addr)
 }
 
 /* Find the divider index for a desired MII clock rate */
-uint32_t Chip_ENET_FindMIIDiv(LPC_ENET_T *pENET, uint32_t clockRate)
-{
+uint32_t Chip_ENET_FindMIIDiv(LPC_ENET_T *pENET, uint32_t clockRate) {
 	uint32_t tmp, divIdx = 0;
 
 	/* Find desired divider value */
 	tmp = Chip_Clock_GetENETClockRate() / clockRate;
 
 	/* Determine divider index from desired divider */
-	for (divIdx = 0; divIdx < (sizeof(EnetClkDiv) / sizeof(EnetClkDiv[0])); divIdx++) {
+	for (divIdx = 0; divIdx < (sizeof(EnetClkDiv) / sizeof(EnetClkDiv[0]));
+			divIdx++) {
 		/* Closest index, but not higher than desired rate */
 		if (EnetClkDiv[divIdx] >= tmp) {
 			return divIdx;
@@ -177,8 +206,7 @@ uint32_t Chip_ENET_FindMIIDiv(LPC_ENET_T *pENET, uint32_t clockRate)
 }
 
 /* Starts a PHY write via the MII */
-void Chip_ENET_StartMIIWrite(LPC_ENET_T *pENET, uint8_t reg, uint16_t data)
-{
+void Chip_ENET_StartMIIWrite(LPC_ENET_T *pENET, uint8_t reg, uint16_t data) {
 	/* Write value at PHY address and register */
 	pENET->MAC.MCMD = 0;
 	pENET->MAC.MADR = phyAddr | ENET_MADR_REGADDR(reg);
@@ -186,42 +214,35 @@ void Chip_ENET_StartMIIWrite(LPC_ENET_T *pENET, uint8_t reg, uint16_t data)
 }
 
 /*Starts a PHY read via the MII */
-void Chip_ENET_StartMIIRead(LPC_ENET_T *pENET, uint8_t reg)
-{
+void Chip_ENET_StartMIIRead(LPC_ENET_T *pENET, uint8_t reg) {
 	/* Read value at PHY address and register */
 	pENET->MAC.MADR = phyAddr | ENET_MADR_REGADDR(reg);
 	pENET->MAC.MCMD = ENET_MCMD_READ;
 }
 
 /* Read MII data */
-uint16_t Chip_ENET_ReadMIIData(LPC_ENET_T *pENET)
-{
+uint16_t Chip_ENET_ReadMIIData(LPC_ENET_T *pENET) {
 	pENET->MAC.MCMD = 0;
 	return pENET->MAC.MRDD;
 }
 
 /* Sets full duplex for the ENET interface */
-void Chip_ENET_SetFullDuplex(LPC_ENET_T *pENET)
-{
+void Chip_ENET_SetFullDuplex(LPC_ENET_T *pENET) {
 	pENET->MAC.MAC2 |= ENET_MAC2_FULLDUPLEX;
 	pENET->CONTROL.COMMAND |= ENET_COMMAND_FULLDUPLEX;
 	pENET->MAC.IPGT = ENET_IPGT_FULLDUPLEX;
 }
 
 /* Sets half duplex for the ENET interface */
-void Chip_ENET_SetHalfDuplex(LPC_ENET_T *pENET)
-{
+void Chip_ENET_SetHalfDuplex(LPC_ENET_T *pENET) {
 	pENET->MAC.MAC2 &= ~ENET_MAC2_FULLDUPLEX;
 	pENET->CONTROL.COMMAND &= ~ENET_COMMAND_FULLDUPLEX;
 	pENET->MAC.IPGT = ENET_IPGT_HALFDUPLEX;
 }
 
 /* Configures the initial ethernet transmit descriptors */
-void Chip_ENET_InitTxDescriptors(LPC_ENET_T *pENET,
-								 ENET_TXDESC_T *pDescs,
-								 ENET_TXSTAT_T *pStatus,
-								 uint32_t descNum)
-{
+void Chip_ENET_InitTxDescriptors(LPC_ENET_T *pENET, ENET_TXDESC_T *pDescs,
+		ENET_TXSTAT_T *pStatus, uint32_t descNum) {
 	/* Setup descriptor list base addresses */
 	pENET->CONTROL.TX.DESCRIPTOR = (uint32_t) pDescs;
 	pENET->CONTROL.TX.DESCRIPTORNUMBER = descNum - 1;
@@ -230,11 +251,8 @@ void Chip_ENET_InitTxDescriptors(LPC_ENET_T *pENET,
 }
 
 /* Configures the initial ethernet receive descriptors */
-void Chip_ENET_InitRxDescriptors(LPC_ENET_T *pENET,
-								 ENET_RXDESC_T *pDescs,
-								 ENET_RXSTAT_T *pStatus,
-								 uint32_t descNum)
-{
+void Chip_ENET_InitRxDescriptors(LPC_ENET_T *pENET, ENET_RXDESC_T *pDescs,
+		ENET_RXSTAT_T *pStatus, uint32_t descNum) {
 	/* Setup descriptor list base addresses */
 	pENET->CONTROL.RX.DESCRIPTOR = (uint32_t) pDescs;
 	pENET->CONTROL.RX.DESCRIPTORNUMBER = descNum - 1;
@@ -244,18 +262,14 @@ void Chip_ENET_InitRxDescriptors(LPC_ENET_T *pENET,
 
 /* Get status for the descriptor list */
 ENET_BUFF_STATUS_T Chip_ENET_GetBufferStatus(LPC_ENET_T *pENET,
-											 uint16_t produceIndex,
-											 uint16_t consumeIndex,
-											 uint16_t buffSize)
-{
+		uint16_t produceIndex, uint16_t consumeIndex, uint16_t buffSize) {
 	/* Empty descriptor list */
 	if (consumeIndex == produceIndex) {
 		return ENET_BUFF_EMPTY;
 	}
 
 	/* Full descriptor list */
-	if ((consumeIndex == 0) &&
-		(produceIndex == (buffSize - 1))) {
+	if ((consumeIndex == 0) && (produceIndex == (buffSize - 1))) {
 		return ENET_BUFF_FULL;
 	}
 
@@ -268,8 +282,8 @@ ENET_BUFF_STATUS_T Chip_ENET_GetBufferStatus(LPC_ENET_T *pENET,
 }
 
 /* Get the number of descriptor filled */
-uint32_t Chip_ENET_GetFillDescNum(LPC_ENET_T *pENET, uint16_t produceIndex, uint16_t consumeIndex, uint16_t buffSize)
-{
+uint32_t Chip_ENET_GetFillDescNum(LPC_ENET_T *pENET, uint16_t produceIndex,
+		uint16_t consumeIndex, uint16_t buffSize) {
 	/* Empty descriptor list */
 	if (consumeIndex == produceIndex) {
 		return 0;
@@ -283,8 +297,7 @@ uint32_t Chip_ENET_GetFillDescNum(LPC_ENET_T *pENET, uint16_t produceIndex, uint
 }
 
 /* Increase the current Tx Produce Descriptor Index */
-uint16_t Chip_ENET_IncTXProduceIndex(LPC_ENET_T *pENET)
-{
+uint16_t Chip_ENET_IncTXProduceIndex(LPC_ENET_T *pENET) {
 	/* Get current TX produce index */
 	uint32_t idx = pENET->CONTROL.TX.PRODUCEINDEX;
 
@@ -299,8 +312,7 @@ uint16_t Chip_ENET_IncTXProduceIndex(LPC_ENET_T *pENET)
 }
 
 /* Increase the current Rx Consume Descriptor Index */
-uint16_t Chip_ENET_IncRXConsumeIndex(LPC_ENET_T *pENET)
-{
+uint16_t Chip_ENET_IncRXConsumeIndex(LPC_ENET_T *pENET) {
 	/* Get current RX consume index */
 	uint32_t idx = pENET->CONTROL.RX.CONSUMEINDEX;
 

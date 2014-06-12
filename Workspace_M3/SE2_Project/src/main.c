@@ -16,14 +16,13 @@ void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
 //	LCD_Init();
-	InitDescriptors();
 	Chip_ENET_Init(LPC_ETHERNET,TRUE);
 }
 
 int main(void) {
 	short _changes = 0;
 	unsigned int _buttons =0;
-
+	SystemCoreClockUpdate();
 	Inits();
 
 //	LCD_CleanDisplay(BLACK);
