@@ -36,6 +36,8 @@
 extern "C" {
 #endif
 
+#include "chip.h"
+
 /** @defgroup CLOCK_17XX_40XX CHIP: LPC17xx/40xx Clock Driver
  * @ingroup CHIP_17XX_40XX_Drivers
  * @{
