@@ -33,6 +33,8 @@
 #include "LPC1769_Addresses.h"
 #include "LPC1769_Types.h"
 #include "pcb.h"
+#include "enet.h"
+#include "board.h"
 
 #define ENET_TXD0 		(1<<0)
 #define ENET_TXD1 		(1<<2)
@@ -75,6 +77,14 @@ STATIC INLINE void resetENET(LPC_ENET_T *pENET) {
 	/* Reset ethernet peripheral */
 	Chip_ENET_Reset(pENET);
 	for (i = 0; i < 100; i++) {
+	}
+}
+
+STATIC void localMsDelay(uint32_t ms)
+{
+	ms = ms * 40000;
+	while (ms > 0) {
+		ms--;
 	}
 }
 
@@ -157,6 +167,36 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	/* Disable MAC interrupts */
 	pENET->MODULE_CONTROL.INTENABLE = 0;
 }
+
+void Chip_ENET_Setup(LPC_ENET_T *pENET){
+	uint8_t macaddr[6];
+
+	/* Setup ethernet and PHY */
+#if defined(USE_RMII)
+	Chip_ENET_Init(LPC_ETHERNET, true);
+
+#else
+	Chip_ENET_Init(LPC_ETHERNET, false);
+#endif
+
+	/* Setup MII clock rate and PHY address */
+	Chip_ENET_SetupMII(LPC_ETHERNET, Chip_ENET_FindMIIDiv(LPC_ETHERNET, 2500000), 1);
+
+	lpc_phy_init(true, localMsDelay);
+
+	/* Setup MAC address for device */
+	Board_ENET_GetMacADDR(macaddr);
+	Chip_ENET_SetADDR(LPC_ETHERNET, macaddr);
+
+	/* Setup descriptors */
+	InitDescriptors();
+
+	/* Enable RX/TX after descriptors are setup */
+	Chip_ENET_TXEnable(LPC_ETHERNET);
+	Chip_ENET_RXEnable(LPC_ETHERNET);
+
+}
+
 
 /* Ethernet interface shutdown */
 void Chip_ENET_DeInit(LPC_ENET_T *pENET) {

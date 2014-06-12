@@ -66,7 +66,6 @@ void ENET_RXBuffClaim(void)
 }
 
 // ping = 0x0806
-
 int ENET_checkBuffer(void){
 	int32_t bytes;
 	void* buffer;
