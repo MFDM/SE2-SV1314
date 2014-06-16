@@ -168,16 +168,11 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	pENET->MODULE_CONTROL.INTENABLE = 0;
 }
 
-void Chip_ENET_Setup(LPC_ENET_T *pENET){
+void Chip_ENET_Setup(LPC_ENET_T *pENET, bool useRMII){
 	uint8_t macaddr[6];
 
 	/* Setup ethernet and PHY */
-#if defined(USE_RMII)
-	Chip_ENET_Init(LPC_ETHERNET, true);
-
-#else
-	Chip_ENET_Init(LPC_ETHERNET, false);
-#endif
+	Chip_ENET_Init(LPC_ETHERNET, useRMII);
 
 	/* Setup MII clock rate and PHY address */
 	Chip_ENET_SetupMII(LPC_ETHERNET, Chip_ENET_FindMIIDiv(LPC_ETHERNET, 2500000), 1);
