@@ -28,8 +28,8 @@
  * copyright, permission, and disclaimer notice must appear in all copies of
  * this code.
  */
+#include "clock_17xx_40xx.h"
 
-#include "chip.h"
 
 /*****************************************************************************
  * Private types/enumerations/variables
@@ -38,6 +38,9 @@
 /*****************************************************************************
  * Public types/enumerations/variables
  ****************************************************************************/
+
+const uint32_t OscRateIn = 12000000;
+const uint32_t RTCOscRateIn = 32768;
 
 /*****************************************************************************
  * Private functions
