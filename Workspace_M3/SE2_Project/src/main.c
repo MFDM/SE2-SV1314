@@ -22,6 +22,7 @@ void Inits(void) {
 int main(void) {
 	short _changes = 0;
 	unsigned int _buttons =0;
+	int debug=0;
 //	SystemCoreClockUpdate();
 	Inits();
 
@@ -59,7 +60,10 @@ int main(void) {
 			}
 		}
 
-		int debug = ENET_checkBuffer();
+		debug = ENET_checkBuffer();
+		if(debug!=0){
+			debug =0;
+		}
 	}
 	return 0;
 }

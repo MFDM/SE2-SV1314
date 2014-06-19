@@ -31,6 +31,7 @@ void InitDescriptors(void)
 	}
 	for (i = 0; i < ENET_NUM_TX_DESC; i++) {
 		pTXDescs[i].Packet = (uint32_t) ENET_TX_BUF(i);
+		pTXDescs[i].Control = (ENET_TCTRL_PAD| ENET_TCTRL_CRC);
 	}
 
 	/* Setup list pointers in Ethernet controller */
@@ -67,7 +68,7 @@ void ENET_RXBuffClaim(void)
 
 // ping = 0x0806
 int ENET_checkBuffer(void){
-	int32_t bytes;
+	int32_t bytes =0;
 	void* buffer;
 	buffer= ENET_RXGet(&bytes);
 
@@ -76,6 +77,37 @@ int ENET_checkBuffer(void){
 		return 1;
 	}
 	return 0;
+}
+
+/* Get Tx Buffer for the next transmission */
+STATIC void *ENET_TXBuffGet(void)
+{
+	uint16_t consumeIdx = Chip_ENET_GetTXConsumeIndex(LPC_ETHERNET);
+
+	if (Chip_ENET_GetBufferStatus(LPC_ETHERNET, txProduceIdx, consumeIdx, ENET_NUM_TX_DESC) != ENET_BUFF_FULL) {
+		return (void *) pTXDescs[txProduceIdx].Packet;
+	}
+	return NULL;
+}
+
+/* Queue a new frame for transmission */
+STATIC void ENET_TXQueue(int32_t bytes)
+{
+	if (bytes > 0) {
+		pTXDescs[txProduceIdx].Control = ENET_TCTRL_SIZE(bytes) | ENET_TCTRL_LAST;
+		txProduceIdx = Chip_ENET_IncTXProduceIndex(LPC_ETHERNET);
+	}
+}
+
+/* Check if tranmission finished */
+STATIC bool ENET_IsTXFinish(void)
+{
+	uint16_t consumeIdx = Chip_ENET_GetTXConsumeIndex(LPC_ETHERNET);
+
+	if (Chip_ENET_GetBufferStatus(LPC_ETHERNET, txProduceIdx, consumeIdx, ENET_NUM_TX_DESC) == ENET_BUFF_EMPTY) {
+		return true;
+	}
+	return false;
 }
 
 

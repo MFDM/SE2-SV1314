@@ -125,19 +125,19 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	resetENET(pENET);
 
 	/* Setup MII clock rate and PHY address */
-	Chip_ENET_SetupMII(LPC_ETHERNET,
-			Chip_ENET_FindMIIDiv(LPC_ETHERNET, 2500000), 1);
+	Chip_ENET_SetupMII(pENET,
+			Chip_ENET_FindMIIDiv(pENET, 2500000), 1);
 
 	/* Setup MAC address for device */
 	Board_ENET_GetMacADDR(macaddr);
-	Chip_ENET_SetADDR(LPC_ETHERNET, macaddr);
+	Chip_ENET_SetADDR(pENET, macaddr);
 
 	/* Setup descriptors */
 	InitDescriptors();
 
 	/* Enable RX/TX after descriptors are setup */
-	Chip_ENET_TXEnable(LPC_ETHERNET);
-	Chip_ENET_RXEnable(LPC_ETHERNET);
+	Chip_ENET_TXEnable(pENET);
+	Chip_ENET_RXEnable(pENET);
 
 	/* Initial MAC configuration for  full duplex,
 	 100Mbps, inter-frame gap use default values */
@@ -167,6 +167,8 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 
 	/* Disable MAC interrupts */
 	pENET->MODULE_CONTROL.INTENABLE = 0;
+
+	pENET->RXFILTER.CONTROL |= 0x20;
 }
 
 void Chip_ENET_Setup(LPC_ENET_T *pENET, bool useRMII){
