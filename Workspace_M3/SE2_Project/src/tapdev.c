@@ -64,6 +64,8 @@
 #include "chip.h"
 #include "lpc_types.h"
 #include "enet_17xx_40xx.h"
+#include "uip.h"
+#include "enet.h"
 
 #define useRMMI TRUE
 
@@ -76,7 +78,7 @@ tapdev_init(void){
 ///*---------------------------------------------------------------------------*/
 unsigned int
 tapdev_read(void){
-	void* buff = null;
+	void* buff = NULL;
 	int32_t bytes = 0;
 	buff = ENET_RXGet(&bytes);
 	if(bytes){

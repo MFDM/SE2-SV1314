@@ -89,9 +89,6 @@ STATIC void localMsDelay(uint32_t ms)
 	}
 }
 
-/*****************************************************************************
- * Public functions
- ****************************************************************************/
 STATIC void Board_Enet_Init(LPC_ENET_T *pENET) {
 	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
 	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
@@ -107,7 +104,9 @@ STATIC void Board_Enet_Init(LPC_ENET_T *pENET) {
 	//enet initialization
 
 }
-
+/*****************************************************************************
+ * Public functions
+ ****************************************************************************/
 /* Returns the MAC address assigned to this board */
 void Board_ENET_GetMacADDR(uint8_t *mcaddr)
 {
@@ -187,14 +186,13 @@ void Chip_ENET_Setup(LPC_ENET_T *pENET, bool useRMII){
 	Chip_ENET_SetADDR(LPC_ETHERNET, macaddr);
 
 	/* Setup descriptors */
-	InitDescriptors();
+//	InitDescriptors();
 
 	/* Enable RX/TX after descriptors are setup */
 	Chip_ENET_TXEnable(LPC_ETHERNET);
 	Chip_ENET_RXEnable(LPC_ETHERNET);
 
 }
-
 
 /* Ethernet interface shutdown */
 void Chip_ENET_DeInit(LPC_ENET_T *pENET) {

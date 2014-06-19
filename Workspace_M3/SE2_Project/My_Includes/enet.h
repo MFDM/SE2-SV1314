@@ -23,5 +23,14 @@ void *ENET_RXGet(int32_t *bytes);
 /* Release Rx Buffer */
 void ENET_RXBuffClaim(void);
 
-// Debugging purposes
+/*	 Debugging purposes	*/
 int ENET_checkBuffer(void);
+
+/* Get Tx Buffer for the next transmission */
+void *ENET_TXBuffGet(void);
+
+/* Queue a new frame for transmission */
+void ENET_TXQueue(int32_t bytes);
+
+/* Check if tranmission finished */
+bool ENET_IsTXFinish(void);

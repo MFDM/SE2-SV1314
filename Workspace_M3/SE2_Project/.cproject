@@ -64,7 +64,7 @@
 									<listOptionValue builtIn="false" value="-Map=&quot;${BuildArtifactFileBaseName}.map&quot;"/>
 									<listOptionValue builtIn="false" value="--gc-sections"/>
 								</option>
-								<option id="com.crt.advproject.link.gcc.hdrlib.1000789822" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.none" valueType="enumerated"/>
+								<option id="com.crt.advproject.link.gcc.hdrlib.1000789822" name="Library" superClass="com.crt.advproject.link.gcc.hdrlib" value="com.crt.advproject.gcc.link.hdrlib.codered.semihost" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.crpenable.403368337" name="Enable Code Read Protect" superClass="com.crt.advproject.link.crpenable"/>
 								<option id="com.crt.advproject.link.gcc.multicore.slave.63132971" name="Multicore slave" superClass="com.crt.advproject.link.gcc.multicore.slave"/>
 								<option id="gnu.c.link.option.paths.1182544769" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">

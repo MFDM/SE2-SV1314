@@ -55,7 +55,6 @@ void *ENET_RXGet(int32_t *bytes)
 	else {
 		/* Nothing received */
 		*bytes = 0;
-//		buffer = NULL;
 	}
 	return buffer;
 }
@@ -80,7 +79,7 @@ int ENET_checkBuffer(void){
 }
 
 /* Get Tx Buffer for the next transmission */
-STATIC void *ENET_TXBuffGet(void)
+void *ENET_TXBuffGet(void)
 {
 	uint16_t consumeIdx = Chip_ENET_GetTXConsumeIndex(LPC_ETHERNET);
 
@@ -91,7 +90,7 @@ STATIC void *ENET_TXBuffGet(void)
 }
 
 /* Queue a new frame for transmission */
-STATIC void ENET_TXQueue(int32_t bytes)
+void ENET_TXQueue(int32_t bytes)
 {
 	if (bytes > 0) {
 		pTXDescs[txProduceIdx].Control = ENET_TCTRL_SIZE(bytes) | ENET_TCTRL_LAST;
@@ -100,7 +99,7 @@ STATIC void ENET_TXQueue(int32_t bytes)
 }
 
 /* Check if tranmission finished */
-STATIC bool ENET_IsTXFinish(void)
+bool ENET_IsTXFinish(void)
 {
 	uint16_t consumeIdx = Chip_ENET_GetTXConsumeIndex(LPC_ETHERNET);
 
@@ -109,8 +108,3 @@ STATIC bool ENET_IsTXFinish(void)
 	}
 	return false;
 }
-
-
-
-
-

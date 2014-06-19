@@ -888,6 +888,8 @@ STATIC INLINE void Chip_ENET_ClearIntStatus(LPC_ENET_T *pENET, uint32_t mask)
  */
 void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII);
 
+void Chip_ENET_Setup(LPC_ENET_T *pENET, bool useRMII);
+
 /**
  * @brief	De-initialize the ethernet interface
  * @param	pENET	: The base of ENET peripheral on the chip
