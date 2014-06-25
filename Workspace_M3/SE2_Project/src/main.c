@@ -51,7 +51,8 @@ int main(void) {
 
 //	tapdev_init();
 //	uip_init();
-//
+// movido para os init
+
 	uip_ipaddr(ipaddr, 192, 168, 0, 2);
 	uip_sethostaddr(ipaddr);
 	uip_ipaddr(ipaddr, 192, 168, 0, 1);
@@ -103,6 +104,7 @@ int main(void) {
 //					;
 //			}
 //		}
+//		ENET_checkBuffer();
 
 		uip_len = tapdev_read();
 		if (uip_len > 0) {
@@ -116,8 +118,7 @@ int main(void) {
 					uip_arp_out();
 					tapdev_send();
 				}
-			}
-			else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
+			} else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
 				uip_arp_arpin();
 				/* If the above function invocation resulted in data that
 				 should be sent out on the network, the global variable
@@ -127,8 +128,7 @@ int main(void) {
 				}
 			}
 
-		}
-		else if (timer_expired(&periodic_timer)) {
+		} else if (timer_expired(&periodic_timer)) {
 			timer_reset(&periodic_timer);
 			for (i = 0; i < UIP_CONNS; i++) {
 				uip_periodic(i);
@@ -163,8 +163,6 @@ int main(void) {
 	}
 	return 0;
 }
-void
-uip_log(char *m)
-{
-  //printf("uIP log message: %s\n", m);
+void uip_log(char *m) {
+	//printf("uIP log message: %s\n", m);
 }

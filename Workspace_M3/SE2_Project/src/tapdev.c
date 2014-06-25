@@ -86,7 +86,6 @@ tapdev_read(void){
 		uip_len = bytes;
 	}
 	Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
-
 	return bytes;
 }
 
@@ -96,7 +95,6 @@ tapdev_send(void){
 	void* bufAddr = ENET_TXBuffGet();
 	memcpy(bufAddr, uip_buf, uip_len);
 	ENET_TXQueue(uip_len);
-
 }
 
 ///*---------------------------------------------------------------------------*/
