@@ -69,13 +69,11 @@
 
 #define useRMMI TRUE
 
-///*---------------------------------------------------------------------------*/
 void
 tapdev_init(void){
 	Chip_ENET_Setup(LPC_ETHERNET, useRMMI);
 }
 
-///*---------------------------------------------------------------------------*/
 unsigned int
 tapdev_read(void){
 	void* buff = NULL;
@@ -89,12 +87,9 @@ tapdev_read(void){
 	return bytes;
 }
 
-///*---------------------------------------------------------------------------*/
 void
 tapdev_send(void){
 	void* bufAddr = ENET_TXBuffGet();
 	memcpy(bufAddr, uip_buf, uip_len);
 	ENET_TXQueue(uip_len);
 }
-
-///*---------------------------------------------------------------------------*/
