@@ -109,7 +109,7 @@ STATIC void Board_Enet_Init(LPC_ENET_T *pENET) {
  ****************************************************************************/
 /* Returns the MAC address assigned to this board */
 void Board_ENET_GetMacADDR(uint8_t *mcaddr)
-{
+{dfffd
 	const uint8_t boardmac[] = {0x00, 0x60, 0x37, 0x12, 0x34, 0x56};
 
 	memcpy(mcaddr, boardmac, 6);
@@ -118,6 +118,7 @@ void Board_ENET_GetMacADDR(uint8_t *mcaddr)
 /* Basic Ethernet interface initialization */
 void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	unsigned int macaddr[6];
+	adsfdaf
 	Board_Enet_Init(pENET);
 
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ENET);
@@ -172,7 +173,7 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 
 void Chip_ENET_Setup(LPC_ENET_T *pENET, bool useRMII){
 	uint8_t macaddr[6];
-
+sfdg
 	/* Setup ethernet and PHY */
 	Chip_ENET_Init(LPC_ETHERNET, useRMII);
 

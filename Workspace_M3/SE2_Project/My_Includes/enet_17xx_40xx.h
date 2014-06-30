@@ -518,9 +518,9 @@ STATIC INLINE void Chip_ENET_Reset(LPC_ENET_T *pENET)
 STATIC INLINE void Chip_ENET_SetADDR(LPC_ENET_T *pENET, const uint8_t *macAddr)
 {
 	/* Save MAC address */
-	pENET->MAC.SA[0] = ((uint32_t) macAddr[5] << 8) | ((uint32_t) macAddr[4]);
+	pENET->MAC.SA[2] = ((uint32_t) macAddr[5] << 8) | ((uint32_t) macAddr[4]);
 	pENET->MAC.SA[1] = ((uint32_t) macAddr[3] << 8) | ((uint32_t) macAddr[2]);
-	pENET->MAC.SA[2] = ((uint32_t) macAddr[1] << 8) | ((uint32_t) macAddr[0]);
+	pENET->MAC.SA[0] = ((uint32_t) macAddr[1] << 8) | ((uint32_t) macAddr[0]);
 }
 
 /**
