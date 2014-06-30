@@ -8,6 +8,14 @@
 #define LCD_CS				1<<3
 #define LCD_RESET			1<<4
 
+
+#define UIP_ETHADDR0  0x0
+#define UIP_ETHADDR1 0x60
+#define UIP_ETHADDR2  0x37
+#define	UIP_ETHADDR3  0x12
+#define UIP_ETHADDR4  0x34
+#define	UIP_ETHADDR5  0x56
+
 #endif
 
 

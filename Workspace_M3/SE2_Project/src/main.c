@@ -17,6 +17,7 @@
 #define BUF 				((struct uip_eth_hdr *)&uip_buf[0])
 #define BLACK				0x0
 
+
 void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init();
