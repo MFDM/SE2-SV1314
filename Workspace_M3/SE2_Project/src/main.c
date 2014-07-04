@@ -3,13 +3,13 @@
 #endif
 
 #include <cr_section_macros.h>
+#include "SE2_specific.h"
 #include "buttons.h"
 #include "tea5767.h"
-#include "SE2_specific.h"
 #include "lcd.h"
-#include "enet.h"
 #include "uip.h"
 #include "uip_arp.h"
+#include "enet.h"
 #include "tapdev.h"
 
 #include "timer.h"
@@ -18,22 +18,22 @@
 #define BLACK				0x0
 
 const struct uip_eth_addr macAddr = {{0x00, 0x60, 0x37, 0x12, 0x34, 0x56}};
+//struct uip_eth_addr macAddr;
 
 struct timer periodic_timer, arp_timer;
 void Inits(void) {
 	uip_ipaddr_t ipaddr;
 
 	SystemCoreClockUpdate();
-	SysTick_Config(SystemCoreClock / 1000);
-	//	BUTTONS_Init(MASK_BUTTONS_ALL);
-	//	TEA5767_Init();
-	//	LCD_Init();
+////	SysTick_Config(SystemCoreClock / 1000);
+//	//	BUTTONS_Init(MASK_BUTTONS_ALL);
+//	//	TEA5767_Init();
+//	//	LCD_Init();
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-
+//
 	tapdev_init();
 	uip_init();
-	// movido para os init
 
 	uip_setethaddr(macAddr);
 
@@ -43,7 +43,6 @@ void Inits(void) {
 	uip_setdraddr(ipaddr);
 	uip_ipaddr(ipaddr, 255, 255, 255, 0);
 	uip_setnetmask(ipaddr);
-
 
 	httpd_init();
 }

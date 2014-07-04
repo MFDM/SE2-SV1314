@@ -40,11 +40,7 @@
 
 #include "clock-arch.h"
 #include "chip.h"
-int my_time = 1000;
 /*---------------------------------------------------------------------------*/
 clock_time_t clock_time(void) {
-//return System Timer Current value register (STCURR - 0xE000 E018)
-//
 	return SysTick->VAL;
 }
-/*---------------------------------------------------------------------------*/

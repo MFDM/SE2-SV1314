@@ -30,14 +30,15 @@
  */
 
 #include "chip.h"
+#include "board.h"
+#include "uip.h"
+#include "uip_arp.h"
 #include "iocon_17xx_40xx.h"
 #include "LPC1769_Addresses.h"
 #include "LPC1769_Types.h"
+#include "SE2_specific.h"
 #include "pcb.h"
 #include "enet.h"
-#include "board.h"
-#include "SE2_specific.h"
-#include "uip.h"
 
 #define ENET_TXD0 		(1<<0)
 #define ENET_TXD1 		(1<<2)
@@ -49,10 +50,10 @@
 #define ENET_REF_CLK 	(1<<30)
 #define ENET_MDC 		(1<<0)
 #define ENET_MDIO 		(1<<2)
-#define ENET_PINSEL2_CLEAN	(3<<0|3<<2|3<<8|3<<16|3<<18|3<<20|3<<28|3<<30)
-#define ENET_PINSEL3_CLEAN	(3<<0|3<<2)
-#define ENET_PINSEL2	(ENET_TXD0|ENET_TXD1|ENET_TX_EN|ENET_CRS|ENET_RXD0|ENET_RXD1|ENET_RX_ER|ENET_REF_CLK|ENET_REF_CLK)
-#define ENET_PINSEL3	(ENET_MDC|ENET_MDIO)
+#define ENET_PINSEL2_CLEAN	((3<<0)|(3<<2)|(3<<8)|(3<<16)|(3<<18)|(3<<20)|(3<<28)|(3<<30))
+#define ENET_PINSEL3_CLEAN	((3<<0)|(3<<2))
+#define ENET_PINSEL2	((ENET_TXD0)|(ENET_TXD1)|(ENET_TX_EN)|(ENET_CRS)|(ENET_RXD0)|(ENET_RXD1)|(ENET_RX_ER)|(ENET_REF_CLK)|(ENET_REF_CLK))
+#define ENET_PINSEL3	((ENET_MDC)|(ENET_MDIO))
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
@@ -93,16 +94,21 @@ STATIC void localMsDelay(uint32_t ms) {
 }
 
 STATIC void Board_Enet_Init(void) {
-//	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
-//	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
-//	unsigned int valueToReg = 0;
-//	*ptr_pcnp |= (1 << 30); // In the PCONP register, set bit PCENET.
-//	valueToReg = (ENET_PINSEL2);
-//	pcb_Regs->PINSEL2 &= (~ENET_PINSEL2_CLEAN);
-//	pcb_Regs->PINSEL2 |= valueToReg;
-//	valueToReg = (ENET_PINSEL3);
-//	pcb_Regs->PINSEL3 &= (~ENET_PINSEL3_CLEAN);
-//	pcb_Regs->PINSEL3 |= valueToReg;
+	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
+	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
+	uint32_t debug;
+	unsigned int valueToReg = 0;
+	*ptr_pcnp |= (1 << 30); // In the PCONP register, set bit PCENET.
+	debug = ENET_PINSEL2_CLEAN;
+	debug = ENET_TX_EN;
+	valueToReg = (ENET_PINSEL2);
+	pcb_Regs->PINSEL2 &= (~ENET_PINSEL2_CLEAN);
+	pcb_Regs->PINSEL2 |= valueToReg;
+	debug = pcb_Regs->PINSEL2;
+	valueToReg = (ENET_PINSEL3);
+	pcb_Regs->PINSEL3 &= (~ENET_PINSEL3_CLEAN);
+	pcb_Regs->PINSEL3 |= valueToReg;
+	debug = pcb_Regs->PINSEL3;
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 9, IOCON_MODE_PULLUP, IOCON_FUNC1);
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 10, IOCON_MODE_PULLUP, IOCON_FUNC1);
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 16, IOCON_MODE_PULLUP, IOCON_FUNC1);
@@ -111,7 +117,6 @@ STATIC void Board_Enet_Init(void) {
 /*****************************************************************************
  * Public functions
  ****************************************************************************/
-
 
 extern const struct uip_eth_addr macAddr;
 
@@ -122,6 +127,7 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 ////// ORIGINAL CHIP_ENET_INIT CODE
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ENET);
 	resetENET(pENET);
+
 	/* Initial MAC configuration for  full duplex,
 	 100Mbps, inter-frame gap use default values */
 	pENET->MAC.MAC1 = ENET_MAC1_PARF;
@@ -144,7 +150,6 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 
 	/* Setup default filter */
 	pENET->CONTROL.COMMAND |= ENET_COMMAND_PASSRXFILTER;
-	//When set to ’1’, disables receive filtering i.e. all frames received are written to memory.
 
 	/* Clear all MAC interrupts */
 	pENET->MODULE_CONTROL.INTCLEAR = 0xFFFF;

@@ -70,17 +70,15 @@
 
 #define useRMMI TRUE
 
-void
-tapdev_init(void){
+void tapdev_init(void) {
 	Chip_ENET_Init(LPC_ETHERNET, useRMMI);
 }
 
-unsigned int
-tapdev_read(void){
+unsigned int tapdev_read(void) {
 	void* buff = NULL;
 	uint32_t bytes = 0;
 	buff = ENET_RXGet(&bytes);
-	if(bytes){
+	if (bytes) {
 		memcpy(uip_buf, buff, bytes);
 		uip_len = bytes;
 	}
@@ -88,10 +86,9 @@ tapdev_read(void){
 	return bytes;
 }
 
-void
-tapdev_send(void){
+void tapdev_send(void) {
 	void* bufAddr = ENET_TXBuffGet();
-	if(bufAddr){
+	if (bufAddr) {
 		memcpy(bufAddr, uip_buf, uip_len);
 		ENET_TXQueue(uip_len);
 	}

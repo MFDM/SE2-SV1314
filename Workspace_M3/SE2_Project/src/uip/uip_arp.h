@@ -54,7 +54,6 @@
 
 #include "uip.h"
 
-
 extern struct uip_eth_addr uip_ethaddr;
 
 /**
