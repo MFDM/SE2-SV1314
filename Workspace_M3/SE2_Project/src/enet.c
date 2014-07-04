@@ -1,4 +1,5 @@
 #include "enet.h"
+#include <string.h>
 
 STATIC ENET_RXDESC_T *pRXDescs = (ENET_RXDESC_T *) ENET_RX_DESC_BASE;
 STATIC ENET_RXSTAT_T *pRXStats = (ENET_RXSTAT_T *) ENET_RX_STAT_BASE;
@@ -22,7 +23,7 @@ void InitDescriptors(void)
 	memset(pRXStats, 0, ENET_NUM_RX_DESC * sizeof(ENET_RXSTAT_T));
 
 	rxConsumeIdx = 0;
-    rxConsumeIdx = 0;
+	txProduceIdx = 0;
 
 	/* Build linked list, CPU is owner of descriptors */
 	for (i = 0; i < ENET_NUM_RX_DESC; i++) {
@@ -40,7 +41,7 @@ void InitDescriptors(void)
 }
 
 /* Get the pointer to the Rx buffer storing new received frame */
-void *ENET_RXGet(int32_t *bytes)
+void *ENET_RXGet(uint32_t *bytes)
 {
 	uint16_t produceIdx;
 	void *buffer=NULL;
@@ -50,7 +51,7 @@ void *ENET_RXGet(int32_t *bytes)
 	if (Chip_ENET_GetBufferStatus(LPC_ETHERNET, produceIdx, rxConsumeIdx, ENET_NUM_RX_DESC) != ENET_BUFF_EMPTY) {
 		/* CPU owns descriptor, so a packet was received */
 		buffer = (void *) pRXDescs[rxConsumeIdx].Packet;
-		*bytes = (int32_t) (ENET_RINFO_SIZE(pRXStats[rxConsumeIdx].StatusInfo) - 4);/* Remove CRC */
+		*bytes = (uint32_t) (ENET_RINFO_SIZE(pRXStats[rxConsumeIdx].StatusInfo) - 4);/* Remove CRC */
 	}
 	else {
 		/* Nothing received */
@@ -90,7 +91,7 @@ void *ENET_TXBuffGet(void)
 }
 
 /* Queue a new frame for transmission */
-void ENET_TXQueue(int32_t bytes)
+void ENET_TXQueue(uint32_t bytes)
 {
 	if (bytes > 0) {
 		pTXDescs[txProduceIdx].Control = ENET_TCTRL_SIZE(bytes) | ENET_TCTRL_LAST;
