@@ -1,4 +1,6 @@
 #include "enet.h"
+#include "board.h"
+#include <stdio.h>
 #include <string.h>
 
 STATIC ENET_RXDESC_T *pRXDescs = (ENET_RXDESC_T *) ENET_RX_DESC_BASE;

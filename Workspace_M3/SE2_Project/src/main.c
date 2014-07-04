@@ -3,6 +3,10 @@
 #endif
 
 #include <cr_section_macros.h>
+#include <stdio.h>
+#include <string.h>
+#include "board.h"
+#include "system_LPC17xx.h"
 #include "SE2_specific.h"
 #include "buttons.h"
 #include "tea5767.h"
@@ -17,21 +21,26 @@
 #define BUF				((struct uip_eth_hdr *)&uip_buf[0])
 #define BLACK				0x0
 
-const struct uip_eth_addr macAddr = {{0x00, 0x60, 0x37, 0x12, 0x34, 0x56}};
-//struct uip_eth_addr macAddr;
-
+const struct uip_eth_addr macAddr = { { 0x00, 0x60, 0x37, 0x12, 0x34, 0x56 } };
+/*
+ *
+ A fazer ping para 192.168.0.2 com 32 bytes de dados:
+Resposta de 192.168.0.3: Anfitrião de destino inacessív
+Resposta de 192.168.0.2: bytes=32 tempo=2184ms TTL=128
+Resposta de 192.168.0.2: bytes=32 tempo=1930ms TTL=128
+*/
 struct timer periodic_timer, arp_timer;
 void Inits(void) {
 	uip_ipaddr_t ipaddr;
-
+	SystemInit();
 	SystemCoreClockUpdate();
-////	SysTick_Config(SystemCoreClock / 1000);
+	SysTick_Config(SystemCoreClock / 1000);
 //	//	BUTTONS_Init(MASK_BUTTONS_ALL);
 //	//	TEA5767_Init();
 //	//	LCD_Init();
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-//
+
 	tapdev_init();
 	uip_init();
 
@@ -122,26 +131,6 @@ int main(void) {
 //	a = "START RADIO";
 //	LCD_WriteString(a, 14, 90);
 
-	/*  telnetd_init();*/
-
-	/*  {
-	 u8_t mac[6] = {1,2,3,4,5,6};
-	 dhcpc_init(&mac, 6);
-	 }*/
-
-	/*uip_ipaddr(ipaddr, 127,0,0,1);
-	 smtp_configure("localhost", ipaddr);
-	 SMTP_SEND("adam@sics.se", NULL, "uip-testing@example.com",
-	 "Testing SMTP from uIP",
-	 "Test message sent by uIP\r\n");*/
-
-	/*
-	 webclient_init();
-	 resolv_init();
-	 uip_ipaddr(ipaddr, 195,54,122,204);
-	 resolv_conf(ipaddr);
-	 resolv_query("www.sics.se");*/
-
 	while (1) {
 //		if (_changes) {
 //			//LCD_Clear();
@@ -171,7 +160,7 @@ int main(void) {
 	return 0;
 }
 
-void SysTick_Handler(void){
+void SysTick_Handler(void) {
 
 }
 void uip_log(char *m) {

@@ -1,36 +1,7 @@
-/*
- * @brief LPC17xx/40xx ethernet driver
- *
- * @note
- * Copyright(C) NXP Semiconductors, 2014
- * All rights reserved.
- *
- * @par
- * Software that is described herein is for illustrative purposes only
- * which provides customers with programming information regarding the
- * LPC products.  This software is supplied "AS IS" without any warranties of
- * any kind, and NXP Semiconductors and its licensor disclaim any and
- * all warranties, express or implied, including all implied warranties of
- * merchantability, fitness for a particular purpose and non-infringement of
- * intellectual property rights.  NXP Semiconductors assumes no responsibility
- * or liability for the use of the software, conveys no license or rights under any
- * patent, copyright, mask work right, or any other intellectual property rights in
- * or to any products. NXP Semiconductors reserves the right to make changes
- * in the software without notification. NXP Semiconductors also makes no
- * representation or warranty that such application will be suitable for the
- * specified use without further testing or modification.
- *
- * @par
- * Permission to use, copy, modify, and distribute this software and its
- * documentation is hereby granted, under NXP Semiconductors' and its
- * licensor's relevant copyrights in the software, without fee, provided that it
- * is used in conjunction with NXP Semiconductors microcontrollers.  This
- * copyright, permission, and disclaimer notice must appear in all copies of
- * this code.
- */
-
 #include "chip.h"
 #include "board.h"
+#include <stdio.h>
+#include <string.h>
 #include "uip.h"
 #include "uip_arp.h"
 #include "iocon_17xx_40xx.h"
@@ -53,25 +24,13 @@
 #define ENET_PINSEL2_CLEAN	((3<<0)|(3<<2)|(3<<8)|(3<<16)|(3<<18)|(3<<20)|(3<<28)|(3<<30))
 #define ENET_PINSEL3_CLEAN	((3<<0)|(3<<2))
 #define ENET_PINSEL2	((ENET_TXD0)|(ENET_TXD1)|(ENET_TX_EN)|(ENET_CRS)|(ENET_RXD0)|(ENET_RXD1)|(ENET_RX_ER)|(ENET_REF_CLK)|(ENET_REF_CLK))
+#define ENET_PINSEL2_JUST_RXD_O_1	((ENET_RXD0)|(ENET_RXD1))
 #define ENET_PINSEL3	((ENET_MDC)|(ENET_MDIO))
-/*****************************************************************************
- * Private types/enumerations/variables
- ****************************************************************************/
 
-/* Saved address for PHY and clock divider */
 STATIC uint32_t phyAddr;
 
-/* Divider index values for the MII PHY clock */
 STATIC const uint8_t EnetClkDiv[] = { 4, 6, 8, 10, 14, 20, 28, 36, 40, 44, 48,
 		52, 56, 60, 64 };
-
-/*****************************************************************************
- * Public types/enumerations/variables
- ****************************************************************************/
-
-/*****************************************************************************
- * Private functions
- ****************************************************************************/
 
 STATIC INLINE void resetENET(LPC_ENET_T *pENET) {
 	volatile uint32_t i;
@@ -80,43 +39,49 @@ STATIC INLINE void resetENET(LPC_ENET_T *pENET) {
 	Chip_SYSCTL_PeriphReset(SYSCTL_RESET_ENET);
 #endif
 
-	/* Reset ethernet peripheral */
 	Chip_ENET_Reset(pENET);
 	for (i = 0; i < 100; i++) {
 	}
 }
 
 STATIC void localMsDelay(uint32_t ms) {
-	ms = ms * 40000;
+	ms = ms * 1000000;
 	while (ms > 0) {
 		ms--;
 	}
 }
 
 STATIC void Board_Enet_Init(void) {
+	////  CODIGO COM TODOS OS PINOS ETHERNET
+	//
+
 	LPC1769_Reg* ptr_pcnp = LPC1769_PCONP;
 	LPC1769_PCB* pcb_Regs = LPC1769_BASE_PCB;
-	uint32_t debug;
-	unsigned int valueToReg = 0;
+//	uint32_t debug;
+	static unsigned int valueToReg = 0;
 	*ptr_pcnp |= (1 << 30); // In the PCONP register, set bit PCENET.
-	debug = ENET_PINSEL2_CLEAN;
-	debug = ENET_TX_EN;
 	valueToReg = (ENET_PINSEL2);
+//	valueToReg = (ENET_PINSEL2_JUST_RXD_O_1);
 	pcb_Regs->PINSEL2 &= (~ENET_PINSEL2_CLEAN);
 	pcb_Regs->PINSEL2 |= valueToReg;
-	debug = pcb_Regs->PINSEL2;
+//	debug = pcb_Regs->PINSEL2;
 	valueToReg = (ENET_PINSEL3);
 	pcb_Regs->PINSEL3 &= (~ENET_PINSEL3_CLEAN);
 	pcb_Regs->PINSEL3 |= valueToReg;
-	debug = pcb_Regs->PINSEL3;
+//	debug = pcb_Regs->PINSEL3;
+
+	////  CODIGO COM PINOS
+	//--ENET_MDC Output MIIM clock.
+	//--ENET_MDIO Input/Output MI data input and output
+	//--ENET_RXD[1:0] Input Receive data, 2 bits.
+	// se usarmos o codigo abaixo, COMPILA, MAS NAO ESCREVE NA RAM, DÁ PROBLEMAS
+	// E DEPOIS temos qe escrever um codigo sem erros ni IAP com o reset pelo porto 2.10
+
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 9, IOCON_MODE_PULLUP, IOCON_FUNC1);
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 10, IOCON_MODE_PULLUP, IOCON_FUNC1);
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 16, IOCON_MODE_PULLUP, IOCON_FUNC1);
 //	Chip_IOCON_PinMux(LPC_IOCON, 1, 17, IOCON_MODE_PULLUP, IOCON_FUNC1);
 }
-/*****************************************************************************
- * Public functions
- ****************************************************************************/
 
 extern const struct uip_eth_addr macAddr;
 
@@ -124,7 +89,7 @@ extern const struct uip_eth_addr macAddr;
 void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	Board_Enet_Init();
 
-////// ORIGINAL CHIP_ENET_INIT CODE
+//// ORIGINAL CHIP_ENET_INIT CODE
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_ENET);
 	resetENET(pENET);
 
@@ -149,7 +114,7 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	pENET->MAC.CLRT = ENET_CLRT_DEF;
 
 	/* Setup default filter */
-	pENET->CONTROL.COMMAND |= ENET_COMMAND_PASSRXFILTER;
+//	pENET->CONTROL.COMMAND |= ENET_COMMAND_PASSRXFILTER;
 
 	/* Clear all MAC interrupts */
 	pENET->MODULE_CONTROL.INTCLEAR = 0xFFFF;
@@ -157,7 +122,7 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 	/* Disable MAC interrupts */
 	pENET->MODULE_CONTROL.INTENABLE = 0;
 
-	pENET->RXFILTER.CONTROL |= 0x20;
+	pENET->RXFILTER.CONTROL |= 0x22;
 	//When set to ’1’, the frames with a destination address identical to the station address are accepted.
 
 	/////// END OF ORIGINAL CODE

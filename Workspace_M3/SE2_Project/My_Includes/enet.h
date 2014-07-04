@@ -1,6 +1,9 @@
 #include "LPC1769_Types.h"
 #include "chip.h"
 #include "enet_17xx_40xx.h"
+#include "board.h"
+#include <stdio.h>
+#include <string.h>
 
 #define ENET_NUM_TX_DESC 4
 #define ENET_NUM_RX_DESC 4
