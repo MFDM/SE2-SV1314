@@ -16,6 +16,18 @@
 #define UIP_ETHADDR4  0x34
 #define	UIP_ETHADDR5  0x56
 
+// Station flash position
+#define FLASH_ADDR 			0x78000
+
+//Stations
+#define NUM_STATION_MEM 	4
+#define TEA_FREQ 			100
+
+typedef struct _sation{
+	unsigned int frequency;
+	unsigned int valid;
+} Station, *PStation;
+
 #endif
 
 
