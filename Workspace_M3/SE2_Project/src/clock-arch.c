@@ -41,6 +41,8 @@
 #include "clock-arch.h"
 #include "chip.h"
 /*---------------------------------------------------------------------------*/
+clock_time_t __clock =0;
 clock_time_t clock_time(void) {
-	return SysTick->VAL;
+	//return SysTick->VAL;
+	return ++__clock;
 }

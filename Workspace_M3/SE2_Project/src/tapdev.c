@@ -18,9 +18,9 @@ unsigned int tapdev_read(void) {
 	if (bytes) {
 		uip_len = bytes;
 		memcpy(uip_buf, buff, bytes);
+		ENET_RXBuffClaim();//Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET); tb mexeu no control dos descriptors
 	}
-	Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
-	return bytes;
+		return bytes;
 }
 
 void tapdev_send(void) {
