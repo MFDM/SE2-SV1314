@@ -90,9 +90,8 @@ static int32_t phyustate;
 static p_msDelay_func_t pDelayMs;
 
 /* Write to the PHY. Will block for delays based on the pDelayMs function. Returns
-   true on success, or false on failure */
-static Status lpc_mii_write(uint8_t reg, uint16_t data)
-{
+ true on success, or false on failure */
+static Status lpc_mii_write(uint8_t reg, uint16_t data) {
 	Status sts = ERROR;
 	int32_t mst = 250;
 
@@ -104,8 +103,7 @@ static Status lpc_mii_write(uint8_t reg, uint16_t data)
 		if (Chip_ENET_IsMIIBusy(LPC_ETHERNET)) {
 			mst--;
 			pDelayMs(1);
-		}
-		else {
+		} else {
 			mst = 0;
 			sts = SUCCESS;
 		}
@@ -115,9 +113,8 @@ static Status lpc_mii_write(uint8_t reg, uint16_t data)
 }
 
 /* Read from the PHY. Will block for delays based on the pDelayMs function. Returns
-   true on success, or false on failure */
-static Status lpc_mii_read(uint8_t reg, uint16_t *data)
-{
+ true on success, or false on failure */
+static Status lpc_mii_read(uint8_t reg, uint16_t *data) {
 	Status sts = ERROR;
 	int32_t mst = 250;
 
@@ -130,8 +127,7 @@ static Status lpc_mii_read(uint8_t reg, uint16_t *data)
 			mst = 0;
 			*data = Chip_ENET_ReadMIIData(LPC_ETHERNET);
 			sts = SUCCESS;
-		}
-		else {
+		} else {
 			mst--;
 			pDelayMs(1);
 		}
@@ -141,13 +137,11 @@ static Status lpc_mii_read(uint8_t reg, uint16_t *data)
 }
 
 /* Update PHY status from passed value */
-static void smsc_update_phy_sts(uint16_t linksts, uint16_t sdsts)
-{
+static void smsc_update_phy_sts(uint16_t linksts, uint16_t sdsts) {
 	/* Update link active status */
 	if (linksts & LAN8_LINK_STATUS) {
 		physts |= PHY_LINK_CONNECTED;
-	}
-	else {
+	} else {
 		physts &= ~PHY_LINK_CONNECTED;
 	}
 
@@ -175,16 +169,17 @@ static void smsc_update_phy_sts(uint16_t linksts, uint16_t sdsts)
 	}
 
 	/* If the status has changed, indicate via change flag */
-	if ((physts & (PHY_LINK_SPEED100 | PHY_LINK_FULLDUPLX | PHY_LINK_CONNECTED)) !=
-		(olddphysts & (PHY_LINK_SPEED100 | PHY_LINK_FULLDUPLX | PHY_LINK_CONNECTED))) {
+	if ((physts & (PHY_LINK_SPEED100 | PHY_LINK_FULLDUPLX | PHY_LINK_CONNECTED))
+			!= (olddphysts
+					& (PHY_LINK_SPEED100 | PHY_LINK_FULLDUPLX
+							| PHY_LINK_CONNECTED))) {
 		olddphysts = physts;
 		physts |= PHY_LINK_CHANGED;
 	}
 }
 
 /* Initialize the SMSC 87x0 PHY */
-uint32_t lpc_phy_init(bool rmii, p_msDelay_func_t pDelayMsFunc)
-{
+uint32_t lpc_phy_init(bool rmii, p_msDelay_func_t pDelayMsFunc) {
 	uint16_t tmp;
 	int32_t i;
 
@@ -207,8 +202,7 @@ uint32_t lpc_phy_init(bool rmii, p_msDelay_func_t pDelayMsFunc)
 
 		if (!(tmp & (LAN8_RESET | LAN8_POWER_DOWN))) {
 			i = -1;
-		}
-		else {
+		} else {
 			i--;
 		}
 	}
@@ -221,14 +215,13 @@ uint32_t lpc_phy_init(bool rmii, p_msDelay_func_t pDelayMsFunc)
 	lpc_mii_write(LAN8_BCR_REG, LAN8_AUTONEG);
 
 	/* The link is not set active at this point, but will be detected
-	   later */
+	 later */
 
 	return SUCCESS;
 }
 
 /* Phy status update state machine */
-uint32_t lpcPHYStsPoll(void)
-{
+uint32_t lpcPHYStsPoll(void) {
 	static uint16_t sts;
 
 	switch (phyustate) {

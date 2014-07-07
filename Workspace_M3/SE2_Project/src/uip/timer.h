@@ -16,7 +16,6 @@
  * @{
  */
 
-
 /**
  * \file
  * Timer library header file.
@@ -72,8 +71,8 @@
  * \hideinitializer
  */
 struct timer {
-  clock_time_t start;
-  clock_time_t interval;
+	clock_time_t start;
+	clock_time_t interval;
 };
 
 void timer_set(struct timer *t, clock_time_t interval);

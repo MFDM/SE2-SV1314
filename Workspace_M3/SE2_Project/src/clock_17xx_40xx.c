@@ -30,7 +30,6 @@
  */
 #include "clock_17xx_40xx.h"
 
-
 /*****************************************************************************
  * Private types/enumerations/variables
  ****************************************************************************/
@@ -78,8 +77,7 @@ void Chip_Clock_SetupPLL(CHIP_SYSCTL_PLL_T PLLNum, uint32_t msel, uint32_t psel)
 	/* PLL0 and PLL1 are slightly different */
 	if (PLLNum == SYSCTL_MAIN_PLL) {
 		PLLcfg = (msel) | (psel << 16);
-	}
-	else {
+	} else {
 		PLLcfg = (msel) | (psel << 5);
 	}
 
@@ -125,8 +123,7 @@ void Chip_Clock_DisablePeriphClock(CHIP_SYSCTL_CLOCK_T clk) {
 }
 
 /* Returns power enables state for a peripheral */
-bool Chip_Clock_IsPeripheralClockEnabled(CHIP_SYSCTL_CLOCK_T clk)
-{
+bool Chip_Clock_IsPeripheralClockEnabled(CHIP_SYSCTL_CLOCK_T clk) {
 	uint32_t bs = (uint32_t) clk;
 
 #if defined(CHIP_LPC40XX)
@@ -144,15 +141,13 @@ bool Chip_Clock_IsPeripheralClockEnabled(CHIP_SYSCTL_CLOCK_T clk)
 }
 
 /* Sets the current CPU clock source */
-void Chip_Clock_SetCPUClockSource(CHIP_SYSCTL_CCLKSRC_T src)
-{
+void Chip_Clock_SetCPUClockSource(CHIP_SYSCTL_CCLKSRC_T src) {
 #if defined(CHIP_LPC175X_6X)
 	/* LPC175x/6x CPU clock source is based on PLL connect status */
 	if (src == SYSCTL_CCLKSRC_MAINPLL) {
 		/* Connect PLL0 */
 		Chip_Clock_EnablePLL(SYSCTL_MAIN_PLL, SYSCTL_PLL_CONNECT);
-	}
-	else {
+	} else {
 		Chip_Clock_DisablePLL(SYSCTL_MAIN_PLL, SYSCTL_PLL_CONNECT);
 	}
 #else
@@ -168,15 +163,13 @@ void Chip_Clock_SetCPUClockSource(CHIP_SYSCTL_CCLKSRC_T src)
 }
 
 /* Returns the current CPU clock source */
-CHIP_SYSCTL_CCLKSRC_T Chip_Clock_GetCPUClockSource(void)
-{
+CHIP_SYSCTL_CCLKSRC_T Chip_Clock_GetCPUClockSource(void) {
 	CHIP_SYSCTL_CCLKSRC_T src;
 #if defined(CHIP_LPC175X_6X)
 	/* LPC175x/6x CPU clock source is based on PLL connect status */
 	if (Chip_Clock_IsMainPLLConnected()) {
 		src = SYSCTL_CCLKSRC_MAINPLL;
-	}
-	else {
+	} else {
 		src = SYSCTL_CCLKSRC_SYSCLK;
 	}
 #else
@@ -193,8 +186,7 @@ CHIP_SYSCTL_CCLKSRC_T Chip_Clock_GetCPUClockSource(void)
 }
 
 /* Selects the CPU clock divider */
-void Chip_Clock_SetCPUClockDiv(uint32_t div)
-{
+void Chip_Clock_SetCPUClockDiv(uint32_t div) {
 #if defined(CHIP_LPC175X_6X)
 	LPC_SYSCTL->CCLKSEL = div;
 #else
@@ -207,8 +199,7 @@ void Chip_Clock_SetCPUClockDiv(uint32_t div)
 }
 
 /* Gets the CPU clock divider */
-uint32_t Chip_Clock_GetCPUClockDiv(void)
-{
+uint32_t Chip_Clock_GetCPUClockDiv(void) {
 #if defined(CHIP_LPC175X_6X)
 	return (LPC_SYSCTL->CCLKSEL & 0xFF) + 1;
 #else
@@ -230,8 +221,7 @@ void Chip_Clock_SetUSBClockSource(CHIP_SYSCTL_USBCLKSRC_T src)
 #endif
 
 /* Sets the USB clock divider */
-void Chip_Clock_SetUSBClockDiv(uint32_t div)
-{
+void Chip_Clock_SetUSBClockDiv(uint32_t div) {
 	uint32_t temp;
 
 	/* Mask out current divider */
@@ -244,8 +234,7 @@ void Chip_Clock_SetUSBClockDiv(uint32_t div)
 }
 
 /* Gets the USB clock divider */
-uint32_t Chip_Clock_GetUSBClockDiv(void)
-{
+uint32_t Chip_Clock_GetUSBClockDiv(void) {
 #if defined(CHIP_LPC175X_6X)
 	return (LPC_SYSCTL->USBCLKSEL & 0xF) + 1;
 #else
@@ -255,8 +244,7 @@ uint32_t Chip_Clock_GetUSBClockDiv(void)
 
 #if defined(CHIP_LPC175X_6X)
 /* Selects a clock divider for a peripheral */
-void Chip_Clock_SetPCLKDiv(CHIP_SYSCTL_PCLK_T clk, CHIP_SYSCTL_CLKDIV_T div)
-{
+void Chip_Clock_SetPCLKDiv(CHIP_SYSCTL_PCLK_T clk, CHIP_SYSCTL_CLKDIV_T div) {
 	uint32_t temp, bitIndex, regIndex = (uint32_t) clk;
 
 	/* Get register array index and clock index into the register */
@@ -270,8 +258,7 @@ void Chip_Clock_SetPCLKDiv(CHIP_SYSCTL_PCLK_T clk, CHIP_SYSCTL_CLKDIV_T div)
 }
 
 /* Gets a clock divider for a peripheral */
-uint32_t Chip_Clock_GetPCLKDiv(CHIP_SYSCTL_PCLK_T clk)
-{
+uint32_t Chip_Clock_GetPCLKDiv(CHIP_SYSCTL_PCLK_T clk) {
 	uint32_t div = 1, bitIndex, regIndex = ((uint32_t) clk) * 2;
 
 	/* Get register array index and clock index into the register */
@@ -283,19 +270,16 @@ uint32_t Chip_Clock_GetPCLKDiv(CHIP_SYSCTL_PCLK_T clk)
 	div = (div >> bitIndex) & 0x3;
 	if (div == SYSCTL_CLKDIV_4) {
 		div = 4;
-	}
-	else if (div == SYSCTL_CLKDIV_1) {
+	} else if (div == SYSCTL_CLKDIV_1) {
 		div = 1;
-	}
-	else if (div == SYSCTL_CLKDIV_2) {
+	} else if (div == SYSCTL_CLKDIV_2) {
 		div = 2;
-	}
-	else {
+	} else {
 		/* Special case for CAN clock divider */
-		if ((clk == SYSCTL_PCLK_CAN1) || (clk == SYSCTL_PCLK_CAN2) || (clk == SYSCTL_PCLK_ACF)) {
+		if ((clk == SYSCTL_PCLK_CAN1) || (clk == SYSCTL_PCLK_CAN2)
+				|| (clk == SYSCTL_PCLK_ACF)) {
 			div = 6;
-		}
-		else {
+		} else {
 			div = 8;
 		}
 	}
@@ -306,9 +290,7 @@ uint32_t Chip_Clock_GetPCLKDiv(CHIP_SYSCTL_PCLK_T clk)
 #endif
 
 /* Selects a source clock and divider rate for the CLKOUT pin */
-void Chip_Clock_SetCLKOUTSource(CHIP_SYSCTL_CLKOUTSRC_T src,
-								uint32_t div)
-{
+void Chip_Clock_SetCLKOUTSource(CHIP_SYSCTL_CLKOUTSRC_T src, uint32_t div) {
 	uint32_t temp;
 
 	temp = LPC_SYSCTL->CLKOUTCFG & ~0x1FF;
@@ -317,8 +299,7 @@ void Chip_Clock_SetCLKOUTSource(CHIP_SYSCTL_CLKOUTSRC_T src,
 }
 
 /* Returns the current SYSCLK clock rate */
-uint32_t Chip_Clock_GetSYSCLKRate(void)
-{
+uint32_t Chip_Clock_GetSYSCLKRate(void) {
 	/* Determine clock input rate to SYSCLK based on input selection */
 	switch (Chip_Clock_GetMainPLLSource()) {
 	case (uint32_t) SYSCTL_PLLCLKSRC_IRC:
@@ -336,8 +317,7 @@ uint32_t Chip_Clock_GetSYSCLKRate(void)
 }
 
 /* Returns the main PLL output clock rate */
-uint32_t Chip_Clock_GetMainPLLOutClockRate(void)
-{
+uint32_t Chip_Clock_GetMainPLLOutClockRate(void) {
 	uint32_t clkhr = 0;
 
 #if defined(CHIP_LPC175X_6X)
@@ -364,8 +344,7 @@ uint32_t Chip_Clock_GetMainPLLOutClockRate(void)
 }
 
 /* Get USB output clock rate */
-uint32_t Chip_Clock_GetUSBPLLOutClockRate(void)
-{
+uint32_t Chip_Clock_GetUSBPLLOutClockRate(void) {
 	uint32_t clkhr = 0;
 
 	/* Only valid if enabled */
@@ -383,10 +362,9 @@ uint32_t Chip_Clock_GetUSBPLLOutClockRate(void)
 
 /* Get the main clock rate */
 /* On 175x/6x devices, this is the input clock to the CPU divider.
-   Additionally, on 177x/8x and 407x/8x devices, this is also the
-   input clock to the peripheral divider. */
-uint32_t Chip_Clock_GetMainClockRate(void)
-{
+ Additionally, on 177x/8x and 407x/8x devices, this is also the
+ input clock to the peripheral divider. */
+uint32_t Chip_Clock_GetMainClockRate(void) {
 	switch (Chip_Clock_GetCPUClockSource()) {
 	case SYSCTL_CCLKSRC_MAINPLL:
 		return Chip_Clock_GetMainPLLOutClockRate();
@@ -400,14 +378,12 @@ uint32_t Chip_Clock_GetMainClockRate(void)
 }
 
 /* Get CCLK rate */
-uint32_t Chip_Clock_GetSystemClockRate(void)
-{
+uint32_t Chip_Clock_GetSystemClockRate(void) {
 	return Chip_Clock_GetMainClockRate() / Chip_Clock_GetCPUClockDiv();
 }
 
 /* Returns the USB clock (USB_CLK) rate */
-uint32_t Chip_Clock_GetUSBClockRate(void)
-{
+uint32_t Chip_Clock_GetUSBClockRate(void) {
 	uint32_t div, clkrate;
 #if defined(CHIP_LPC175X_6X)
 	/* The USB clock rate is derived from PLL1 or PLL0 */
@@ -415,8 +391,7 @@ uint32_t Chip_Clock_GetUSBClockRate(void)
 		/* Use PLL1 clock for USB source with divider of 1 */
 		clkrate = Chip_Clock_GetUSBPLLOutClockRate();
 		div = 1;
-	}
-	else {
+	} else {
 		clkrate = Chip_Clock_GetMainClockRate();
 		div = Chip_Clock_GetUSBClockDiv();
 	}
@@ -424,16 +399,16 @@ uint32_t Chip_Clock_GetUSBClockRate(void)
 #else
 	/* Get clock from source drving USB */
 	switch (Chip_Clock_GetUSBClockSource()) {
-	case SYSCTL_USBCLKSRC_SYSCLK:
-	default:
+		case SYSCTL_USBCLKSRC_SYSCLK:
+		default:
 		clkrate = Chip_Clock_GetSYSCLKRate();
 		break;
 
-	case SYSCTL_USBCLKSRC_MAINPLL:
+		case SYSCTL_USBCLKSRC_MAINPLL:
 		clkrate = Chip_Clock_GetMainPLLOutClockRate();
 		break;
 
-	case SYSCTL_USBCLKSRC_USBPLL:
+		case SYSCTL_USBCLKSRC_USBPLL:
 		clkrate = Chip_Clock_GetUSBPLLOutClockRate();
 		break;
 	}
@@ -472,16 +447,16 @@ uint32_t Chip_Clock_GetSPIFIClockRate(void)
 
 	/* Get clock from source drving USB */
 	switch (Chip_Clock_GetSPIFIClockSource()) {
-	case SYSCTL_SPIFICLKSRC_SYSCLK:
-	default:
+		case SYSCTL_SPIFICLKSRC_SYSCLK:
+		default:
 		clkrate = Chip_Clock_GetSYSCLKRate();
 		break;
 
-	case SYSCTL_SPIFICLKSRC_MAINPLL:
+		case SYSCTL_SPIFICLKSRC_MAINPLL:
 		clkrate = Chip_Clock_GetMainPLLOutClockRate();
 		break;
 
-	case SYSCTL_SPIFICLKSRC_USBPLL:
+		case SYSCTL_SPIFICLKSRC_USBPLL:
 		clkrate = Chip_Clock_GetUSBPLLOutClockRate();
 		break;
 	}

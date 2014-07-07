@@ -65,7 +65,6 @@ typedef void * lc_t;
 
 #define LC_INIT(s) s = NULL
 
-
 #define LC_RESUME(s)                            \
   do {                                          \
     if(s != NULL) {                             \

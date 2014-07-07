@@ -59,7 +59,6 @@
  * to work.
  */
 
-
 /**
  * \file
  * Module for splitting outbound TCP segments in two to avoid the

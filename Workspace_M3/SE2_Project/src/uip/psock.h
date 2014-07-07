@@ -84,7 +84,7 @@
 #include "uipopt.h"
 #include "pt.h"
 
- /*
+/*
  * The structure that holds the state of a buffer.
  *
  * This structure holds the state of a uIP buffer. The structure has
@@ -93,8 +93,8 @@
  *
  */
 struct psock_buf {
-  u8_t *ptr;
-  unsigned short left;
+	u8_t *ptr;
+	unsigned short left;
 };
 
 /**
@@ -104,23 +104,23 @@ struct psock_buf {
  * elements.
  */
 struct psock {
-  struct pt pt, psockpt; /* Protothreads - one that's using the psock
-			    functions, and one that runs inside the
-			    psock functions. */
-  const u8_t *sendptr;   /* Pointer to the next data to be sent. */
-  u8_t *readptr;         /* Pointer to the next data to be read. */
-  
-  char *bufptr;          /* Pointer to the buffer used for buffering
-			    incoming data. */
-  
-  u16_t sendlen;         /* The number of bytes left to be sent. */
-  u16_t readlen;         /* The number of bytes left to be read. */
+	struct pt pt, psockpt; /* Protothreads - one that's using the psock
+	 functions, and one that runs inside the
+	 psock functions. */
+	const u8_t *sendptr; /* Pointer to the next data to be sent. */
+	u8_t *readptr; /* Pointer to the next data to be read. */
 
-  struct psock_buf buf;  /* The structure holding the state of the
-			    input buffer. */
-  unsigned int bufsize;  /* The size of the input buffer. */
-  
-  unsigned char state;   /* The state of the protosocket. */
+	char *bufptr; /* Pointer to the buffer used for buffering
+	 incoming data. */
+
+	u16_t sendlen; /* The number of bytes left to be sent. */
+	u16_t readlen; /* The number of bytes left to be read. */
+
+	struct psock_buf buf; /* The structure holding the state of the
+	 input buffer. */
+	unsigned int bufsize; /* The size of the input buffer. */
+
+	unsigned char state; /* The state of the protosocket. */
 };
 
 void psock_init(struct psock *psock, char *buffer, unsigned int buffersize);
@@ -157,7 +157,7 @@ void psock_init(struct psock *psock, char *buffer, unsigned int buffersize);
  */
 #define PSOCK_BEGIN(psock) PT_BEGIN(&((psock)->pt))
 
-PT_THREAD(psock_send(struct psock *psock, const char *buf, unsigned int len));
+PT_THREAD( psock_send(struct psock *psock, const char *buf, unsigned int len));
 /**
  * Send data.
  *
@@ -191,8 +191,9 @@ PT_THREAD(psock_send(struct psock *psock, const char *buf, unsigned int len));
 #define PSOCK_SEND_STR(psock, str)      		\
     PT_WAIT_THREAD(&((psock)->pt), psock_send(psock, str, strlen(str)))
 
-PT_THREAD(psock_generator_send(struct psock *psock,
-				unsigned short (*f)(void *), void *arg));
+PT_THREAD(
+		psock_generator_send(struct psock *psock, unsigned short (*f)(void *),
+				void *arg));
 
 /**
  * \brief      Generate data with a function and send it
@@ -220,7 +221,6 @@ PT_THREAD(psock_generator_send(struct psock *psock,
     PT_WAIT_THREAD(&((psock)->pt),					\
 		   psock_generator_send(psock, generator, arg))
 
-
 /**
  * Close a protosocket.
  *
@@ -234,7 +234,7 @@ PT_THREAD(psock_generator_send(struct psock *psock,
  */
 #define PSOCK_CLOSE(psock) uip_close()
 
-PT_THREAD(psock_readbuf(struct psock *psock));
+PT_THREAD( psock_readbuf(struct psock *psock));
 /**
  * Read data until the buffer is full.
  *
@@ -250,7 +250,7 @@ PT_THREAD(psock_readbuf(struct psock *psock));
 #define PSOCK_READBUF(psock)				\
   PT_WAIT_THREAD(&((psock)->pt), psock_readbuf(psock))
 
-PT_THREAD(psock_readto(struct psock *psock, unsigned char c));
+PT_THREAD( psock_readto(struct psock *psock, unsigned char c));
 /**
  * Read data up to a specified character.
  *
@@ -350,17 +350,17 @@ char psock_newdata(struct psock *s);
  \code
  PT_THREAD(thread(struct psock *s, struct timer *t))
  {
-   PSOCK_BEGIN(s);
+ PSOCK_BEGIN(s);
 
-   PSOCK_WAIT_UNTIL(s, PSOCK_NEWADATA(s) || timer_expired(t));
-   
-   if(PSOCK_NEWDATA(s)) {
-     PSOCK_READTO(s, '\n');
-   } else {
-     handle_timed_out(s);
-   }
-   
-   PSOCK_END(s);
+ PSOCK_WAIT_UNTIL(s, PSOCK_NEWADATA(s) || timer_expired(t));
+ 
+ if(PSOCK_NEWDATA(s)) {
+ PSOCK_READTO(s, '\n');
+ } else {
+ handle_timed_out(s);
+ }
+ 
+ PSOCK_END(s);
  }
  \endcode
  *

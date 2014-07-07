@@ -45,7 +45,8 @@ STATIC INLINE void resetENET(LPC_ENET_T *pENET) {
 }
 
 STATIC void localMsDelay(uint32_t ms) {
-	ms = ms * 1000000;
+//	ms = ms * 1000000;
+	ms = ms * 40000;
 	while (ms > 0) {
 		ms--;
 	}
@@ -115,7 +116,6 @@ void Chip_ENET_Init(LPC_ENET_T *pENET, bool useRMII) {
 
 	/* Setup default filter */
 //	pENET->CONTROL.COMMAND |= ENET_COMMAND_PASSRXFILTER;
-
 	/* Clear all MAC interrupts */
 	pENET->MODULE_CONTROL.INTCLEAR = 0xFFFF;
 

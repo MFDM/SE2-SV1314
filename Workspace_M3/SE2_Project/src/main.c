@@ -25,10 +25,10 @@ const struct uip_eth_addr macAddr = { { 0x00, 0x60, 0x37, 0x12, 0x34, 0x56 } };
 /*
  *
  A fazer ping para 192.168.0.2 com 32 bytes de dados:
-Resposta de 192.168.0.3: Anfitrião de destino inacessív
-Resposta de 192.168.0.2: bytes=32 tempo=2184ms TTL=128
-Resposta de 192.168.0.2: bytes=32 tempo=1930ms TTL=128
-*/
+ Resposta de 192.168.0.3: Anfitrião de destino inacessív
+ Resposta de 192.168.0.2: bytes=32 tempo=2184ms TTL=128
+ Resposta de 192.168.0.2: bytes=32 tempo=1930ms TTL=128
+ */
 struct timer periodic_timer, arp_timer;
 void Inits(void) {
 	uip_ipaddr_t ipaddr;

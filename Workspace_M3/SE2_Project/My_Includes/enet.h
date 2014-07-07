@@ -22,7 +22,7 @@
 void InitDescriptors(void);
 
 /* Get the pointer to the Rx buffer storing new received frame */
-void *ENET_RXGet(uint32_t *bytes);
+void *ENET_RXGet(int32_t *bytes);
 
 /* Release Rx Buffer */
 void ENET_RXBuffClaim(void);
@@ -34,7 +34,7 @@ int ENET_checkBuffer(void);
 void *ENET_TXBuffGet(void);
 
 /* Queue a new frame for transmission */
-void ENET_TXQueue(uint32_t bytes);
+void ENET_TXQueue(int32_t bytes);
 
 /* Check if tranmission finished */
 bool ENET_IsTXFinish(void);

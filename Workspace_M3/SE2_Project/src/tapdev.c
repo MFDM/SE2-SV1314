@@ -12,21 +12,23 @@ void tapdev_init(void) {
 }
 
 unsigned int tapdev_read(void) {
-	void* buff = NULL;
-	uint32_t bytes = 0;
+	uint8_t *buff;
+	int32_t bytes = 0;
 	buff = ENET_RXGet(&bytes);
 	if (bytes) {
-		memcpy(uip_buf, buff, bytes);
 		uip_len = bytes;
+		memcpy(uip_buf, buff, bytes);
 	}
 	Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
 	return bytes;
 }
 
 void tapdev_send(void) {
+	uint16_t size;
 	void* bufAddr = ENET_TXBuffGet();
 	if (bufAddr) {
-		memcpy(bufAddr, uip_buf, uip_len);
-		ENET_TXQueue(uip_len);
+		size = uip_len;
+		memcpy(bufAddr, uip_buf, size);
+		ENET_TXQueue(size);
 	}
 }
