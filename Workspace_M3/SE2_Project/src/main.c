@@ -24,19 +24,19 @@
 const struct uip_eth_addr macAddr = { { 0x00, 0x60, 0x37, 0x12, 0x34, 0x56 } };
 
 struct timer periodic_timer, arp_timer;
-static int BUTTON_LONG_PRESSED = 0x1;
+static int BUTTON_LONG_PRESSED = 0x8;
 
 static void Inits(void) {
 	uip_ipaddr_t ipaddr;
 	SystemInit();
 	SystemCoreClockUpdate();
 	SysTick_Config(SystemCoreClock / 1000);
-//	//	BUTTONS_Init(MASK_BUTTONS_ALL);
-//	//	TEA5767_Init();
-//	//	LCD_Init();
+	BUTTONS_Init(MASK_BUTTONS_ALL);
+	TEA5767_Init();
+	LCD_Init();
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-
+/*
 	tapdev_init();
 	uip_init();
 
@@ -49,7 +49,7 @@ static void Inits(void) {
 	uip_ipaddr(ipaddr, 255, 255, 255, 0);
 	uip_setnetmask(ipaddr);
 
-	httpd_init();
+	httpd_init(); */
 }
 
 static void delaySeconds(int time) {
@@ -62,7 +62,7 @@ static unsigned int check_buttons() {
 	unsigned int second_button_press;
 	unsigned int first_button_press = BUTTONS_Read(MASK_BUTTONS_ALL);
 	if (first_button_press) {
-		delaySeconds(1);
+		delaySeconds(2);
 		second_button_press = BUTTONS_Read(MASK_BUTTONS_ALL);
 		if (second_button_press == first_button_press)
 			return first_button_press | BUTTON_LONG_PRESSED; //botao for igual
@@ -117,10 +117,9 @@ static unsigned int check_buttons() {
 //	RTC_Init(dateTime);
 //	return changes;
 //}
-
-//static short radio_management(unsigned int buttons, Station * _stt,
-//		short * current_station) {
-//	if (buttons & BUTTON_LONG_PRESSED) {
+//
+//static short radio_management(unsigned int buttons, Station * _stt,	short * current_station) {
+//	if (buttons & BUTTON_ONG_PRESSED) {
 //		if (buttons & MASK_BUTTONS_U)
 //			TEA5767_SearchUp(TEA_FREQ);
 //		else if (buttons & MASK_BUTTONS_D)
@@ -155,64 +154,64 @@ static void save_stations(Station* stt) {
 	Chip_IAP_CopyRamToFlash(FLASH_ADDR, (void*) &stt,
 			sizeof(Station) * NUM_STATION_MEM);
 }
-
-void EthernetHandle(void) {
-	int i;
-	uip_len = tapdev_read();
-	if (uip_len > 0) {
-		if (BUF->type == htons(UIP_ETHTYPE_IP)) {
-			uip_arp_ipin();
-			uip_input();
-			/* If the above function invocation resulted in data that
-			 should be sent out on the network, the global variable
-			 uip_len is set to a value > 0. */
-			if (uip_len > 0) {
-				uip_arp_out();
-				tapdev_send();
-			}
-		} else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
-			uip_arp_arpin();
-			/* If the above function invocation resulted in data that
-			 should be sent out on the network, the global variable
-			 uip_len is set to a value > 0. */
-			if (uip_len > 0) {
-				tapdev_send();
-			}
-		}
-
-	} else if (timer_expired(&periodic_timer)) {
-		timer_reset(&periodic_timer);
-		for (i = 0; i < UIP_CONNS; i++) {
-			uip_periodic(i);
-			/* If the above function invocation resulted in data that
-			 should be sent out on the network, the global variable
-			 uip_len is set to a value > 0. */
-			if (uip_len > 0) {
-				uip_arp_out();
-				tapdev_send();
-			}
-		}
-
-#if UIP_UDP
-		for(i = 0; i < UIP_UDP_CONNS; i++) {
-			uip_udp_periodic(i);
-			/* If the above function invocation resulted in data that
-			 should be sent out on the network, the global variable
-			 uip_len is set to a value > 0. */
-			if(uip_len > 0) {
-				uip_arp_out();
-				tapdev_send();
-			}
-		}
-#endif /* UIP_UDP */
-
-		/* Call the ARP timer function every 10 seconds. */
-		if (timer_expired(&arp_timer)) {
-			timer_reset(&arp_timer);
-			uip_arp_timer();
-		}
-	}
-}
+//
+//void EthernetHandle(void) {
+//	int i;
+//	uip_len = tapdev_read();
+//	if (uip_len > 0) {
+//		if (BUF->type == htons(UIP_ETHTYPE_IP)) {
+//			uip_arp_ipin();
+//			uip_input();
+//			/* If the above function invocation resulted in data that
+//			 should be sent out on the network, the global variable
+//			 uip_len is set to a value > 0. */
+//			if (uip_len > 0) {
+//				uip_arp_out();
+//				tapdev_send();
+//			}
+//		} else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
+//			uip_arp_arpin();
+//			/* If the above function invocation resulted in data that
+//			 should be sent out on the network, the global variable
+//			 uip_len is set to a value > 0. */
+//			if (uip_len > 0) {
+//				tapdev_send();
+//			}
+//		}
+//
+//	} else if (timer_expired(&periodic_timer)) {
+//		timer_reset(&periodic_timer);
+//		for (i = 0; i < UIP_CONNS; i++) {
+//			uip_periodic(i);
+//			/* If the above function invocation resulted in data that
+//			 should be sent out on the network, the global variable
+//			 uip_len is set to a value > 0. */
+//			if (uip_len > 0) {
+//				uip_arp_out();
+//				tapdev_send();
+//			}
+//		}
+//
+//#if UIP_UDP
+//		for(i = 0; i < UIP_UDP_CONNS; i++) {
+//			uip_udp_periodic(i);
+//			/* If the above function invocation resulted in data that
+//			 should be sent out on the network, the global variable
+//			 uip_len is set to a value > 0. */
+//			if(uip_len > 0) {
+//				uip_arp_out();
+//				tapdev_send();
+//			}
+//		}
+//#endif /* UIP_UDP */
+//
+//		/* Call the ARP timer function every 10 seconds. */
+//		if (timer_expired(&arp_timer)) {
+//			timer_reset(&arp_timer);
+//			uip_arp_timer();
+//		}
+//	}
+//}
 
 int main(void) {
 	static short _changes = 0;
@@ -240,19 +239,36 @@ int main(void) {
 
 		_buttons = check_buttons();
 		if (_buttons) {
-			if ((_buttons & (MASK_BUTTONS_U | MASK_BUTTONS_D))
-					== (MASK_BUTTONS_U | MASK_BUTTONS_D))
+			if ((_buttons & (MASK_BUTTONS_U | MASK_BUTTONS_D)) == (MASK_BUTTONS_U | MASK_BUTTONS_D)){
+				LCD_WriteString("Pressed D and U", 0, 0);
+			}
 //				_changes = clock_management(&dateTime);
-			if ((_buttons & MASK_BUTTONS_U) == MASK_BUTTONS_U
-					|| (_buttons & MASK_BUTTONS_D) == MASK_BUTTONS_D)
+			if ((_buttons & MASK_BUTTONS_U) == MASK_BUTTONS_U){
+				if(_buttons & BUTTON_LONG_PRESSED){
+					LCD_WriteString("Long pressed U", 0, 0);
+				}
+				else {
+					LCD_CleanDisplay(BLACK);
+					LCD_WriteString("Pressed U", 0, 0);
+				}
+			}
+			if ((_buttons & MASK_BUTTONS_D) == MASK_BUTTONS_D){
+				if(_buttons & BUTTON_LONG_PRESSED){
+					LCD_WriteString("Long pressed D", 0, 0);
+				}
+				else {
+					LCD_CleanDisplay(BLACK);
+					LCD_WriteString("Pressed D", 0, 0);
+				}
+			}
 //				_changes = radio_management(_buttons, stt, &current_station);
-			if ((_buttons & (MASK_BUTTONS_M | BUTTON_LONG_PRESSED))
-					== (MASK_BUTTONS_M | BUTTON_LONG_PRESSED)) {
+			if ((_buttons & (MASK_BUTTONS_M | BUTTON_LONG_PRESSED))	== (MASK_BUTTONS_M | BUTTON_LONG_PRESSED)) {
+				LCD_WriteString("Long pressed M", 0, 0);
 //				save_frequency(stt, &current_station);
 //				save_stations(stt);
 			}
 		}
-		EthernetHandle();
+//		EthernetHandle();
 	}
 	return 0;
 }
