@@ -20,11 +20,35 @@
 
 #define BUF				((struct uip_eth_hdr *)&uip_buf[0])
 #define BLACK				0x0
+#define _valid_information	0x5a5a
 
 const struct uip_eth_addr macAddr = { { 0x00, 0x60, 0x37, 0x12, 0x34, 0x56 } };
 
 struct timer periodic_timer, arp_timer;
-static int BUTTON_LONG_PRESSED = 0x8;
+Stations stations;
+unsigned int current_station_idx = 0;
+static char * frequency_text = "Frequency:";
+extern unsigned int init_pll;
+
+static void loadStations(void) {
+	PStations flash_stations = FLASH_ADDR;
+	unsigned int freq_idx = 0;
+	unsigned int idx = 0, idx2 = 0, idx_temp;
+	if (Chip_IAP_PreSectorForReadWrite(FLASH_INIT_SECTOR,
+	FLASH_END_SECTOR) == IAP_CMD_SUCCESS) {
+		stations.frequency[0] = flash_stations->frequency[0];
+		stations.frequency[1] = flash_stations->frequency[1];
+		stations.frequency[2] = flash_stations->frequency[2];
+		stations.frequency[3] = flash_stations->frequency[3];
+		stations.valid_information = flash_stations->valid_information;
+		if (stations.valid_information != _valid_information) {
+			stations.valid_information = _valid_information;
+			while (freq_idx < STATIONS_MAX_MEM) {
+				stations.frequency[freq_idx++] = init_pll;
+			}
+		}
+	}
+}
 
 static void Inits(void) {
 	uip_ipaddr_t ipaddr;
@@ -32,28 +56,29 @@ static void Inits(void) {
 	SystemCoreClockUpdate();
 	SysTick_Config(SystemCoreClock / 1000);
 	BUTTONS_Init(MASK_BUTTONS_ALL);
-	TEA5767_Init();
+	TEA5767_Init(TEA_FREQ);
 	LCD_Init();
+	loadStations();
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-/*
-	tapdev_init();
-	uip_init();
+	/*
+	 tapdev_init();
+	 uip_init();
 
-	uip_setethaddr(macAddr);
+	 uip_setethaddr(macAddr);
 
-	uip_ipaddr(ipaddr, 192, 168, 0, 2);
-	uip_sethostaddr(ipaddr);
-	uip_ipaddr(ipaddr, 192, 168, 0, 1);
-	uip_setdraddr(ipaddr);
-	uip_ipaddr(ipaddr, 255, 255, 255, 0);
-	uip_setnetmask(ipaddr);
+	 uip_ipaddr(ipaddr, 192, 168, 0, 2);
+	 uip_sethostaddr(ipaddr);
+	 uip_ipaddr(ipaddr, 192, 168, 0, 1);
+	 uip_setdraddr(ipaddr);
+	 uip_ipaddr(ipaddr, 255, 255, 255, 0);
+	 uip_setnetmask(ipaddr);
 
-	httpd_init(); */
+	 httpd_init(); */
 }
 
-static void delaySeconds(int time) {
-	int i = time * 1000000;
+static void delaySeconds(unsigned int time) {
+	int i = time * 3000000;
 	for (; i > 0; --i) {
 	}
 }
@@ -65,13 +90,20 @@ static unsigned int check_buttons() {
 		delaySeconds(2);
 		second_button_press = BUTTONS_Read(MASK_BUTTONS_ALL);
 		if (second_button_press == first_button_press)
-			return first_button_press | BUTTON_LONG_PRESSED; //botao for igual
-		else if ((second_button_press | first_button_press)
-				== (MASK_BUTTONS_U | MASK_BUTTONS_D))
-			return (MASK_BUTTONS_D | MASK_BUTTONS_U); //modo de acertar relogio
-		return first_button_press; //discutivel
+			return (first_button_press | MASK_BUTTONS_LONG_PRESS); //botao for igual
+		return first_button_press;
 	}
 	return 0; //nenhum botao
+}
+
+static void manual_search(unsigned int direction) {
+	if (direction == MASK_BUTTONS_U) {
+		if (current_station_idx == STATIONS_MAX_MEM)
+			current_station_idx = 0;
+	} else {
+		current_station_idx = STATIONS_MAX_MEM - 1;
+	}
+	TEA5767_SetFrequency(stations.frequency[current_station_idx]);
 }
 
 //static short clock_management(struct tm *dateTime) {
@@ -141,21 +173,44 @@ static unsigned int check_buttons() {
 //	}
 //	return 1;
 //}
-
-static short save_frequency(Station * stt, short * current_station) {
-	//TODO nao eh freq é PLL
-	//*(stt + (*current_station)) = TEA5767_GetFrequency();
-	return 1;
+static void display_freq(void) {
+	unsigned int current_freq = TEA5767_GetFrequency();
+	char text_to_print[12];
+	text_to_print[0] = 'P';
+	text_to_print[1] = 'O';
+	text_to_print[2] = 'S';
+	text_to_print[3] = ':';
+	text_to_print[4] = '0' + current_station_idx;
+	text_to_print[5] = ' ';
+	text_to_print[8] = '0' + current_freq % 10;
+	current_freq /= 10;
+	text_to_print[7] = '0' + current_freq % 10;
+	current_freq /= 10;
+	text_to_print[6] = '0' + current_freq % 10;
+	text_to_print[9] = 'F';
+	text_to_print[10] = 'M';
+	text_to_print[11] = '\0';
+	LCD_WriteString(frequency_text, 16, 16);
+	//adicionar frequencia
+	LCD_WriteString(text_to_print, 24, 24);
 }
 
-static void save_stations(Station* stt) {
-	//TODO copiar array de estaçoess...plural
-	Chip_IAP_PreSectorForReadWrite(FLASH_ADDR, FLASH_ADDR);
-	Chip_IAP_CopyRamToFlash(FLASH_ADDR, (void*) &stt,
-			sizeof(Station) * NUM_STATION_MEM);
+static void save_current_station(void) {
+	unsigned int station_pll = TEA5767_GetFrequencyInPLL();
+	if (current_station_idx == STATIONS_MAX_MEM)
+		current_station_idx = 0;
+	stations.frequency[current_station_idx++] = station_pll;
+	if (Chip_IAP_PreSectorForReadWrite(FLASH_INIT_SECTOR,
+	FLASH_END_SECTOR) == IAP_CMD_SUCCESS)
+		if (Chip_IAP_EraseSector(FLASH_INIT_SECTOR,
+		FLASH_END_SECTOR) == IAP_CMD_SUCCESS)
+			if (Chip_IAP_PreSectorForReadWrite(FLASH_INIT_SECTOR,
+			FLASH_END_SECTOR) == IAP_CMD_SUCCESS)
+				station_pll = Chip_IAP_CopyRamToFlash(FLASH_ADDR,
+						(void*) &stations, 256);
 }
-//
-//void EthernetHandle(void) {
+
+static void EthernetHandle(void) {
 //	int i;
 //	uip_len = tapdev_read();
 //	if (uip_len > 0) {
@@ -211,10 +266,10 @@ static void save_stations(Station* stt) {
 //			uip_arp_timer();
 //		}
 //	}
-//}
+}
 
 int main(void) {
-	static short _changes = 0;
+	static short _changes = 1;
 	static unsigned int _buttons = 0;
 //	static int debug = 0;
 	Inits();
@@ -222,51 +277,67 @@ int main(void) {
 	LCD_CleanDisplay(BLACK);
 	char * a;
 	a = "HELLO WORLD!";
-	LCD_WriteString(a, 10, 50);
+	LCD_WriteString(a, 8, 40);
 	a = "PRESS ANY ";
-	LCD_WriteString(a, 10, 70);
+	LCD_WriteString(a, 16, 56);
 	a = "BUTTON TO";
-	LCD_WriteString(a, 20, 80);
+	LCD_WriteString(a, 24, 64);
 	a = "START RADIO";
-	LCD_WriteString(a, 14, 90);
+	LCD_WriteString(a, 32, 80);
 
 	while (1) {
 		if (_changes) {
 			LCD_CleanDisplay(BLACK);
-//			display_freq(stt);
+			display_freq();
 			_changes = 0;
 		}
 
 		_buttons = check_buttons();
 		if (_buttons) {
-			if ((_buttons & (MASK_BUTTONS_U | MASK_BUTTONS_D)) == (MASK_BUTTONS_U | MASK_BUTTONS_D)){
-				LCD_WriteString("Pressed D and U", 0, 0);
+			if ((_buttons
+					& (MASK_BUTTONS_U | MASK_BUTTONS_D | MASK_BUTTONS_LONG_PRESS))
+					== (MASK_BUTTONS_U | MASK_BUTTONS_D
+							| MASK_BUTTONS_LONG_PRESS)) {
+				//acerto do relogio
+				//clock_management
+				LCD_CleanDisplay(BLACK);
+				LCD_WriteString("Pressed D and U", 8, 8);
 			}
-//				_changes = clock_management(&dateTime);
-			if ((_buttons & MASK_BUTTONS_U) == MASK_BUTTONS_U){
-				if(_buttons & BUTTON_LONG_PRESSED){
-					LCD_WriteString("Long pressed U", 0, 0);
-				}
-				else {
+			if (_buttons & MASK_BUTTONS_U) {
+				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
+					//automatic search
 					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Pressed U", 0, 0);
+					LCD_WriteString("Long pressed U", 8, 8);
+					TEA5767_SearchUp();
+				} else {
+					//manual search on saved stations
+					LCD_CleanDisplay(BLACK);
+					LCD_WriteString("Pressed U", 8, 8);
+					manual_search(MASK_BUTTONS_U);
 				}
 			}
-			if ((_buttons & MASK_BUTTONS_D) == MASK_BUTTONS_D){
-				if(_buttons & BUTTON_LONG_PRESSED){
-					LCD_WriteString("Long pressed D", 0, 0);
-				}
-				else {
+			if (_buttons & MASK_BUTTONS_D) {
+				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
+					//automatic search
 					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Pressed D", 0, 0);
+					LCD_WriteString("Long pressed D", 8, 8);
+					TEA5767_SearchDown();
+				} else {
+					//manual search on saved stations
+					LCD_CleanDisplay(BLACK);
+					LCD_WriteString("Pressed D", 8, 8);
+					manual_search(MASK_BUTTONS_D);
 				}
 			}
 //				_changes = radio_management(_buttons, stt, &current_station);
-			if ((_buttons & (MASK_BUTTONS_M | BUTTON_LONG_PRESSED))	== (MASK_BUTTONS_M | BUTTON_LONG_PRESSED)) {
-				LCD_WriteString("Long pressed M", 0, 0);
-//				save_frequency(stt, &current_station);
-//				save_stations(stt);
+			if ((_buttons & (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS))
+					== (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS)) {
+				//save current station
+				LCD_CleanDisplay(BLACK);
+				LCD_WriteString("Long pressed M", 8, 8);
+				save_current_station();
 			}
+			_changes = 1;
 		}
 //		EthernetHandle();
 	}

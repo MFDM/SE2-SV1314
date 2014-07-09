@@ -24,11 +24,12 @@
 #define EUROPE_FREQUENCY_MAX 	108
 #define EUROPE_FREQUENCY_MIN 	87.5
 
-void TEA5767_Init();
-unsigned TEA5767_FMToPLL(unsigned freq);
-unsigned TEA5767_PLLToFM(unsigned pll);
-void TEA5767_SearchUp();
-void TEA5767_SearchDown();
-unsigned int TEA5767_GetFrequency();
+void TEA5767_Init(unsigned int freq);
+unsigned TEA5767_FMToPLL(unsigned int freq);
+unsigned TEA5767_PLLToFM(unsigned int pll);
+void TEA5767_SearchUp(void);
+void TEA5767_SearchDown(void);
+unsigned int TEA5767_GetFrequency(void);
+unsigned int TEA5767_GetFrequencyInPLL(void);
 void TEA5767_SetFrequency(unsigned int pllVal);
 #endif
