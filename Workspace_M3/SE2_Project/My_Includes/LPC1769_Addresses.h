@@ -23,6 +23,9 @@
 #define LPC1769_BASE_PCB		((LPC1769_PCB *)0x4002C000) 	// PCB address
 #define LPC1769_BASE_PINMODE	((LPC1769_PINMODE *)0x4002C040) // PINMODE address
 
+//RTC Pointers
+#define LPC1769_BASE_RTC		((LPC_RTC_T*)0x40024000) 	// PCB address
+
 //--------- Clock and Power Control ----------
 //Phase Locked Loop (PLL0, Main PLL)
 #define LPC1769_PLL0CON 		((LPC1769_Reg*) 0x400FC080)

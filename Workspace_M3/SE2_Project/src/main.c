@@ -8,6 +8,7 @@
 #include "board.h"
 #include "system_LPC17xx.h"
 #include "SE2_specific.h"
+#include "LPC1769_Addresses.h"
 #include "buttons.h"
 #include "tea5767.h"
 #include "lcd.h"
@@ -17,6 +18,7 @@
 #include "tapdev.h"
 #include "iap.h"
 #include "timer.h"
+#include "rtc_17xx_40xx.h"
 
 #define BUF				((struct uip_eth_hdr *)&uip_buf[0])
 #define BLACK				0x0
@@ -25,6 +27,7 @@
 const struct uip_eth_addr macAddr = { { 0x00, 0x60, 0x37, 0x12, 0x34, 0x56 } };
 
 struct timer periodic_timer, arp_timer;
+RTC_TIME_T FullTime;
 Stations stations;
 unsigned int current_station_idx = 0;
 static char * frequency_text = "Frequency:";
@@ -58,7 +61,23 @@ static void Inits(void) {
 	BUTTONS_Init(MASK_BUTTONS_ALL);
 	TEA5767_Init(TEA_FREQ);
 	LCD_Init();
+
+	//RTC_init
+	Chip_RTC_Init(LPC1769_BASE_RTC);
+	FullTime.time[RTC_TIMETYPE_SECOND] = 0;
+	FullTime.time[RTC_TIMETYPE_MINUTE] = 0;
+	FullTime.time[RTC_TIMETYPE_HOUR] = 14;
+	FullTime.time[RTC_TIMETYPE_DAYOFMONTH] = 10;
+	FullTime.time[RTC_TIMETYPE_DAYOFWEEK] = 5;
+	FullTime.time[RTC_TIMETYPE_DAYOFYEAR] = 279;
+	FullTime.time[RTC_TIMETYPE_MONTH] = 7;
+	FullTime.time[RTC_TIMETYPE_YEAR] = 2014;
+	Chip_RTC_SetFullTime(LPC1769_BASE_RTC, &FullTime);
+	Chip_RTC_Enable(LPC1769_BASE_RTC, ENABLE);
+
+	//loadstations from flash
 	loadStations();
+	//server init
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
 	/*
@@ -106,7 +125,7 @@ static void manual_search(unsigned int direction) {
 	TEA5767_SetFrequency(stations.frequency[current_station_idx]);
 }
 
-//static short clock_management(struct tm *dateTime) {
+static short clock_management() {
 //	int buttonRead = 0;
 //	short changes;
 //	LCD_Goto(1, 8);
@@ -148,31 +167,8 @@ static void manual_search(unsigned int direction) {
 ////blink twice;
 //	RTC_Init(dateTime);
 //	return changes;
-//}
-//
-//static short radio_management(unsigned int buttons, Station * _stt,	short * current_station) {
-//	if (buttons & BUTTON_ONG_PRESSED) {
-//		if (buttons & MASK_BUTTONS_U)
-//			TEA5767_SearchUp(TEA_FREQ);
-//		else if (buttons & MASK_BUTTONS_D)
-//			TEA5767_SearchDown(TEA_FREQ);
-//		return 1;
-//	}
-//	if (buttons & MASK_BUTTONS_U) {
-//		if ((*current_station) + 1 >= (NUM_STATION_MEM + 1))
-//			*current_station = 1;
-//		else
-//			*current_station = *current_station + 1;
-//		TEA5767_SetFrequency(*(_stt + (*current_station - 1)), 1);
-//	} else if (buttons & MASK_BUTTONS_D) {
-//		if ((*current_station) - 1 <= 0)
-//			*current_station = NUM_STATION_MEM;
-//		else
-//			*current_station = *current_station - 1;
-//		TEA5767_SetFrequency(*(_stt + (*current_station - 1)), 0);
-//	}
-//	return 1;
-//}
+}
+
 static void display_freq(void) {
 	unsigned int current_freq = TEA5767_GetFrequency();
 	char text_to_print[12];
@@ -268,6 +264,18 @@ static void EthernetHandle(void) {
 //	}
 }
 
+static void showTime(void) {
+//	Uusa o FullTime
+//	FullTime.time[RTC_TIMETYPE_HOUR],
+//	FullTime.time[RTC_TIMETYPE_MINUTE],
+//	 FullTime.time[RTC_TIMETYPE_SECOND],
+//	 FullTime.time[RTC_TIMETYPE_MONTH],
+// FullTime.time[RTC_TIMETYPE_DAYOFMONTH],
+// FullTime.time[RTC_TIMETYPE_YEAR];
+	LCD_WriteString("tempo", 32,32);
+
+}
+
 int main(void) {
 	static short _changes = 1;
 	static unsigned int _buttons = 0;
@@ -289,6 +297,8 @@ int main(void) {
 		if (_changes) {
 			LCD_CleanDisplay(BLACK);
 			display_freq();
+			Chip_RTC_GetFullTime(LPC1769_BASE_RTC, &FullTime);
+			showTime();
 			_changes = 0;
 		}
 
