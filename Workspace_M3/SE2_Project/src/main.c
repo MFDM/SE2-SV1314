@@ -272,14 +272,15 @@ static void showTime(void) {
 //	 FullTime.time[RTC_TIMETYPE_MONTH],
 // FullTime.time[RTC_TIMETYPE_DAYOFMONTH],
 // FullTime.time[RTC_TIMETYPE_YEAR];
-	LCD_WriteString("tempo", 32,32);
 
+	LCD_WriteString("tempo", 32,32);
 }
 
 int main(void) {
 	static short _changes = 1;
-	static unsigned int _buttons = 0;
+	static unsigned int _buttons = 0, aux = 0;
 //	static int debug = 0;
+	char time[6];
 	Inits();
 
 	LCD_CleanDisplay(BLACK);
@@ -349,6 +350,17 @@ int main(void) {
 			}
 			_changes = 1;
 		}
+		aux = FullTime.time[RTC_TIMETYPE_HOUR] / 10;
+		time[0] = '0'+(aux % 10);
+		aux = FullTime.time[RTC_TIMETYPE_HOUR];;
+		time[1] = '0'+(aux % 10);
+		time[2] = ':';
+		aux = FullTime.time[RTC_TIMETYPE_MINUTE] / 10;
+		time[3] = '0'+(aux % 10);
+		aux = FullTime.time[RTC_TIMETYPE_MINUTE];
+		time[4] = '0'+(aux % 10);
+		time[5] = '\0';
+		LCD_WriteString(time, 40, 40);
 //		EthernetHandle();
 	}
 	return 0;
