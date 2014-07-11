@@ -32,14 +32,9 @@
 #include "chip.h"
 #include "rtc_17xx_40xx.h"
 
-static void Board_Init(){
-	//TODO implementar manel
-}
-
 /* Initialize the RTC peripheral */
 void Chip_RTC_Init(LPC_RTC_T *pRTC)
 {
-	Board_Init();
 
 	Chip_Clock_EnablePeriphClock(SYSCTL_CLOCK_RTC);
 

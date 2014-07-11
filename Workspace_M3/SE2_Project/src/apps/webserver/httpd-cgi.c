@@ -50,6 +50,7 @@
 #include "httpd.h"
 #include "httpd-cgi.h"
 #include "httpd-fs.h"
+#include "tea5767.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -57,15 +58,17 @@
 HTTPD_CGI_CALL(file, "file-stats", file_stats);
 HTTPD_CGI_CALL(tcp, "tcp-connections", tcp_stats);
 HTTPD_CGI_CALL(net, "net-stats", net_stats);
+HTTPD_CGI_CALL(radio, "radio-stats", radio_stats);
 
-static const struct httpd_cgi_call *calls[] = { &file, &tcp, &net, NULL };
+static const struct httpd_cgi_call *calls[] =
+		{ &file, &tcp, &net, &radio, NULL };
 
 /*---------------------------------------------------------------------------*/
 static
 PT_THREAD(nullfunction(struct httpd_state *s, char *ptr)) {
 	PSOCK_BEGIN(&s->sout)
-	;
-PSOCK_END(&s->sout);
+		;
+	PSOCK_END(&s->sout);
 }
 /*---------------------------------------------------------------------------*/
 httpd_cgifunction httpd_cgi(char *name) {
@@ -89,9 +92,9 @@ return snprintf((char *) uip_appdata, UIP_APPDATA_SIZE, "%5u",
 static
 PT_THREAD(file_stats(struct httpd_state *s, char *ptr)) {
 PSOCK_BEGIN(&s->sout)
-;
+	;
 
-PSOCK_GENERATOR_SEND(&s->sout, generate_file_stats, strchr(ptr, ' ') + 1);
+	PSOCK_GENERATOR_SEND(&s->sout, generate_file_stats, strchr(ptr, ' ') + 1);
 
 PSOCK_END(&s->sout);
 }
@@ -139,9 +142,9 @@ PSOCK_BEGIN(&s->sout)
 ;
 
 for (s->count = 0; s->count < UIP_CONNS; ++s->count) {
-if ((uip_conns[s->count].tcpstateflags & UIP_TS_MASK) != UIP_CLOSED) {
-	PSOCK_GENERATOR_SEND(&s->sout, generate_tcp_stats, s);
-}
+	if ((uip_conns[s->count].tcpstateflags & UIP_TS_MASK) != UIP_CLOSED) {
+		PSOCK_GENERATOR_SEND(&s->sout, generate_tcp_stats, s);
+	}
 }
 
 PSOCK_END(&s->sout);
@@ -161,7 +164,7 @@ PSOCK_BEGIN(&s->sout)
 #if UIP_STATISTICS
 
 for (s->count = 0; s->count < sizeof(uip_stat) / sizeof(uip_stats_t);
-++s->count) {
+	++s->count) {
 PSOCK_GENERATOR_SEND(&s->sout, generate_net_stats, s);
 }
 
@@ -171,3 +174,26 @@ PSOCK_END(&s->sout);
 }
 /*---------------------------------------------------------------------------*/
 /** @} */
+//this is new!
+static unsigned short generate_radio_stats(void *arg) {
+	static unsigned int current_freq;
+	current_freq= TEA5767_GetFrequency();
+	char _text_to_print[7];
+	_text_to_print[2] = '0' + current_freq % 10;
+	current_freq /= 10;
+	_text_to_print[1] = '0' + current_freq % 10;
+	current_freq /= 10;
+	_text_to_print[0] = '0' + current_freq % 10;
+	_text_to_print[3] = ' ';
+	_text_to_print[4] = 'F';
+	_text_to_print[5] = 'M';
+	_text_to_print[6] = '\0';
+	return snprintf((char *) uip_appdata, UIP_APPDATA_SIZE, "%s", _text_to_print);
+}
+
+static
+PT_THREAD(radio_stats(struct httpd_state *s, char *ptr)) {
+PSOCK_BEGIN(&s->sout);
+PSOCK_GENERATOR_SEND(&s->sout, generate_radio_stats, s);
+PSOCK_END(&s->sout);
+}

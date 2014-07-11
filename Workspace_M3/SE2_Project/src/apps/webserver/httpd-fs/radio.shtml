@@ -1,0 +1,6 @@
+%!: /header.html
+<h1>Current Frequency</h1>
+<div>
+<h2>Radio Frequency: %! radio-stats
+</h2>
+</div>

@@ -36,7 +36,6 @@ extern unsigned int init_pll;
 static void loadStations(void) {
 	PStations flash_stations = FLASH_ADDR;
 	unsigned int freq_idx = 0;
-	unsigned int idx = 0, idx2 = 0, idx_temp;
 	if (Chip_IAP_PreSectorForReadWrite(FLASH_INIT_SECTOR,
 	FLASH_END_SECTOR) == IAP_CMD_SUCCESS) {
 		stations.frequency[0] = flash_stations->frequency[0];
@@ -80,7 +79,6 @@ static void Inits(void) {
 	//server init
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-	/*
 	 tapdev_init();
 	 uip_init();
 
@@ -93,11 +91,11 @@ static void Inits(void) {
 	 uip_ipaddr(ipaddr, 255, 255, 255, 0);
 	 uip_setnetmask(ipaddr);
 
-	 httpd_init(); */
+	 httpd_init();
 }
 
 static void delaySeconds(unsigned int time) {
-	int i = time * 3000000;
+	int i = time * 4000000;
 	for (; i > 0; --i) {
 	}
 }
@@ -167,6 +165,7 @@ static short clock_management() {
 ////blink twice;
 //	RTC_Init(dateTime);
 //	return changes;
+	return 0;
 }
 
 static void display_freq(void) {
@@ -207,82 +206,92 @@ static void save_current_station(void) {
 }
 
 static void EthernetHandle(void) {
-//	int i;
-//	uip_len = tapdev_read();
-//	if (uip_len > 0) {
-//		if (BUF->type == htons(UIP_ETHTYPE_IP)) {
-//			uip_arp_ipin();
-//			uip_input();
-//			/* If the above function invocation resulted in data that
-//			 should be sent out on the network, the global variable
-//			 uip_len is set to a value > 0. */
-//			if (uip_len > 0) {
-//				uip_arp_out();
-//				tapdev_send();
-//			}
-//		} else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
-//			uip_arp_arpin();
-//			/* If the above function invocation resulted in data that
-//			 should be sent out on the network, the global variable
-//			 uip_len is set to a value > 0. */
-//			if (uip_len > 0) {
-//				tapdev_send();
-//			}
-//		}
-//
-//	} else if (timer_expired(&periodic_timer)) {
-//		timer_reset(&periodic_timer);
-//		for (i = 0; i < UIP_CONNS; i++) {
-//			uip_periodic(i);
-//			/* If the above function invocation resulted in data that
-//			 should be sent out on the network, the global variable
-//			 uip_len is set to a value > 0. */
-//			if (uip_len > 0) {
-//				uip_arp_out();
-//				tapdev_send();
-//			}
-//		}
-//
-//#if UIP_UDP
-//		for(i = 0; i < UIP_UDP_CONNS; i++) {
-//			uip_udp_periodic(i);
-//			/* If the above function invocation resulted in data that
-//			 should be sent out on the network, the global variable
-//			 uip_len is set to a value > 0. */
-//			if(uip_len > 0) {
-//				uip_arp_out();
-//				tapdev_send();
-//			}
-//		}
-//#endif /* UIP_UDP */
-//
-//		/* Call the ARP timer function every 10 seconds. */
-//		if (timer_expired(&arp_timer)) {
-//			timer_reset(&arp_timer);
-//			uip_arp_timer();
-//		}
-//	}
+	int i;
+	uip_len = tapdev_read();
+	if (uip_len > 0) {
+		if (BUF->type == htons(UIP_ETHTYPE_IP)) {
+			uip_arp_ipin();
+			uip_input();
+			/* If the above function invocation resulted in data that
+			 should be sent out on the network, the global variable
+			 uip_len is set to a value > 0. */
+			if (uip_len > 0) {
+				uip_arp_out();
+				tapdev_send();
+			}
+		} else if (BUF->type == htons(UIP_ETHTYPE_ARP)) {
+			uip_arp_arpin();
+			/* If the above function invocation resulted in data that
+			 should be sent out on the network, the global variable
+			 uip_len is set to a value > 0. */
+			if (uip_len > 0) {
+				tapdev_send();
+			}
+		}
+
+	} else if (timer_expired(&periodic_timer)) {
+		timer_reset(&periodic_timer);
+		for (i = 0; i < UIP_CONNS; i++) {
+			uip_periodic(i);
+			/* If the above function invocation resulted in data that
+			 should be sent out on the network, the global variable
+			 uip_len is set to a value > 0. */
+			if (uip_len > 0) {
+				uip_arp_out();
+				tapdev_send();
+			}
+		}
+
+#if UIP_UDP
+		for(i = 0; i < UIP_UDP_CONNS; i++) {
+			uip_udp_periodic(i);
+			/* If the above function invocation resulted in data that
+			 should be sent out on the network, the global variable
+			 uip_len is set to a value > 0. */
+			if(uip_len > 0) {
+				uip_arp_out();
+				tapdev_send();
+			}
+		}
+#endif /* UIP_UDP */
+
+		/* Call the ARP timer function every 10 seconds. */
+		if (timer_expired(&arp_timer)) {
+			timer_reset(&arp_timer);
+			uip_arp_timer();
+		}
+	}
 }
 
 static void showTime(void) {
-//	Uusa o FullTime
-//	FullTime.time[RTC_TIMETYPE_HOUR],
-//	FullTime.time[RTC_TIMETYPE_MINUTE],
-//	 FullTime.time[RTC_TIMETYPE_SECOND],
-//	 FullTime.time[RTC_TIMETYPE_MONTH],
-// FullTime.time[RTC_TIMETYPE_DAYOFMONTH],
-// FullTime.time[RTC_TIMETYPE_YEAR];
+	static unsigned int aux = 0;
+	char time[6];
+	aux = FullTime.time[RTC_TIMETYPE_HOUR] / 10;
+	time[0] = '0' + (aux % 10);
+	aux = FullTime.time[RTC_TIMETYPE_HOUR];
+	time[1] = '0' + (aux % 10);
+	time[2] = ':';
+	aux = FullTime.time[RTC_TIMETYPE_MINUTE] / 10;
+	time[3] = '0' + (aux % 10);
+	aux = FullTime.time[RTC_TIMETYPE_MINUTE];
+	time[4] = '0' + (aux % 10);
+	time[5] = '\0';
+	LCD_WriteString(time, 40, 40);
+}
 
-	LCD_WriteString("tempo", 32,32);
+static void printInformation() {
+	LCD_CleanDisplay(BLACK);
+	display_freq();
+	Chip_RTC_GetFullTime(LPC1769_BASE_RTC, &FullTime);
+	showTime();
 }
 
 int main(void) {
-	static short _changes = 1;
-	static unsigned int _buttons = 0, aux = 0;
+	static short _changes = 0;
+	static unsigned int _buttons = 0;
 //	static int debug = 0;
-	char time[6];
 	Inits();
-
+//
 	LCD_CleanDisplay(BLACK);
 	char * a;
 	a = "HELLO WORLD!";
@@ -296,11 +305,13 @@ int main(void) {
 
 	while (1) {
 		if (_changes) {
-			LCD_CleanDisplay(BLACK);
-			display_freq();
-			Chip_RTC_GetFullTime(LPC1769_BASE_RTC, &FullTime);
-			showTime();
+			printInformation();
 			_changes = 0;
+		}
+
+		if(((LPC_RTC_T*)LPC1769_BASE_RTC)->TIME[RTC_TIMETYPE_MINUTE] != FullTime.time[RTC_TIMETYPE_MINUTE]){
+			Chip_RTC_GetFullTime(LPC1769_BASE_RTC, &FullTime);
+			_changes =1;
 		}
 
 		_buttons = check_buttons();
@@ -311,32 +322,22 @@ int main(void) {
 							| MASK_BUTTONS_LONG_PRESS)) {
 				//acerto do relogio
 				//clock_management
-				LCD_CleanDisplay(BLACK);
-				LCD_WriteString("Pressed D and U", 8, 8);
 			}
 			if (_buttons & MASK_BUTTONS_U) {
 				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
 					//automatic search
-					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Long pressed U", 8, 8);
 					TEA5767_SearchUp();
 				} else {
 					//manual search on saved stations
-					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Pressed U", 8, 8);
 					manual_search(MASK_BUTTONS_U);
 				}
 			}
 			if (_buttons & MASK_BUTTONS_D) {
 				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
 					//automatic search
-					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Long pressed D", 8, 8);
 					TEA5767_SearchDown();
 				} else {
 					//manual search on saved stations
-					LCD_CleanDisplay(BLACK);
-					LCD_WriteString("Pressed D", 8, 8);
 					manual_search(MASK_BUTTONS_D);
 				}
 			}
@@ -344,24 +345,11 @@ int main(void) {
 			if ((_buttons & (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS))
 					== (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS)) {
 				//save current station
-				LCD_CleanDisplay(BLACK);
-				LCD_WriteString("Long pressed M", 8, 8);
 				save_current_station();
 			}
 			_changes = 1;
 		}
-		aux = FullTime.time[RTC_TIMETYPE_HOUR] / 10;
-		time[0] = '0'+(aux % 10);
-		aux = FullTime.time[RTC_TIMETYPE_HOUR];;
-		time[1] = '0'+(aux % 10);
-		time[2] = ':';
-		aux = FullTime.time[RTC_TIMETYPE_MINUTE] / 10;
-		time[3] = '0'+(aux % 10);
-		aux = FullTime.time[RTC_TIMETYPE_MINUTE];
-		time[4] = '0'+(aux % 10);
-		time[5] = '\0';
-		LCD_WriteString(time, 40, 40);
-//		EthernetHandle();
+		EthernetHandle();
 	}
 	return 0;
 }

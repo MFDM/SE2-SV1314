@@ -19,9 +19,9 @@
 #define	UIP_ETHADDR5  	0x56
 
 // Station flash position
-#define FLASH_ADDR 			0x7000
-#define FLASH_INIT_SECTOR	7
-#define FLASH_END_SECTOR	7
+#define FLASH_ADDR 			0xE000
+#define FLASH_INIT_SECTOR	14
+#define FLASH_END_SECTOR	14
 
 //Stations
 #define STATIONS_MAX_MEM 	4

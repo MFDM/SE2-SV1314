@@ -2,7 +2,7 @@
 #include "i2c.h"
 #include "SE2_specific.h"
 
-char data[TEA_SIZE_OF_ARRAY];
+static char data[TEA_SIZE_OF_ARRAY];
 static int searchFreq;
 unsigned int init_pll, end_pll, pll_value, next_pll;
 
@@ -13,6 +13,7 @@ void TEA5767_Init(unsigned int freq) {
 	next_pll = (4 * (92 * 1000 - 225)) / (XTAL / 1000); //START AT MIDDLE FREQUENCY
 	pll_value = next_pll;
 	searchFreq = freq;
+	TEA5767_SearchUp();
 }
 
 /**
@@ -36,7 +37,7 @@ unsigned TEA5767_PLLToFM(unsigned int pll){
 
 
 static void transfer(char search_direction){
-	//SEARCH
+		//SEARCH
 		I2C_Transfer(ADDR_RADIO, WRITE, data, TEA_SIZE_OF_ARRAY, searchFreq);
 		//READ STATE OF SEARCHING..
 		I2C_Transfer(ADDR_RADIO, READ, data, TEA_SIZE_OF_ARRAY, searchFreq);
