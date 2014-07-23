@@ -71,16 +71,7 @@ void ENET_RXBuffClaim(void) {
 	rxConsumeIdx = Chip_ENET_IncRXConsumeIndex(LPC_ETHERNET);
 }
 
-// ping = 0x0806
 int ENET_checkBuffer(void) {
-//	int32_t bytes = 0;
-//	void* buffer;
-//	buffer = ENET_RXGet(&bytes);
-//
-//	if (bytes != 0) {
-//		ENET_RXBuffClaim();
-//		return 1;
-//	}
 	return 0;
 }
 
