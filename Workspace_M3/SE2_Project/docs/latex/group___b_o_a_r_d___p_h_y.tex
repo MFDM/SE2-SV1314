@@ -1,0 +1,96 @@
+\hypertarget{group___b_o_a_r_d___p_h_y}{\section{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}
+\label{group___b_o_a_r_d___p_h_y}\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_ga3dcfb76aa2527e963441a79c5420ec5f}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R}~(1 $<$$<$ 0)
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_gae9570359588a14f9e79b363a4861b461}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y}~(1 $<$$<$ 1)
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_ga024ecb53e2bd08b11916fe3df9881fe6}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D}~(1 $<$$<$ 2)
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_ga4355878edd2f4e71c449318d65caff96}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D}~(1 $<$$<$ 3)
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_gaa09dfe28e00af59bceb69ef503f88e68}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100}~(1 $<$$<$ 4)
+\item 
+\#define \hyperlink{group___b_o_a_r_d___p_h_y_ga4b400b487b0e6a1bfc52fbc50e72be3e}{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X}~(1 $<$$<$ 5)
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \hyperlink{group___b_o_a_r_d___p_h_y_gab5a4203ab2c54fa3fb243e784f9b3ddc}{lpc\+P\+H\+Y\+Sts\+Poll} (void)
+\begin{DoxyCompactList}\small\item\em Phy status update state machine. \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{group___b_o_a_r_d___p_h_y_ga9d09c9f5e31d5213b738ab80863776d5}{lpc\+\_\+phy\+\_\+init} (bool rmii, \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabd040b6a5eb9bbf2697cbe943b8ecbc8}{p\+\_\+ms\+Delay\+\_\+func\+\_\+t} p\+Delay\+Ms\+Func)
+\begin{DoxyCompactList}\small\item\em Initialize the P\+H\+Y. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The simple P\+H\+Y function A\+P\+I provides simple non-\/blocking P\+H\+Y status monitoring and initialization support for various Ethernet P\+H\+Ys. To initialize the P\+H\+Y, call \hyperlink{group___b_o_a_r_d___p_h_y_ga9d09c9f5e31d5213b738ab80863776d5}{lpc\+\_\+phy\+\_\+init()} once. \hyperlink{group___b_o_a_r_d___p_h_y_ga9d09c9f5e31d5213b738ab80863776d5}{lpc\+\_\+phy\+\_\+init()} requires several standard functions from the M\+A\+C driver for interfacing to the P\+H\+Y via a M\+I\+I link (\hyperlink{group___e_n_e_t__17_x_x__40_x_x_gade9f31bbc04119bc06638fd8ce874f73}{Chip\+\_\+\+E\+N\+E\+T\+\_\+\+Start\+M\+I\+I\+Write()}, \hyperlink{group___e_n_e_t__17_x_x__40_x_x_ga2ae5389a2b99d6006980083d02667e07}{Chip\+\_\+\+E\+N\+E\+T\+\_\+\+Is\+M\+I\+I\+Busy()}, \hyperlink{group___e_n_e_t__17_x_x__40_x_x_gaca2166605d385fd5150f173cd33a3ac2}{Chip\+\_\+\+E\+N\+E\+T\+\_\+\+Start\+M\+I\+I\+Read()}, and \hyperlink{group___e_n_e_t__17_x_x__40_x_x_gab6d3dfc1cc671503532d00947f236e1d}{Chip\+\_\+\+E\+N\+E\+T\+\_\+\+Read\+M\+I\+I\+Data()}).
+
+Once initialized, just preiodically call the \hyperlink{group___b_o_a_r_d___p_h_y_gab5a4203ab2c54fa3fb243e784f9b3ddc}{lpc\+P\+H\+Y\+Sts\+Poll()} function from the background loop or a thread and monitor the returned status to determine if the P\+H\+Y state has changed and the current P\+H\+Y state. 
+
+\subsection{Macro Definition Documentation}
+\hypertarget{group___b_o_a_r_d___p_h_y_gae9570359588a14f9e79b363a4861b461}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+B\+U\+S\+Y~(1 $<$$<$ 1)}}\label{group___b_o_a_r_d___p_h_y_gae9570359588a14f9e79b363a4861b461}
+P\+H\+Y status bit for M\+I\+I link busy \hypertarget{group___b_o_a_r_d___p_h_y_ga024ecb53e2bd08b11916fe3df9881fe6}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+H\+A\+N\+G\+E\+D~(1 $<$$<$ 2)}}\label{group___b_o_a_r_d___p_h_y_ga024ecb53e2bd08b11916fe3df9881fe6}
+P\+H\+Y status bit for changed state (not persistent) \hypertarget{group___b_o_a_r_d___p_h_y_ga4355878edd2f4e71c449318d65caff96}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+C\+O\+N\+N\+E\+C\+T\+E\+D~(1 $<$$<$ 3)}}\label{group___b_o_a_r_d___p_h_y_ga4355878edd2f4e71c449318d65caff96}
+P\+H\+Y status bit for connected state \hypertarget{group___b_o_a_r_d___p_h_y_ga3dcfb76aa2527e963441a79c5420ec5f}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R~(1 $<$$<$ 0)}}\label{group___b_o_a_r_d___p_h_y_ga3dcfb76aa2527e963441a79c5420ec5f}
+P\+H\+Y status bit for link error \hypertarget{group___b_o_a_r_d___p_h_y_ga4b400b487b0e6a1bfc52fbc50e72be3e}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+F\+U\+L\+L\+D\+U\+P\+L\+X~(1 $<$$<$ 5)}}\label{group___b_o_a_r_d___p_h_y_ga4b400b487b0e6a1bfc52fbc50e72be3e}
+P\+H\+Y status bit for full duplex mode \hypertarget{group___b_o_a_r_d___p_h_y_gaa09dfe28e00af59bceb69ef503f88e68}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100}}
+\index{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100@{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100}]{\setlength{\rightskip}{0pt plus 5cm}\#define P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+S\+P\+E\+E\+D100~(1 $<$$<$ 4)}}\label{group___b_o_a_r_d___p_h_y_gaa09dfe28e00af59bceb69ef503f88e68}
+P\+H\+Y status bit for 100\+Mbps mode 
+
+\subsection{Function Documentation}
+\hypertarget{group___b_o_a_r_d___p_h_y_ga9d09c9f5e31d5213b738ab80863776d5}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!lpc\+\_\+phy\+\_\+init@{lpc\+\_\+phy\+\_\+init}}
+\index{lpc\+\_\+phy\+\_\+init@{lpc\+\_\+phy\+\_\+init}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{lpc\+\_\+phy\+\_\+init}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t lpc\+\_\+phy\+\_\+init (
+\begin{DoxyParamCaption}
+\item[{bool}]{rmii, }
+\item[{{\bf p\+\_\+ms\+Delay\+\_\+func\+\_\+t}}]{p\+Delay\+Ms\+Func}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___p_h_y_ga9d09c9f5e31d5213b738ab80863776d5}
+
+
+Initialize the P\+H\+Y. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rmii} & \+: Initializes P\+H\+Y for R\+M\+I\+I mode if true, M\+I\+I if false \\
+\hline
+{\em p\+Delay\+Ms\+Func} & \+: Delay function (in m\+S) used for this driver \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+\+E\+R\+R\+O\+R or 0 on success 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function initializes the P\+H\+Y. It will block until complete. It will not wait for the P\+H\+Y to detect a connected cable and remain busy. Use lpc\+P\+H\+Y\+Sts\+Poll to detect cable insertion. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___p_h_y_gab5a4203ab2c54fa3fb243e784f9b3ddc}{\index{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}!lpc\+P\+H\+Y\+Sts\+Poll@{lpc\+P\+H\+Y\+Sts\+Poll}}
+\index{lpc\+P\+H\+Y\+Sts\+Poll@{lpc\+P\+H\+Y\+Sts\+Poll}!B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers@{B\+O\+A\+R\+D\+: Board specific P\+H\+Y drivers}}
+\subsubsection[{lpc\+P\+H\+Y\+Sts\+Poll}]{\setlength{\rightskip}{0pt plus 5cm}uint32\+\_\+t lpc\+P\+H\+Y\+Sts\+Poll (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___p_h_y_gab5a4203ab2c54fa3fb243e784f9b3ddc}
+
+
+Phy status update state machine. 
+
+\begin{DoxyReturn}{Returns}
+An Or'ed value of P\+H\+Y\+\_\+\+L\+I\+N\+K\+\_\+$\ast$ statuses 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function can be called at any rate and will poll the the P\+H\+Y status. Multiple calls may be needed to determine P\+H\+Y status. 
+\end{DoxyNote}

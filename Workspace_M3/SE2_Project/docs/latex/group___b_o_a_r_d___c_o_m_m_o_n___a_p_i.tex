@@ -1,0 +1,289 @@
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i}{\section{B\+O\+A\+R\+D\+: Common board functions}
+\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i}\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga5f3d8b382683793eb0b2723083f518f8}{\#define {\bfseries D\+E\+B\+U\+G\+I\+N\+I\+T}()}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga5f3d8b382683793eb0b2723083f518f8}
+
+\item 
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gacf358ee75cab3e9eb271e46bf983aaff}{\#define {\bfseries D\+E\+B\+U\+G\+O\+U\+T}(...)}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gacf358ee75cab3e9eb271e46bf983aaff}
+
+\item 
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaf1817cfaa7fbfb1c32ba55fa0d792d0b}{\#define {\bfseries D\+E\+B\+U\+G\+S\+T\+R}(str)}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaf1817cfaa7fbfb1c32ba55fa0d792d0b}
+
+\item 
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gad87de76956f23e36f51356aaed5c18e4}{\#define {\bfseries D\+E\+B\+U\+G\+I\+N}()~(int) E\+O\+F}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gad87de76956f23e36f51356aaed5c18e4}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabd040b6a5eb9bbf2697cbe943b8ecbc8}{typedef void($\ast$ \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabd040b6a5eb9bbf2697cbe943b8ecbc8}{p\+\_\+ms\+Delay\+\_\+func\+\_\+t} )(uint32\+\_\+t)}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabd040b6a5eb9bbf2697cbe943b8ecbc8}
+
+\begin{DoxyCompactList}\small\item\em Function prototype for a M\+S delay function. Board layers or example code may define this function as needed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaeb60ea85499a4208167ae2540086516a}{Board\+\_\+\+System\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Setup and initialize hardware prior to call to main() \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8ac1dc465c66e1cc00f5ffd346904d97}{Board\+\_\+\+Setup\+Muxing} (void)
+\begin{DoxyCompactList}\small\item\em Setup pin multiplexer per board schematics. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae417dc93d00f1a89f74220e569fac777}{Board\+\_\+\+Setup\+Clocking} (void)
+\begin{DoxyCompactList}\small\item\em Setup system clocking. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga27d97e44ce026a509b12317e059b2204}{Board\+\_\+\+Setup\+Ext\+Memory} (void)
+\begin{DoxyCompactList}\small\item\em Setup external system memory. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae8d2d761b984f48c3dbb27dd32a8c119}{Board\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Set up and initialize all required blocks and functions related to the board hardware. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabcba073f50ad637ee6bc852f64ea2ce6}{Board\+\_\+\+Debug\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Initializes board U\+A\+R\+T for output, required for printf redirection. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gada2a79f4fcd7cd730317fc34291bf08e}{Board\+\_\+\+U\+A\+R\+T\+Put\+Char} (char ch)
+\begin{DoxyCompactList}\small\item\em Sends a single character on the U\+A\+R\+T, required for printf redirection. \end{DoxyCompactList}\item 
+int \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4cffd2ff35f970b7dfad4fdf6419ecf6}{Board\+\_\+\+U\+A\+R\+T\+Get\+Char} (void)
+\begin{DoxyCompactList}\small\item\em Get a single character from the U\+A\+R\+T, required for scanf input. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga26211607542af1bb2a867d6641a8d4f3}{Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R} (char $\ast$str)
+\begin{DoxyCompactList}\small\item\em Prints a string to the U\+A\+R\+T. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4beb63d516764b260e9798642fab0047}{Board\+\_\+\+L\+E\+D\+\_\+\+Set} (uint8\+\_\+t L\+E\+D\+Number, bool State)
+\begin{DoxyCompactList}\small\item\em Sets the state of a board L\+E\+D to on or off. \end{DoxyCompactList}\item 
+bool \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8e79f51947703de384c34bc86908bd9e}{Board\+\_\+\+L\+E\+D\+\_\+\+Test} (uint8\+\_\+t L\+E\+D\+Number)
+\begin{DoxyCompactList}\small\item\em Returns the current state of a board L\+E\+D. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga39c663f67913226d0f29e11c0d0fd523}{Board\+\_\+\+L\+E\+D\+\_\+\+Toggle} (uint8\+\_\+t L\+E\+D\+Number)
+\begin{DoxyCompactList}\small\item\em Toggles the current state of a board L\+E\+D. \end{DoxyCompactList}\item 
+void \hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga56f5c2aa9b42d140429abdd9d3f629c8}{Board\+\_\+\+Set\+L\+C\+D\+Backlight} (uint8\+\_\+t Intensity)
+\begin{DoxyCompactList}\small\item\em Turn on Board L\+C\+D Backlight. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common board definitions that are shared across boards and devices. All of these functions do not need to be implemented for a specific board, but if they are implemented, they should use this A\+P\+I standard. 
+
+\subsection{Function Documentation}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabcba073f50ad637ee6bc852f64ea2ce6}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Debug\+\_\+\+Init@{Board\+\_\+\+Debug\+\_\+\+Init}}
+\index{Board\+\_\+\+Debug\+\_\+\+Init@{Board\+\_\+\+Debug\+\_\+\+Init}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Debug\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Debug\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gabcba073f50ad637ee6bc852f64ea2ce6}
+
+
+Initializes board U\+A\+R\+T for output, required for printf redirection. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae8d2d761b984f48c3dbb27dd32a8c119}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Init@{Board\+\_\+\+Init}}
+\index{Board\+\_\+\+Init@{Board\+\_\+\+Init}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae8d2d761b984f48c3dbb27dd32a8c119}
+
+
+Set up and initialize all required blocks and functions related to the board hardware. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4beb63d516764b260e9798642fab0047}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+L\+E\+D\+\_\+\+Set@{Board\+\_\+\+L\+E\+D\+\_\+\+Set}}
+\index{Board\+\_\+\+L\+E\+D\+\_\+\+Set@{Board\+\_\+\+L\+E\+D\+\_\+\+Set}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+L\+E\+D\+\_\+\+Set}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+L\+E\+D\+\_\+\+Set (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{L\+E\+D\+Number, }
+\item[{bool}]{State}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4beb63d516764b260e9798642fab0047}
+
+
+Sets the state of a board L\+E\+D to on or off. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L\+E\+D\+Number} & \+: L\+E\+D number to set state for \\
+\hline
+{\em State} & \+: true for on, false for off \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8e79f51947703de384c34bc86908bd9e}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+L\+E\+D\+\_\+\+Test@{Board\+\_\+\+L\+E\+D\+\_\+\+Test}}
+\index{Board\+\_\+\+L\+E\+D\+\_\+\+Test@{Board\+\_\+\+L\+E\+D\+\_\+\+Test}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+L\+E\+D\+\_\+\+Test}]{\setlength{\rightskip}{0pt plus 5cm}bool Board\+\_\+\+L\+E\+D\+\_\+\+Test (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{L\+E\+D\+Number}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8e79f51947703de384c34bc86908bd9e}
+
+
+Returns the current state of a board L\+E\+D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L\+E\+D\+Number} & \+: L\+E\+D number to set state for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the L\+E\+D is on, otherwise false 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga39c663f67913226d0f29e11c0d0fd523}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+L\+E\+D\+\_\+\+Toggle@{Board\+\_\+\+L\+E\+D\+\_\+\+Toggle}}
+\index{Board\+\_\+\+L\+E\+D\+\_\+\+Toggle@{Board\+\_\+\+L\+E\+D\+\_\+\+Toggle}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+L\+E\+D\+\_\+\+Toggle}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+L\+E\+D\+\_\+\+Toggle (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{L\+E\+D\+Number}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga39c663f67913226d0f29e11c0d0fd523}
+
+
+Toggles the current state of a board L\+E\+D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em L\+E\+D\+Number} & \+: L\+E\+D number to change state for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga56f5c2aa9b42d140429abdd9d3f629c8}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Set\+L\+C\+D\+Backlight@{Board\+\_\+\+Set\+L\+C\+D\+Backlight}}
+\index{Board\+\_\+\+Set\+L\+C\+D\+Backlight@{Board\+\_\+\+Set\+L\+C\+D\+Backlight}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Set\+L\+C\+D\+Backlight}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Set\+L\+C\+D\+Backlight (
+\begin{DoxyParamCaption}
+\item[{uint8\+\_\+t}]{Intensity}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga56f5c2aa9b42d140429abdd9d3f629c8}
+
+
+Turn on Board L\+C\+D Backlight. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Intensity} & \+: Backlight intensity (0 = off, $>$=1 = on) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+On boards where a G\+P\+I\+O is used to control backlight on/off state, a '0' or '1' value will turn off or on the backlight. On some boards, a non-\/0 value will control backlight intensity via a P\+W\+N. For P\+W\+M systems, the intensity value is a percentage value between 0 and 100\%. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae417dc93d00f1a89f74220e569fac777}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Setup\+Clocking@{Board\+\_\+\+Setup\+Clocking}}
+\index{Board\+\_\+\+Setup\+Clocking@{Board\+\_\+\+Setup\+Clocking}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Setup\+Clocking}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Setup\+Clocking (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gae417dc93d00f1a89f74220e569fac777}
+
+
+Setup system clocking. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This sets up board clocking. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga27d97e44ce026a509b12317e059b2204}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Setup\+Ext\+Memory@{Board\+\_\+\+Setup\+Ext\+Memory}}
+\index{Board\+\_\+\+Setup\+Ext\+Memory@{Board\+\_\+\+Setup\+Ext\+Memory}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Setup\+Ext\+Memory}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Setup\+Ext\+Memory (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga27d97e44ce026a509b12317e059b2204}
+
+
+Setup external system memory. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function is typically called after pin mux setup and clock setup and sets up any external memory needed by the system (D\+R\+A\+M, S\+R\+A\+M, etc.). Not all boards need this function. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8ac1dc465c66e1cc00f5ffd346904d97}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+Setup\+Muxing@{Board\+\_\+\+Setup\+Muxing}}
+\index{Board\+\_\+\+Setup\+Muxing@{Board\+\_\+\+Setup\+Muxing}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+Setup\+Muxing}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+Setup\+Muxing (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8ac1dc465c66e1cc00f5ffd346904d97}
+
+
+Setup pin multiplexer per board schematics. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+\hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga8ac1dc465c66e1cc00f5ffd346904d97}{Board\+\_\+\+Setup\+Muxing()} should be called from System\+Init() prior to application main() is called. So that the P\+I\+Ns are set in proper state. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaeb60ea85499a4208167ae2540086516a}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+System\+Init@{Board\+\_\+\+System\+Init}}
+\index{Board\+\_\+\+System\+Init@{Board\+\_\+\+System\+Init}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+System\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+System\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaeb60ea85499a4208167ae2540086516a}
+
+
+Setup and initialize hardware prior to call to main() 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+\hyperlink{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gaeb60ea85499a4208167ae2540086516a}{Board\+\_\+\+System\+Init()} is called prior to the application and sets up system clocking, memory, and any resources needed prior to the application starting. 
+\end{DoxyNote}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4cffd2ff35f970b7dfad4fdf6419ecf6}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+U\+A\+R\+T\+Get\+Char@{Board\+\_\+\+U\+A\+R\+T\+Get\+Char}}
+\index{Board\+\_\+\+U\+A\+R\+T\+Get\+Char@{Board\+\_\+\+U\+A\+R\+T\+Get\+Char}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+U\+A\+R\+T\+Get\+Char}]{\setlength{\rightskip}{0pt plus 5cm}int Board\+\_\+\+U\+A\+R\+T\+Get\+Char (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga4cffd2ff35f970b7dfad4fdf6419ecf6}
+
+
+Get a single character from the U\+A\+R\+T, required for scanf input. 
+
+\begin{DoxyReturn}{Returns}
+E\+O\+F if not character was received, or character value 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gada2a79f4fcd7cd730317fc34291bf08e}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+U\+A\+R\+T\+Put\+Char@{Board\+\_\+\+U\+A\+R\+T\+Put\+Char}}
+\index{Board\+\_\+\+U\+A\+R\+T\+Put\+Char@{Board\+\_\+\+U\+A\+R\+T\+Put\+Char}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+U\+A\+R\+T\+Put\+Char}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+U\+A\+R\+T\+Put\+Char (
+\begin{DoxyParamCaption}
+\item[{char}]{ch}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_gada2a79f4fcd7cd730317fc34291bf08e}
+
+
+Sends a single character on the U\+A\+R\+T, required for printf redirection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ch} & \+: character to send \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\hypertarget{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga26211607542af1bb2a867d6641a8d4f3}{\index{B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}!Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R@{Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R}}
+\index{Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R@{Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R}!B\+O\+A\+R\+D\+: Common board functions@{B\+O\+A\+R\+D\+: Common board functions}}
+\subsubsection[{Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R}]{\setlength{\rightskip}{0pt plus 5cm}void Board\+\_\+\+U\+A\+R\+T\+Put\+S\+T\+R (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{str}
+\end{DoxyParamCaption}
+)}}\label{group___b_o_a_r_d___c_o_m_m_o_n___a_p_i_ga26211607542af1bb2a867d6641a8d4f3}
+
+
+Prints a string to the U\+A\+R\+T. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & \+: Terminated string to output \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
