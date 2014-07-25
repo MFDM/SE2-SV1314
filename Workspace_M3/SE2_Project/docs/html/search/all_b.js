@@ -1,6 +1,10 @@
 var searchData=
 [
   ['lcd_5fcfg',['LCD_CFG',['../struct_l_p_c___s_y_s_c_t_l___t.html#aef5d629c590fd35e8da2e061ddcdf17e',1,'LPC_SYSCTL_T']]],
+  ['lcd_5fcleandisplay',['LCD_CleanDisplay',['../group___l_c_d.html#gafe28b20cf856511f4047a053ba2b5b99',1,'lcd.h']]],
+  ['lcd_5finit',['LCD_Init',['../group___l_c_d.html#gaa53c9d40f3aa552a9974cd55ac510cb3',1,'lcd.h']]],
+  ['lcd_5fwritechar',['LCD_WriteChar',['../group___l_c_d.html#gac0435a3588dc5439ac35ac431d5d4381',1,'lcd.h']]],
+  ['lcd_5fwritestring',['LCD_WriteString',['../group___l_c_d.html#ga07305051b18e7f4d4df9119cbbc9536c',1,'lcd.h']]],
   ['leds_5fled1',['LEDS_LED1',['../group___b_o_a_r_d___n_x_p___l_p_c_x_p_r_e_s_s_o__1769.html#ga07668d0bcd1025a056db2334373709b1',1,'board.h']]],
   ['lpc175x_5f6x_5firqn_5ftype',['LPC175X_6X_IRQn_Type',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#gaaaeafe7bd8401a46d55e8431b6326116',1,'cmsis_175x_6x.h']]],
   ['lpc1769_5fgpio',['LPC1769_GPIO',['../struct_l_p_c1769___g_p_i_o.html',1,'']]],

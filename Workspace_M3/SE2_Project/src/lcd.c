@@ -135,7 +135,7 @@ static void LCD_WriteData(char data) {
 	LCD_WriteToSpi(data, 1);
 }
 
-int LCD_Init() {
+void LCD_Init(void) {
 	int i;
 	SPI_Init();
 	GPIO_Init(LCD_CS | LCD_RESET);
@@ -165,10 +165,9 @@ int LCD_Init() {
 		; //delay
 	// turn on the display
 	LCD_WriteCommand(DISPLAY_ON);
-	return 0;
 }
 
-int LCD_WriteChar(char data, int x, int y) {
+void LCD_WriteChar(char data, int x, int y) {
 	int i, j;
 	unsigned int cols;
 	unsigned int bytes;
@@ -207,7 +206,6 @@ int LCD_WriteChar(char data, int x, int y) {
 
 		}
 	}
-	return 0;
 }
 
 static int strlen(char * string) {
@@ -218,7 +216,7 @@ static int strlen(char * string) {
 	return a;
 }
 
-int LCD_WriteString(char * data, int x, int y) {
+void LCD_WriteString(char * data, int x, int y) {
 
 	int size = strlen(data);
 	int e = 8 * size;
@@ -227,10 +225,9 @@ int LCD_WriteString(char * data, int x, int y) {
 		e -= 8;
 		data++;
 	}
-	return 0;
 }
 
-int LCD_CleanDisplay(char color) {
+void LCD_CleanDisplay(char color) {
 	LCD_WriteCommand(PASET);
 	LCD_WriteData(0);
 	LCD_WriteData(131);
@@ -245,5 +242,4 @@ int LCD_CleanDisplay(char color) {
 			LCD_WriteData(color);
 		}
 	}
-	return 0;
 }

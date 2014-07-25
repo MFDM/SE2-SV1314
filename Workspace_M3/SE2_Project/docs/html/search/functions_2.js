@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['lpc_5fphy_5finit',['lpc_phy_init',['../group___b_o_a_r_d___p_h_y.html#ga9d09c9f5e31d5213b738ab80863776d5',1,'lpc_phy.h']]],
-  ['lpcphystspoll',['lpcPHYStsPoll',['../group___b_o_a_r_d___p_h_y.html#gab5a4203ab2c54fa3fb243e784f9b3ddc',1,'lpc_phy.h']]]
+  ['enet_5fcheckbuffer',['ENET_checkBuffer',['../group___ethernet.html#ga85a93c7b190918bb7d07a19f82820c2a',1,'enet.h']]],
+  ['enet_5fistxfinish',['ENET_IsTXFinish',['../group___ethernet.html#ga9eac02c3e323091545e54ee497247975',1,'enet.h']]],
+  ['enet_5frxbuffclaim',['ENET_RXBuffClaim',['../group___ethernet.html#gab1dfb416efdd76fb4af3da14a6a953e6',1,'enet.h']]],
+  ['enet_5frxget',['ENET_RXGet',['../group___ethernet.html#ga6d20b13e02326e073b3b424243f05445',1,'enet.h']]],
+  ['enet_5ftxbuffget',['ENET_TXBuffGet',['../group___ethernet.html#ga8139791d0554b1ba4accdab65de42861',1,'enet.h']]],
+  ['enet_5ftxqueue',['ENET_TXQueue',['../group___ethernet.html#gaf45704cbe2caeecbb76caf5804fb987d',1,'enet.h']]]
 ];

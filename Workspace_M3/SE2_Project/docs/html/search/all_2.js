@@ -27,5 +27,7 @@ var searchData=
   ['bool_5f32',['BOOL_32',['../group___l_p_c___types___public___types.html#gab02ba567b91b6b3d3c0c0209b2f577a0',1,'lpc_types.h']]],
   ['bool_5f8',['BOOL_8',['../group___l_p_c___types___public___types.html#ga7cc7a8cc54a0a73fbfcc1eb0b792148d',1,'lpc_types.h']]],
   ['busfault_5firqn',['BusFault_IRQn',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#ggaaaeafe7bd8401a46d55e8431b6326116a8693500eff174f16119e96234fee73af',1,'cmsis_175x_6x.h']]],
-  ['buttons_5fbutton1',['BUTTONS_BUTTON1',['../group___b_o_a_r_d___n_x_p___l_p_c_x_p_r_e_s_s_o__1769.html#ga4db3afa28c58f940cf56bf28e21ee78c',1,'board.h']]]
+  ['buttons_5fbutton1',['BUTTONS_BUTTON1',['../group___b_o_a_r_d___n_x_p___l_p_c_x_p_r_e_s_s_o__1769.html#ga4db3afa28c58f940cf56bf28e21ee78c',1,'board.h']]],
+  ['buttons_5finit',['BUTTONS_Init',['../group___buttons.html#ga699a3b1b830e331c4bec9457b40fa270',1,'buttons.h']]],
+  ['buttons_5fread',['BUTTONS_Read',['../group___buttons.html#ga41f83cbc0118ee85d4e65826f0beaf65',1,'buttons.h']]]
 ];

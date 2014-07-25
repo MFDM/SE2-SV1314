@@ -27,6 +27,10 @@
 #define STATIONS_MAX_MEM 	4
 #define TEA_FREQ 			100
 
+
+/**
+ * @brief Stations struct to be used
+ */
 typedef struct _sations{
 	unsigned int frequency[STATIONS_MAX_MEM];
 	unsigned int valid_information;

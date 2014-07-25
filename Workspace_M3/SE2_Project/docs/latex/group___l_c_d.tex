@@ -1,0 +1,117 @@
+\hypertarget{group___l_c_d}{\section{\+: Common L\+C\+D functions}
+\label{group___l_c_d}\index{\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___l_c_d_gaa53c9d40f3aa552a9974cd55ac510cb3}{L\+C\+D\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Make initialization for L\+C\+D. \end{DoxyCompactList}\item 
+void \hyperlink{group___l_c_d_gac0435a3588dc5439ac35ac431d5d4381}{L\+C\+D\+\_\+\+Write\+Char} (char data, int x, int y)
+\begin{DoxyCompactList}\small\item\em Write single char on L\+C\+D. \end{DoxyCompactList}\item 
+void \hyperlink{group___l_c_d_ga07305051b18e7f4d4df9119cbbc9536c}{L\+C\+D\+\_\+\+Write\+String} (char $\ast$data, int x, int y)
+\begin{DoxyCompactList}\small\item\em Write a string on L\+C\+D. \end{DoxyCompactList}\item 
+void \hyperlink{group___l_c_d_gafe28b20cf856511f4047a053ba2b5b99}{L\+C\+D\+\_\+\+Clean\+Display} (char color)
+\begin{DoxyCompactList}\small\item\em Clean lcd's display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common L\+C\+D functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___l_c_d_gafe28b20cf856511f4047a053ba2b5b99}{\index{\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}!L\+C\+D\+\_\+\+Clean\+Display@{L\+C\+D\+\_\+\+Clean\+Display}}
+\index{L\+C\+D\+\_\+\+Clean\+Display@{L\+C\+D\+\_\+\+Clean\+Display}!\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}}
+\subsubsection[{L\+C\+D\+\_\+\+Clean\+Display}]{\setlength{\rightskip}{0pt plus 5cm}void L\+C\+D\+\_\+\+Clean\+Display (
+\begin{DoxyParamCaption}
+\item[{char}]{color}
+\end{DoxyParamCaption}
+)}}\label{group___l_c_d_gafe28b20cf856511f4047a053ba2b5b99}
+
+
+Clean lcd's display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & to be on foreground \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___l_c_d_gaa53c9d40f3aa552a9974cd55ac510cb3}{\index{\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}!L\+C\+D\+\_\+\+Init@{L\+C\+D\+\_\+\+Init}}
+\index{L\+C\+D\+\_\+\+Init@{L\+C\+D\+\_\+\+Init}!\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}}
+\subsubsection[{L\+C\+D\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void L\+C\+D\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___l_c_d_gaa53c9d40f3aa552a9974cd55ac510cb3}
+
+
+Make initialization for L\+C\+D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This initialization use S\+P\+I communication 
+\end{DoxyNote}
+\hypertarget{group___l_c_d_gac0435a3588dc5439ac35ac431d5d4381}{\index{\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}!L\+C\+D\+\_\+\+Write\+Char@{L\+C\+D\+\_\+\+Write\+Char}}
+\index{L\+C\+D\+\_\+\+Write\+Char@{L\+C\+D\+\_\+\+Write\+Char}!\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}}
+\subsubsection[{L\+C\+D\+\_\+\+Write\+Char}]{\setlength{\rightskip}{0pt plus 5cm}void L\+C\+D\+\_\+\+Write\+Char (
+\begin{DoxyParamCaption}
+\item[{char}]{data, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{group___l_c_d_gac0435a3588dc5439ac35ac431d5d4381}
+
+
+Write single char on L\+C\+D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & to be written \\
+\hline
+{\em x} & initial coordenate \\
+\hline
+{\em y} & initial coordenate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This operation use S\+P\+I communication 
+\end{DoxyNote}
+\hypertarget{group___l_c_d_ga07305051b18e7f4d4df9119cbbc9536c}{\index{\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}!L\+C\+D\+\_\+\+Write\+String@{L\+C\+D\+\_\+\+Write\+String}}
+\index{L\+C\+D\+\_\+\+Write\+String@{L\+C\+D\+\_\+\+Write\+String}!\+: Common L\+C\+D functions@{\+: Common L\+C\+D functions}}
+\subsubsection[{L\+C\+D\+\_\+\+Write\+String}]{\setlength{\rightskip}{0pt plus 5cm}void L\+C\+D\+\_\+\+Write\+String (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{data, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}}\label{group___l_c_d_ga07305051b18e7f4d4df9119cbbc9536c}
+
+
+Write a string on L\+C\+D. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & to be written \\
+\hline
+{\em x} & initial coordenate \\
+\hline
+{\em y} & initial coordenate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This operation calls n times Write\+Char till value == '\textbackslash{}0' 
+\end{DoxyNote}

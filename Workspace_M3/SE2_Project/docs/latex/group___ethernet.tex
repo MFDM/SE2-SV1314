@@ -1,0 +1,159 @@
+\hypertarget{group___ethernet}{\section{\+: Common Ethernet functions}
+\label{group___ethernet}\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___ethernet_gae164e147cf2df8af8084497b287e48f4}{Init\+Descriptors} (void)
+\begin{DoxyCompactList}\small\item\em Initialize M\+A\+C descriptors for simple packet receive/transmit. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{group___ethernet_ga6d20b13e02326e073b3b424243f05445}{E\+N\+E\+T\+\_\+\+R\+X\+Get} (int32\+\_\+t $\ast$bytes)
+\begin{DoxyCompactList}\small\item\em Get the pointer to the Rx buffer storing new received frame. \end{DoxyCompactList}\item 
+void \hyperlink{group___ethernet_gab1dfb416efdd76fb4af3da14a6a953e6}{E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim} (void)
+\begin{DoxyCompactList}\small\item\em Release Rx Buffer. \end{DoxyCompactList}\item 
+int \hyperlink{group___ethernet_ga85a93c7b190918bb7d07a19f82820c2a}{E\+N\+E\+T\+\_\+check\+Buffer} (void)
+\begin{DoxyCompactList}\small\item\em Debugging purposes. \end{DoxyCompactList}\item 
+void $\ast$ \hyperlink{group___ethernet_ga8139791d0554b1ba4accdab65de42861}{E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get} (void)
+\begin{DoxyCompactList}\small\item\em Get Tx Buffer for the next transmission. \end{DoxyCompactList}\item 
+void \hyperlink{group___ethernet_gaf45704cbe2caeecbb76caf5804fb987d}{E\+N\+E\+T\+\_\+\+T\+X\+Queue} (int32\+\_\+t bytes)
+\begin{DoxyCompactList}\small\item\em Queue a new frame for transmission. \end{DoxyCompactList}\item 
+bool \hyperlink{group___ethernet_ga9eac02c3e323091545e54ee497247975}{E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish} (void)
+\begin{DoxyCompactList}\small\item\em Check if tranmission finished. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common Ethernet functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___ethernet_ga85a93c7b190918bb7d07a19f82820c2a}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+check\+Buffer@{E\+N\+E\+T\+\_\+check\+Buffer}}
+\index{E\+N\+E\+T\+\_\+check\+Buffer@{E\+N\+E\+T\+\_\+check\+Buffer}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+check\+Buffer}]{\setlength{\rightskip}{0pt plus 5cm}int E\+N\+E\+T\+\_\+check\+Buffer (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_ga85a93c7b190918bb7d07a19f82820c2a}
+
+
+Debugging purposes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_ga9eac02c3e323091545e54ee497247975}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish@{E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish}}
+\index{E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish@{E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish}]{\setlength{\rightskip}{0pt plus 5cm}bool E\+N\+E\+T\+\_\+\+Is\+T\+X\+Finish (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_ga9eac02c3e323091545e54ee497247975}
+
+
+Check if tranmission finished. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_gab1dfb416efdd76fb4af3da14a6a953e6}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim@{E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim}}
+\index{E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim@{E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim}]{\setlength{\rightskip}{0pt plus 5cm}void E\+N\+E\+T\+\_\+\+R\+X\+Buff\+Claim (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_gab1dfb416efdd76fb4af3da14a6a953e6}
+
+
+Release Rx Buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_ga6d20b13e02326e073b3b424243f05445}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+\+R\+X\+Get@{E\+N\+E\+T\+\_\+\+R\+X\+Get}}
+\index{E\+N\+E\+T\+\_\+\+R\+X\+Get@{E\+N\+E\+T\+\_\+\+R\+X\+Get}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+\+R\+X\+Get}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ E\+N\+E\+T\+\_\+\+R\+X\+Get (
+\begin{DoxyParamCaption}
+\item[{int32\+\_\+t $\ast$}]{bytes}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_ga6d20b13e02326e073b3b424243f05445}
+
+
+Get the pointer to the Rx buffer storing new received frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_ga8139791d0554b1ba4accdab65de42861}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get@{E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get}}
+\index{E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get@{E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get}]{\setlength{\rightskip}{0pt plus 5cm}void$\ast$ E\+N\+E\+T\+\_\+\+T\+X\+Buff\+Get (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_ga8139791d0554b1ba4accdab65de42861}
+
+
+Get Tx Buffer for the next transmission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_gaf45704cbe2caeecbb76caf5804fb987d}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!E\+N\+E\+T\+\_\+\+T\+X\+Queue@{E\+N\+E\+T\+\_\+\+T\+X\+Queue}}
+\index{E\+N\+E\+T\+\_\+\+T\+X\+Queue@{E\+N\+E\+T\+\_\+\+T\+X\+Queue}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{E\+N\+E\+T\+\_\+\+T\+X\+Queue}]{\setlength{\rightskip}{0pt plus 5cm}void E\+N\+E\+T\+\_\+\+T\+X\+Queue (
+\begin{DoxyParamCaption}
+\item[{int32\+\_\+t}]{bytes}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_gaf45704cbe2caeecbb76caf5804fb987d}
+
+
+Queue a new frame for transmission. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___ethernet_gae164e147cf2df8af8084497b287e48f4}{\index{\+: Common Ethernet functions@{\+: Common Ethernet functions}!Init\+Descriptors@{Init\+Descriptors}}
+\index{Init\+Descriptors@{Init\+Descriptors}!\+: Common Ethernet functions@{\+: Common Ethernet functions}}
+\subsubsection[{Init\+Descriptors}]{\setlength{\rightskip}{0pt plus 5cm}void Init\+Descriptors (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___ethernet_gae164e147cf2df8af8084497b287e48f4}
+
+
+Initialize M\+A\+C descriptors for simple packet receive/transmit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}

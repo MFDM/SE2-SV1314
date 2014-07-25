@@ -84,45 +84,57 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">tea5767.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef tea5767</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define tea5767</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define MASK_MUTE               0x80</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define MASK_SEARCH_MODE_ON     0x40</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define MASK_SEARCH_MODE_OFF    0x00</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MASK_PLL_HIGH           0x3F</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define MASK_PLL_LOW            0xFF</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define MASK_SSL                0x20</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define MASK_SEARCH_UP          0x80</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define MASK_SEARCH_DOWN        0x00</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define MASK_XTAL               0x10</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define MASK_PLL_REF            0x80</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define MASK_READY_FLAG         0x80</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define MASK_BAND_LIMIT_FLAG    0x40</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define MASK_READY_FLAG         0x80</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define MASK_STEREO             0x80</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define MASK_IF                 0x7F</span></div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define TEA_SIZE_OF_ARRAY       5</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define ADDR_RADIO              0x60</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define READ                    1</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define WRITE                   0</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define XTAL                    32768</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define EUROPE_FREQUENCY_MAX    108</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define EUROPE_FREQUENCY_MIN    87.5</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">void</span> TEA5767_Init(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> freq);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">unsigned</span> TEA5767_FMToPLL(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> freq);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">unsigned</span> TEA5767_PLLToFM(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pll);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">void</span> TEA5767_SearchUp(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> TEA5767_SearchDown(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> TEA5767_GetFrequency(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> TEA5767_GetFrequencyInPLL(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">void</span> TEA5767_SetFrequency(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pllVal);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * @brief Common Radio functions</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef tea5767</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define tea5767</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#define MASK_MUTE               0x80</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#define MASK_SEARCH_MODE_ON     0x40</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#define MASK_SEARCH_MODE_OFF    0x00</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define MASK_PLL_HIGH           0x3F</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#define MASK_PLL_LOW            0xFF</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#define MASK_SSL                0x20</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#define MASK_SEARCH_UP          0x80</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#define MASK_SEARCH_DOWN        0x00</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#define MASK_XTAL               0x10</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define MASK_PLL_REF            0x80</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define MASK_READY_FLAG         0x80</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#define MASK_BAND_LIMIT_FLAG    0x40</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#define MASK_READY_FLAG         0x80</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#define MASK_STEREO             0x80</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define MASK_IF                 0x7F</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#define TEA_SIZE_OF_ARRAY       5</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#define ADDR_RADIO              0x60</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#define READ                    1</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#define WRITE                   0</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#define XTAL                    32768</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#define EUROPE_FREQUENCY_MAX    108</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor">#define EUROPE_FREQUENCY_MIN    87.5</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___radio.html#gabd709714cae0abdd5e8ce6bf39afd678">TEA5767_Init</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> freq);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">unsigned</span> <a class="code" href="group___radio.html#ga0d8dd84f9fe35c52858ed652592d72e8">TEA5767_FMToPLL</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> freq);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keywordtype">unsigned</span> <a class="code" href="group___radio.html#gaf5ca2dac5766f45d859ec89d013b2153">TEA5767_PLLToFM</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pll);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___radio.html#ga5dc56e855d544c8e68f14fbb0c9b41ed">TEA5767_SearchUp</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___radio.html#ga8d8df2bb004f98247675675b7e2aebce">TEA5767_SearchDown</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group___radio.html#gae3031f3eb3e136b297c518dad7f41a02">TEA5767_GetFrequency</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group___radio.html#ga8001e6a6d475501b668ee3a1ed302778">TEA5767_GetFrequencyInPLL</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___radio.html#gae14b846eb96a9641aa8fe04c8348ef4b">TEA5767_SetFrequency</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pllVal);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="group___radio_html_gabd709714cae0abdd5e8ce6bf39afd678"><div class="ttname"><a href="group___radio.html#gabd709714cae0abdd5e8ce6bf39afd678">TEA5767_Init</a></div><div class="ttdeci">void TEA5767_Init(unsigned int freq)</div><div class="ttdoc">Makes radio initialization. </div></div>
+<div class="ttc" id="group___radio_html_gaf5ca2dac5766f45d859ec89d013b2153"><div class="ttname"><a href="group___radio.html#gaf5ca2dac5766f45d859ec89d013b2153">TEA5767_PLLToFM</a></div><div class="ttdeci">unsigned TEA5767_PLLToFM(unsigned int pll)</div><div class="ttdoc">Convert pll value to frequency value. </div></div>
+<div class="ttc" id="group___radio_html_ga8d8df2bb004f98247675675b7e2aebce"><div class="ttname"><a href="group___radio.html#ga8d8df2bb004f98247675675b7e2aebce">TEA5767_SearchDown</a></div><div class="ttdeci">void TEA5767_SearchDown(void)</div><div class="ttdoc">Search down. </div></div>
+<div class="ttc" id="group___radio_html_ga0d8dd84f9fe35c52858ed652592d72e8"><div class="ttname"><a href="group___radio.html#ga0d8dd84f9fe35c52858ed652592d72e8">TEA5767_FMToPLL</a></div><div class="ttdeci">unsigned TEA5767_FMToPLL(unsigned int freq)</div><div class="ttdoc">convert fm frequency to PLL value </div></div>
+<div class="ttc" id="group___radio_html_ga8001e6a6d475501b668ee3a1ed302778"><div class="ttname"><a href="group___radio.html#ga8001e6a6d475501b668ee3a1ed302778">TEA5767_GetFrequencyInPLL</a></div><div class="ttdeci">unsigned int TEA5767_GetFrequencyInPLL(void)</div><div class="ttdoc">Get current frequency in pll value. </div></div>
+<div class="ttc" id="group___radio_html_gae14b846eb96a9641aa8fe04c8348ef4b"><div class="ttname"><a href="group___radio.html#gae14b846eb96a9641aa8fe04c8348ef4b">TEA5767_SetFrequency</a></div><div class="ttdeci">void TEA5767_SetFrequency(unsigned int pllVal)</div><div class="ttdoc">set radio current frequency </div></div>
+<div class="ttc" id="group___radio_html_ga5dc56e855d544c8e68f14fbb0c9b41ed"><div class="ttname"><a href="group___radio.html#ga5dc56e855d544c8e68f14fbb0c9b41ed">TEA5767_SearchUp</a></div><div class="ttdeci">void TEA5767_SearchUp(void)</div><div class="ttdoc">Search up. </div></div>
+<div class="ttc" id="group___radio_html_gae3031f3eb3e136b297c518dad7f41a02"><div class="ttname"><a href="group___radio.html#gae3031f3eb3e136b297c518dad7f41a02">TEA5767_GetFrequency</a></div><div class="ttdeci">unsigned int TEA5767_GetFrequency(void)</div><div class="ttdoc">Get current frequency. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2014 13:02:50 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 24 2014 17:32:29 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

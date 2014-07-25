@@ -84,33 +84,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">gpio.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef gpio</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define gpio</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;LPC1769_Types.h&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div>
-<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="struct_l_p_c1769___g_p_i_o.html">    6</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    LPC1769_Reg FIODIR;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    LPC1769_Reg dummy[3];</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    LPC1769_Reg FIOMASK;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    LPC1769_Reg FIOPIN;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    LPC1769_Reg FIOSET;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    LPC1769_Reg FIOCLR;</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}<a class="code" href="struct_l_p_c1769___g_p_i_o.html">LPC1769_GPIO</a>;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> GPIO_Read(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> GPIO_Init(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">void</span> GPIO_SetDir(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinDirectionMap);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keywordtype">void</span> GPIO_Write(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> preparedValue, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap);</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="struct_l_p_c1769___g_p_i_o_html"><div class="ttname"><a href="struct_l_p_c1769___g_p_i_o.html">LPC1769_GPIO</a></div><div class="ttdef"><b>Definition:</b> gpio.h:6</div></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * @brief Common GPIO functions</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef gpio</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define gpio</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &quot;LPC1769_Types.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="struct_l_p_c1769___g_p_i_o.html">   12</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    LPC1769_Reg FIODIR;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    LPC1769_Reg dummy[3];</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    LPC1769_Reg FIOMASK;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    LPC1769_Reg FIOPIN;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    LPC1769_Reg FIOSET;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    LPC1769_Reg FIOCLR;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}<a class="code" href="struct_l_p_c1769___g_p_i_o.html">LPC1769_GPIO</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="group___g_p_i_o.html#ga23bfb990afc96634878279171ac71c4d">GPIO_Read</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___g_p_i_o.html#ga228420e7e25c0e0bbdeda350cb10f776">GPIO_Init</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___g_p_i_o.html#ga445e3d89007a8f8b228a5a5c28c6eb68">GPIO_SetDir</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinDirectionMap);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___g_p_i_o.html#ga4d14eef4b333507cf0867ea42b6200cd">GPIO_Write</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> preparedValue, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> pinMap);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="struct_l_p_c1769___g_p_i_o_html"><div class="ttname"><a href="struct_l_p_c1769___g_p_i_o.html">LPC1769_GPIO</a></div><div class="ttdoc">GPIO registers struct. </div><div class="ttdef"><b>Definition:</b> gpio.h:12</div></div>
+<div class="ttc" id="group___g_p_i_o_html_ga23bfb990afc96634878279171ac71c4d"><div class="ttname"><a href="group___g_p_i_o.html#ga23bfb990afc96634878279171ac71c4d">GPIO_Read</a></div><div class="ttdeci">unsigned int GPIO_Read(void)</div><div class="ttdoc">Read from GPIO ports. </div></div>
+<div class="ttc" id="group___g_p_i_o_html_ga228420e7e25c0e0bbdeda350cb10f776"><div class="ttname"><a href="group___g_p_i_o.html#ga228420e7e25c0e0bbdeda350cb10f776">GPIO_Init</a></div><div class="ttdeci">void GPIO_Init(unsigned int pinMap)</div><div class="ttdoc">Enable GPIO ports. </div></div>
+<div class="ttc" id="group___g_p_i_o_html_ga4d14eef4b333507cf0867ea42b6200cd"><div class="ttname"><a href="group___g_p_i_o.html#ga4d14eef4b333507cf0867ea42b6200cd">GPIO_Write</a></div><div class="ttdeci">void GPIO_Write(unsigned int preparedValue, unsigned int pinMap)</div><div class="ttdoc">Write on GPIO ports. </div></div>
+<div class="ttc" id="group___g_p_i_o_html_ga445e3d89007a8f8b228a5a5c28c6eb68"><div class="ttname"><a href="group___g_p_i_o.html#ga445e3d89007a8f8b228a5a5c28c6eb68">GPIO_SetDir</a></div><div class="ttdeci">void GPIO_SetDir(unsigned int pinMap, unsigned int pinDirectionMap)</div><div class="ttdoc">Initialize directions for GPIO ports, input or output. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2014 13:02:50 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 24 2014 17:32:29 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

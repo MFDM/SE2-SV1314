@@ -1,0 +1,66 @@
+\hypertarget{group___i2_c}{\section{\+: Common I2\+C functions}
+\label{group___i2_c}\index{\+: Common I2\+C functions@{\+: Common I2\+C functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___i2_c_ga84df9a5887b8b8230cfe85d18e53900e}{I2\+C\+\_\+\+Init} (void)
+\begin{DoxyCompactList}\small\item\em Make initialization for I2\+C communication. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{group___i2_c_gaa20ff6b6d877835a0c6976a8079a65e9}{I2\+C\+\_\+\+Transfer} (unsigned char addr, int read, void $\ast$data, unsigned int size, int freq)
+\begin{DoxyCompactList}\small\item\em Transfer data via I2\+C communication. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common I2\+C functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___i2_c_ga84df9a5887b8b8230cfe85d18e53900e}{\index{\+: Common I2\+C functions@{\+: Common I2\+C functions}!I2\+C\+\_\+\+Init@{I2\+C\+\_\+\+Init}}
+\index{I2\+C\+\_\+\+Init@{I2\+C\+\_\+\+Init}!\+: Common I2\+C functions@{\+: Common I2\+C functions}}
+\subsubsection[{I2\+C\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void I2\+C\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___i2_c_ga84df9a5887b8b8230cfe85d18e53900e}
+
+
+Make initialization for I2\+C communication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___i2_c_gaa20ff6b6d877835a0c6976a8079a65e9}{\index{\+: Common I2\+C functions@{\+: Common I2\+C functions}!I2\+C\+\_\+\+Transfer@{I2\+C\+\_\+\+Transfer}}
+\index{I2\+C\+\_\+\+Transfer@{I2\+C\+\_\+\+Transfer}!\+: Common I2\+C functions@{\+: Common I2\+C functions}}
+\subsubsection[{I2\+C\+\_\+\+Transfer}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int I2\+C\+\_\+\+Transfer (
+\begin{DoxyParamCaption}
+\item[{unsigned char}]{addr, }
+\item[{int}]{read, }
+\item[{void $\ast$}]{data, }
+\item[{unsigned int}]{size, }
+\item[{int}]{freq}
+\end{DoxyParamCaption}
+)}}\label{group___i2_c_gaa20ff6b6d877835a0c6976a8079a65e9}
+
+
+Transfer data via I2\+C communication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+{\em direction-\/$>$} & read =1 or write=0 \\
+\hline
+{\em data} & to be written \\
+\hline
+{\em data} & size \\
+\hline
+{\em communication's} & frequency \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Response from an I2\+C transaction 
+\end{DoxyReturn}

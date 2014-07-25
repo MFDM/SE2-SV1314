@@ -3,8 +3,11 @@
 
 #include "LPC1769_Types.h"
 
-typedef struct {
 
+/**
+ * @brief PCB registers struct
+ */
+typedef struct {
 	LPC1769_Reg PINSEL0;
 	LPC1769_Reg PINSEL1;
 	LPC1769_Reg PINSEL2;
@@ -31,6 +34,10 @@ typedef struct {
 
 }LPC1769_PCB;
 
+
+/**
+ * @brief PINMODE registers struct
+ */
 typedef struct {
 
 	LPC1769_Reg PINMODE0;

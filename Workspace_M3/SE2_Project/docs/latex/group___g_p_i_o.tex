@@ -1,0 +1,102 @@
+\hypertarget{group___g_p_i_o}{\section{\+: Common G\+P\+I\+O functions}
+\label{group___g_p_i_o}\index{\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{group___g_p_i_o_ga23bfb990afc96634878279171ac71c4d}{G\+P\+I\+O\+\_\+\+Read} (void)
+\begin{DoxyCompactList}\small\item\em Read from G\+P\+I\+O ports. \end{DoxyCompactList}\item 
+void \hyperlink{group___g_p_i_o_ga228420e7e25c0e0bbdeda350cb10f776}{G\+P\+I\+O\+\_\+\+Init} (unsigned int pin\+Map)
+\begin{DoxyCompactList}\small\item\em Enable G\+P\+I\+O ports. \end{DoxyCompactList}\item 
+void \hyperlink{group___g_p_i_o_ga445e3d89007a8f8b228a5a5c28c6eb68}{G\+P\+I\+O\+\_\+\+Set\+Dir} (unsigned int pin\+Map, unsigned int pin\+Direction\+Map)
+\begin{DoxyCompactList}\small\item\em Initialize directions for G\+P\+I\+O ports, input or output. \end{DoxyCompactList}\item 
+void \hyperlink{group___g_p_i_o_ga4d14eef4b333507cf0867ea42b6200cd}{G\+P\+I\+O\+\_\+\+Write} (unsigned int prepared\+Value, unsigned int pin\+Map)
+\begin{DoxyCompactList}\small\item\em Write on G\+P\+I\+O ports. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common G\+P\+I\+O functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___g_p_i_o_ga228420e7e25c0e0bbdeda350cb10f776}{\index{\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}!G\+P\+I\+O\+\_\+\+Init@{G\+P\+I\+O\+\_\+\+Init}}
+\index{G\+P\+I\+O\+\_\+\+Init@{G\+P\+I\+O\+\_\+\+Init}!\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+I\+O\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pin\+Map}
+\end{DoxyParamCaption}
+)}}\label{group___g_p_i_o_ga228420e7e25c0e0bbdeda350cb10f776}
+
+
+Enable G\+P\+I\+O ports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin\+Map} & to enable G\+P\+I\+O ports \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___g_p_i_o_ga23bfb990afc96634878279171ac71c4d}{\index{\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}!G\+P\+I\+O\+\_\+\+Read@{G\+P\+I\+O\+\_\+\+Read}}
+\index{G\+P\+I\+O\+\_\+\+Read@{G\+P\+I\+O\+\_\+\+Read}!\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Read}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int G\+P\+I\+O\+\_\+\+Read (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___g_p_i_o_ga23bfb990afc96634878279171ac71c4d}
+
+
+Read from G\+P\+I\+O ports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Value in G\+P\+I\+O ports 
+\end{DoxyReturn}
+\hypertarget{group___g_p_i_o_ga445e3d89007a8f8b228a5a5c28c6eb68}{\index{\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}!G\+P\+I\+O\+\_\+\+Set\+Dir@{G\+P\+I\+O\+\_\+\+Set\+Dir}}
+\index{G\+P\+I\+O\+\_\+\+Set\+Dir@{G\+P\+I\+O\+\_\+\+Set\+Dir}!\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Set\+Dir}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+I\+O\+\_\+\+Set\+Dir (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pin\+Map, }
+\item[{unsigned int}]{pin\+Direction\+Map}
+\end{DoxyParamCaption}
+)}}\label{group___g_p_i_o_ga445e3d89007a8f8b228a5a5c28c6eb68}
+
+
+Initialize directions for G\+P\+I\+O ports, input or output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em G\+P\+I\+O} & ports to select \\
+\hline
+{\em directions} & for selected G\+P\+I\+O ports \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___g_p_i_o_ga4d14eef4b333507cf0867ea42b6200cd}{\index{\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}!G\+P\+I\+O\+\_\+\+Write@{G\+P\+I\+O\+\_\+\+Write}}
+\index{G\+P\+I\+O\+\_\+\+Write@{G\+P\+I\+O\+\_\+\+Write}!\+: Common G\+P\+I\+O functions@{\+: Common G\+P\+I\+O functions}}
+\subsubsection[{G\+P\+I\+O\+\_\+\+Write}]{\setlength{\rightskip}{0pt plus 5cm}void G\+P\+I\+O\+\_\+\+Write (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{prepared\+Value, }
+\item[{unsigned int}]{pin\+Map}
+\end{DoxyParamCaption}
+)}}\label{group___g_p_i_o_ga4d14eef4b333507cf0867ea42b6200cd}
+
+
+Write on G\+P\+I\+O ports. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & to be written on selected ports \\
+\hline
+{\em ports} & to be selected for write operation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}

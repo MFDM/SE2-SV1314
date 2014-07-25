@@ -1,0 +1,180 @@
+\hypertarget{group___radio}{\section{\+: Common Radio functions}
+\label{group___radio}\index{\+: Common Radio functions@{\+: Common Radio functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___radio_gabd709714cae0abdd5e8ce6bf39afd678}{T\+E\+A5767\+\_\+\+Init} (unsigned int freq)
+\begin{DoxyCompactList}\small\item\em Makes radio initialization. \end{DoxyCompactList}\item 
+unsigned \hyperlink{group___radio_ga0d8dd84f9fe35c52858ed652592d72e8}{T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L} (unsigned int freq)
+\begin{DoxyCompactList}\small\item\em convert fm frequency to P\+L\+L value \end{DoxyCompactList}\item 
+unsigned \hyperlink{group___radio_gaf5ca2dac5766f45d859ec89d013b2153}{T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M} (unsigned int pll)
+\begin{DoxyCompactList}\small\item\em Convert pll value to frequency value. \end{DoxyCompactList}\item 
+void \hyperlink{group___radio_ga5dc56e855d544c8e68f14fbb0c9b41ed}{T\+E\+A5767\+\_\+\+Search\+Up} (void)
+\begin{DoxyCompactList}\small\item\em Search up. \end{DoxyCompactList}\item 
+void \hyperlink{group___radio_ga8d8df2bb004f98247675675b7e2aebce}{T\+E\+A5767\+\_\+\+Search\+Down} (void)
+\begin{DoxyCompactList}\small\item\em Search down. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{group___radio_gae3031f3eb3e136b297c518dad7f41a02}{T\+E\+A5767\+\_\+\+Get\+Frequency} (void)
+\begin{DoxyCompactList}\small\item\em Get current frequency. \end{DoxyCompactList}\item 
+unsigned int \hyperlink{group___radio_ga8001e6a6d475501b668ee3a1ed302778}{T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L} (void)
+\begin{DoxyCompactList}\small\item\em Get current frequency in pll value. \end{DoxyCompactList}\item 
+void \hyperlink{group___radio_gae14b846eb96a9641aa8fe04c8348ef4b}{T\+E\+A5767\+\_\+\+Set\+Frequency} (unsigned int pll\+Val)
+\begin{DoxyCompactList}\small\item\em set radio current frequency \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common Radio functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___radio_ga0d8dd84f9fe35c52858ed652592d72e8}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L@{T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L}}
+\index{T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L@{T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L}]{\setlength{\rightskip}{0pt plus 5cm}unsigned T\+E\+A5767\+\_\+\+F\+M\+To\+P\+L\+L (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{freq}
+\end{DoxyParamCaption}
+)}}\label{group___radio_ga0d8dd84f9fe35c52858ed652592d72e8}
+
+
+convert fm frequency to P\+L\+L value 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in fm frequency 
+\end{DoxyReturn}
+\hypertarget{group___radio_gae3031f3eb3e136b297c518dad7f41a02}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Get\+Frequency@{T\+E\+A5767\+\_\+\+Get\+Frequency}}
+\index{T\+E\+A5767\+\_\+\+Get\+Frequency@{T\+E\+A5767\+\_\+\+Get\+Frequency}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Get\+Frequency}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int T\+E\+A5767\+\_\+\+Get\+Frequency (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___radio_gae3031f3eb3e136b297c518dad7f41a02}
+
+
+Get current frequency. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___radio_ga8001e6a6d475501b668ee3a1ed302778}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L@{T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L}}
+\index{T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L@{T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int T\+E\+A5767\+\_\+\+Get\+Frequency\+In\+P\+L\+L (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___radio_ga8001e6a6d475501b668ee3a1ed302778}
+
+
+Get current frequency in pll value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___radio_gabd709714cae0abdd5e8ce6bf39afd678}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Init@{T\+E\+A5767\+\_\+\+Init}}
+\index{T\+E\+A5767\+\_\+\+Init@{T\+E\+A5767\+\_\+\+Init}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void T\+E\+A5767\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{freq}
+\end{DoxyParamCaption}
+)}}\label{group___radio_gabd709714cae0abdd5e8ce6bf39afd678}
+
+
+Makes radio initialization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em search} & frequency \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___radio_gaf5ca2dac5766f45d859ec89d013b2153}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M@{T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M}}
+\index{T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M@{T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M}]{\setlength{\rightskip}{0pt plus 5cm}unsigned T\+E\+A5767\+\_\+\+P\+L\+L\+To\+F\+M (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pll}
+\end{DoxyParamCaption}
+)}}\label{group___radio_gaf5ca2dac5766f45d859ec89d013b2153}
+
+
+Convert pll value to frequency value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pll} & value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value in pll 
+\end{DoxyReturn}
+\hypertarget{group___radio_ga8d8df2bb004f98247675675b7e2aebce}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Search\+Down@{T\+E\+A5767\+\_\+\+Search\+Down}}
+\index{T\+E\+A5767\+\_\+\+Search\+Down@{T\+E\+A5767\+\_\+\+Search\+Down}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Search\+Down}]{\setlength{\rightskip}{0pt plus 5cm}void T\+E\+A5767\+\_\+\+Search\+Down (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___radio_ga8d8df2bb004f98247675675b7e2aebce}
+
+
+Search down. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___radio_ga5dc56e855d544c8e68f14fbb0c9b41ed}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Search\+Up@{T\+E\+A5767\+\_\+\+Search\+Up}}
+\index{T\+E\+A5767\+\_\+\+Search\+Up@{T\+E\+A5767\+\_\+\+Search\+Up}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Search\+Up}]{\setlength{\rightskip}{0pt plus 5cm}void T\+E\+A5767\+\_\+\+Search\+Up (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___radio_ga5dc56e855d544c8e68f14fbb0c9b41ed}
+
+
+Search up. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Nothing} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\hypertarget{group___radio_gae14b846eb96a9641aa8fe04c8348ef4b}{\index{\+: Common Radio functions@{\+: Common Radio functions}!T\+E\+A5767\+\_\+\+Set\+Frequency@{T\+E\+A5767\+\_\+\+Set\+Frequency}}
+\index{T\+E\+A5767\+\_\+\+Set\+Frequency@{T\+E\+A5767\+\_\+\+Set\+Frequency}!\+: Common Radio functions@{\+: Common Radio functions}}
+\subsubsection[{T\+E\+A5767\+\_\+\+Set\+Frequency}]{\setlength{\rightskip}{0pt plus 5cm}void T\+E\+A5767\+\_\+\+Set\+Frequency (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pll\+Val}
+\end{DoxyParamCaption}
+)}}\label{group___radio_gae14b846eb96a9641aa8fe04c8348ef4b}
+
+
+set radio current frequency 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frequency} & in pll \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}

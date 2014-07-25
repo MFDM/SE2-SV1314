@@ -16,5 +16,7 @@ var searchData=
   ['board_5fsysteminit',['Board_SystemInit',['../group___b_o_a_r_d___c_o_m_m_o_n___a_p_i.html#gaeb60ea85499a4208167ae2540086516a',1,'board_api.h']]],
   ['board_5fuartgetchar',['Board_UARTGetChar',['../group___b_o_a_r_d___c_o_m_m_o_n___a_p_i.html#ga4cffd2ff35f970b7dfad4fdf6419ecf6',1,'board_api.h']]],
   ['board_5fuartputchar',['Board_UARTPutChar',['../group___b_o_a_r_d___c_o_m_m_o_n___a_p_i.html#gada2a79f4fcd7cd730317fc34291bf08e',1,'board_api.h']]],
-  ['board_5fuartputstr',['Board_UARTPutSTR',['../group___b_o_a_r_d___c_o_m_m_o_n___a_p_i.html#ga26211607542af1bb2a867d6641a8d4f3',1,'board_api.h']]]
+  ['board_5fuartputstr',['Board_UARTPutSTR',['../group___b_o_a_r_d___c_o_m_m_o_n___a_p_i.html#ga26211607542af1bb2a867d6641a8d4f3',1,'board_api.h']]],
+  ['buttons_5finit',['BUTTONS_Init',['../group___buttons.html#ga699a3b1b830e331c4bec9457b40fa270',1,'buttons.h']]],
+  ['buttons_5fread',['BUTTONS_Read',['../group___buttons.html#ga41f83cbc0118ee85d4e65826f0beaf65',1,'buttons.h']]]
 ];

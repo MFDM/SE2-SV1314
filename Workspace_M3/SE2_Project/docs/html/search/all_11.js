@@ -2,7 +2,9 @@ var searchData=
 [
   ['sa',['SA',['../struct_e_n_e_t___m_a_c___t.html#a25214ef3698b23b87fea95b7158a11ad',1,'ENET_MAC_T']]],
   ['scs',['SCS',['../struct_l_p_c___s_y_s_c_t_l___t.html#a90bf168dbcc04b27d230b74b5e4d17a6',1,'LPC_SYSCTL_T']]],
+  ['spi_5finit',['SPI_Init',['../group___s_p_i.html#ga292196e767158c66f03cbcc244fc802b',1,'spi.h']]],
   ['spi_5firqn',['SPI_IRQn',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#ggaaaeafe7bd8401a46d55e8431b6326116a8f5f99956cf9765f17bcba6865b93ce2',1,'cmsis_175x_6x.h']]],
+  ['spi_5ftransfer',['SPI_Transfer',['../group___s_p_i.html#gaab1451c6969a2309e34d9be8f128af18',1,'spi.h']]],
   ['ssp0_5firqn',['SSP0_IRQn',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#ggaaaeafe7bd8401a46d55e8431b6326116a6c8d6262fd7ecedc57b2fe9209be9765',1,'cmsis_175x_6x.h']]],
   ['ssp1_5firqn',['SSP1_IRQn',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#ggaaaeafe7bd8401a46d55e8431b6326116adcc0cfa46f0d13c2de0f3e826c10a789',1,'cmsis_175x_6x.h']]],
   ['ssp_5firqn',['SSP_IRQn',['../group___c_m_s_i_s__175_x__6_x___i_r_q.html#ggaaaeafe7bd8401a46d55e8431b6326116a91a7a38ad2f048e2813b98dc68f88adc',1,'cmsis_175x_6x.h']]],

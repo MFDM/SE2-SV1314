@@ -84,18 +84,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">lcd.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef lcd</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define lcd</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keywordtype">int</span> LCD_Init();</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keywordtype">int</span> LCD_WriteChar(<span class="keywordtype">char</span> data,<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keywordtype">int</span> LCD_WriteString(<span class="keywordtype">char</span> * data,<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">int</span> LCD_CleanDisplay(<span class="keywordtype">char</span> color);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment"> * @brief Common LCD functions</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"> */</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#ifndef lcd</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#define lcd</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___l_c_d.html#gaa53c9d40f3aa552a9974cd55ac510cb3">LCD_Init</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___l_c_d.html#gac0435a3588dc5439ac35ac431d5d4381">LCD_WriteChar</a>(<span class="keywordtype">char</span> data,<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___l_c_d.html#ga07305051b18e7f4d4df9119cbbc9536c">LCD_WriteString</a>(<span class="keywordtype">char</span> * data,<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group___l_c_d.html#gafe28b20cf856511f4047a053ba2b5b99">LCD_CleanDisplay</a>(<span class="keywordtype">char</span> color);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="group___l_c_d_html_ga07305051b18e7f4d4df9119cbbc9536c"><div class="ttname"><a href="group___l_c_d.html#ga07305051b18e7f4d4df9119cbbc9536c">LCD_WriteString</a></div><div class="ttdeci">void LCD_WriteString(char *data, int x, int y)</div><div class="ttdoc">Write a string on LCD. </div></div>
+<div class="ttc" id="group___l_c_d_html_gac0435a3588dc5439ac35ac431d5d4381"><div class="ttname"><a href="group___l_c_d.html#gac0435a3588dc5439ac35ac431d5d4381">LCD_WriteChar</a></div><div class="ttdeci">void LCD_WriteChar(char data, int x, int y)</div><div class="ttdoc">Write single char on LCD. </div></div>
+<div class="ttc" id="group___l_c_d_html_gaa53c9d40f3aa552a9974cd55ac510cb3"><div class="ttname"><a href="group___l_c_d.html#gaa53c9d40f3aa552a9974cd55ac510cb3">LCD_Init</a></div><div class="ttdeci">void LCD_Init(void)</div><div class="ttdoc">Make initialization for LCD. </div></div>
+<div class="ttc" id="group___l_c_d_html_gafe28b20cf856511f4047a053ba2b5b99"><div class="ttname"><a href="group___l_c_d.html#gafe28b20cf856511f4047a053ba2b5b99">LCD_CleanDisplay</a></div><div class="ttdeci">void LCD_CleanDisplay(char color)</div><div class="ttdoc">Clean lcd&#39;s display. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Jul 24 2014 13:02:50 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Jul 24 2014 17:32:29 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

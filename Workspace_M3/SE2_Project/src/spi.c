@@ -56,7 +56,7 @@ void SPI_Init(void) {
 	v = spiRegs->SOSPCR; // for debug
 }
 
-int SPI_Transfer(char data, char DnC) {
+void SPI_Transfer(char data, char DnC) {
 	// Setting up clock frequency
 	//SystemCoreClockUpdate();
 	unsigned int div;
@@ -71,6 +71,5 @@ int SPI_Transfer(char data, char DnC) {
 		;
 	spiRegs->SOSPDR;	// This bit is cleared by first reading this
 	//register, then accessing the SPI Data Register.
-	return 0;
 }
 

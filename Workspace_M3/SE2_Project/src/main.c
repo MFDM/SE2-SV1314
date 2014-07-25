@@ -79,19 +79,19 @@ static void Inits(void) {
 	//server init
 	timer_set(&periodic_timer, CLOCK_SECOND / 2);
 	timer_set(&arp_timer, CLOCK_SECOND * 10);
-	 tapdev_init();
-	 uip_init();
+	tapdev_init();
+	uip_init();
 
-	 uip_setethaddr(macAddr);
+	uip_setethaddr(macAddr);
 
-	 uip_ipaddr(ipaddr, 192, 168, 0, 2);
-	 uip_sethostaddr(ipaddr);
-	 uip_ipaddr(ipaddr, 192, 168, 0, 1);
-	 uip_setdraddr(ipaddr);
-	 uip_ipaddr(ipaddr, 255, 255, 255, 0);
-	 uip_setnetmask(ipaddr);
+	uip_ipaddr(ipaddr, 192, 168, 0, 2);
+	uip_sethostaddr(ipaddr);
+	uip_ipaddr(ipaddr, 192, 168, 0, 1);
+	uip_setdraddr(ipaddr);
+	uip_ipaddr(ipaddr, 255, 255, 255, 0);
+	uip_setnetmask(ipaddr);
 
-	 httpd_init();
+	httpd_init();
 }
 
 static void delaySeconds(unsigned int time) {
@@ -123,50 +123,7 @@ static void manual_search(unsigned int direction) {
 	TEA5767_SetFrequency(stations.frequency[current_station_idx]);
 }
 
-static short clock_management() {
-//	int buttonRead = 0;
-//	short changes;
-//	LCD_Goto(1, 8);
-//	while (BUTTONS_Read(BUTTON_pinMap))
-//		;
-//	do {
-//		buttonRead = 0;
-//		buttonRead = BUTTONS_Read(BUTTON_pinMap); // testar se apanha duas vezes quando se quer inc so uma vez
-//		if (buttonRead)
-//			if (buttonRead != MASK_BUTTON_M) {
-//				dateTime->tm_hour = assertField(dateTime->tm_hour, 23,
-//						buttonRead);
-//				display_date(dateTime);
-//				LCD_Goto(1, 8);
-//				changes = 1;
-//				while (BUTTONS_Read(BUTTON_pinMap))
-//					;
-//			}
-//	} while (buttonRead != BUTTON_M);
-//	LCD_Goto(1, 11);
-//	while (BUTTONS_Read(BUTTON_pinMap))
-//		;
-//	do {
-//		buttonRead = 0;
-//		buttonRead = BUTTONS_Read(BUTTON_pinMap); // testar se apanha duas vezes quando se quer inc so uma vez
-//		if (buttonRead)
-//			if (buttonRead != BUTTON_M) {
-//				dateTime->tm_min = assertField(dateTime->tm_min, 59,
-//						buttonRead);
-//				display_date(dateTime);
-//				LCD_Goto(1, 11);
-//				changes = 1;
-//				while (BUTTONS_Read(BUTTON_pinMap))
-//					;
-//			}
-//	} while (buttonRead != BUTTON_M);
-//	while (BUTTONS_Read(BUTTON_pinMap))
-//		;
-////blink twice;
-//	RTC_Init(dateTime);
-//	return changes;
-	return 0;
-}
+
 
 static void display_freq(void) {
 	unsigned int current_freq = TEA5767_GetFrequency();
@@ -186,8 +143,7 @@ static void display_freq(void) {
 	text_to_print[10] = 'M';
 	text_to_print[11] = '\0';
 	LCD_WriteString(frequency_text, 16, 16);
-	//adicionar frequencia
-	LCD_WriteString(text_to_print, 24, 24);
+	LCD_WriteString(text_to_print, 32, 32);
 }
 
 static void save_current_station(void) {
@@ -276,7 +232,7 @@ static void showTime(void) {
 	aux = FullTime.time[RTC_TIMETYPE_MINUTE];
 	time[4] = '0' + (aux % 10);
 	time[5] = '\0';
-	LCD_WriteString(time, 40, 40);
+	LCD_WriteString(time, 48, 48);
 }
 
 static void printInformation() {
@@ -286,12 +242,74 @@ static void printInformation() {
 	showTime();
 }
 
+static void clock_management() {
+	int buttonRead = 0;
+	LCD_CleanDisplay(BLACK);
+	showTime();
+	char * text = "Clock    ";
+	LCD_WriteString(text, 8,8);
+	text = "Management";
+		LCD_WriteString(text, 16, 16);
+	text = "  Set Hours";
+	LCD_WriteString(text, 32, 32);
+
+	while (BUTTONS_Read(MASK_BUTTONS_ALL));
+	do {
+		buttonRead = 0;
+		buttonRead = BUTTONS_Read(MASK_BUTTONS_ALL);
+		if (buttonRead)
+			if (buttonRead != MASK_BUTTONS_M) {
+				if (buttonRead == MASK_BUTTONS_U)
+					if (FullTime.time[RTC_TIMETYPE_HOUR] + 1 == 24)
+						FullTime.time[RTC_TIMETYPE_HOUR] = 0;
+					else
+						FullTime.time[RTC_TIMETYPE_HOUR] =
+								FullTime.time[RTC_TIMETYPE_HOUR] + 1;
+				else {
+					if (FullTime.time[RTC_TIMETYPE_HOUR] - 1 == -1)
+						FullTime.time[RTC_TIMETYPE_HOUR] = 23;
+					else
+						FullTime.time[RTC_TIMETYPE_HOUR] =
+								FullTime.time[RTC_TIMETYPE_HOUR] - 1;
+				}
+				showTime();
+				while (BUTTONS_Read(MASK_BUTTONS_ALL));
+			}
+	} while (buttonRead != MASK_BUTTONS_M);
+
+	text = " Set Minutes";
+	LCD_WriteString(text, 32, 32);
+	while (BUTTONS_Read(MASK_BUTTONS_ALL));
+	do {
+		buttonRead = 0;
+		buttonRead = BUTTONS_Read(MASK_BUTTONS_ALL);
+		if (buttonRead)
+			if (buttonRead != MASK_BUTTONS_M) {
+				if (buttonRead == MASK_BUTTONS_U)
+					if (FullTime.time[RTC_TIMETYPE_MINUTE] + 1 == 60)
+						FullTime.time[RTC_TIMETYPE_MINUTE] = 0;
+					else
+						FullTime.time[RTC_TIMETYPE_MINUTE] =
+								FullTime.time[RTC_TIMETYPE_MINUTE] + 1;
+				else {
+					if (FullTime.time[RTC_TIMETYPE_MINUTE] - 1 == -1)
+						FullTime.time[RTC_TIMETYPE_MINUTE] = 59;
+					else
+						FullTime.time[RTC_TIMETYPE_MINUTE] =
+								FullTime.time[RTC_TIMETYPE_MINUTE] - 1;
+				}
+				showTime();
+				while (BUTTONS_Read(MASK_BUTTONS_ALL));
+			}
+	} while (buttonRead != MASK_BUTTONS_M);
+	Chip_RTC_SetFullTime(LPC1769_BASE_RTC, &FullTime);//save the new time
+}
+
 int main(void) {
 	static short _changes = 0;
 	static unsigned int _buttons = 0;
-//	static int debug = 0;
 	Inits();
-//
+
 	LCD_CleanDisplay(BLACK);
 	char * a;
 	a = "HELLO WORLD!";
@@ -309,9 +327,10 @@ int main(void) {
 			_changes = 0;
 		}
 
-		if(((LPC_RTC_T*)LPC1769_BASE_RTC)->TIME[RTC_TIMETYPE_MINUTE] != FullTime.time[RTC_TIMETYPE_MINUTE]){
+		if (((LPC_RTC_T*) LPC1769_BASE_RTC)->TIME[RTC_TIMETYPE_MINUTE]
+				!= FullTime.time[RTC_TIMETYPE_MINUTE]) {
 			Chip_RTC_GetFullTime(LPC1769_BASE_RTC, &FullTime);
-			_changes =1;
+			_changes = 1;
 		}
 
 		_buttons = check_buttons();
@@ -320,10 +339,9 @@ int main(void) {
 					& (MASK_BUTTONS_U | MASK_BUTTONS_D | MASK_BUTTONS_LONG_PRESS))
 					== (MASK_BUTTONS_U | MASK_BUTTONS_D
 							| MASK_BUTTONS_LONG_PRESS)) {
-				//acerto do relogio
-				//clock_management
+				clock_management();
 			}
-			if (_buttons & MASK_BUTTONS_U) {
+			else if (_buttons & MASK_BUTTONS_U) {
 				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
 					//automatic search
 					TEA5767_SearchUp();
@@ -332,7 +350,7 @@ int main(void) {
 					manual_search(MASK_BUTTONS_U);
 				}
 			}
-			if (_buttons & MASK_BUTTONS_D) {
+			else if (_buttons & MASK_BUTTONS_D) {
 				if (_buttons & MASK_BUTTONS_LONG_PRESS) {
 					//automatic search
 					TEA5767_SearchDown();
@@ -341,8 +359,7 @@ int main(void) {
 					manual_search(MASK_BUTTONS_D);
 				}
 			}
-//				_changes = radio_management(_buttons, stt, &current_station);
-			if ((_buttons & (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS))
+			else if ((_buttons & (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS))
 					== (MASK_BUTTONS_M | MASK_BUTTONS_LONG_PRESS)) {
 				//save current station
 				save_current_station();

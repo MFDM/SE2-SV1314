@@ -1,0 +1,60 @@
+\hypertarget{group___buttons}{\section{\+: Common Buttons functions}
+\label{group___buttons}\index{\+: Common Buttons functions@{\+: Common Buttons functions}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \hyperlink{group___buttons_ga41f83cbc0118ee85d4e65826f0beaf65}{B\+U\+T\+T\+O\+N\+S\+\_\+\+Read} (unsigned int mask)
+\begin{DoxyCompactList}\small\item\em Read from G\+P\+I\+O ports for a single mask. \end{DoxyCompactList}\item 
+void \hyperlink{group___buttons_ga699a3b1b830e331c4bec9457b40fa270}{B\+U\+T\+T\+O\+N\+S\+\_\+\+Init} (unsigned int pin\+Map)
+\begin{DoxyCompactList}\small\item\em Initialize G\+I\+P\+O port for Button function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains common buttons functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___buttons_ga699a3b1b830e331c4bec9457b40fa270}{\index{\+: Common Buttons functions@{\+: Common Buttons functions}!B\+U\+T\+T\+O\+N\+S\+\_\+\+Init@{B\+U\+T\+T\+O\+N\+S\+\_\+\+Init}}
+\index{B\+U\+T\+T\+O\+N\+S\+\_\+\+Init@{B\+U\+T\+T\+O\+N\+S\+\_\+\+Init}!\+: Common Buttons functions@{\+: Common Buttons functions}}
+\subsubsection[{B\+U\+T\+T\+O\+N\+S\+\_\+\+Init}]{\setlength{\rightskip}{0pt plus 5cm}void B\+U\+T\+T\+O\+N\+S\+\_\+\+Init (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pin\+Map}
+\end{DoxyParamCaption}
+)}}\label{group___buttons_ga699a3b1b830e331c4bec9457b40fa270}
+
+
+Initialize G\+I\+P\+O port for Button function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pin} & map of buttons \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nothing 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This use G\+P\+I\+O ports for initialization 
+\end{DoxyNote}
+\hypertarget{group___buttons_ga41f83cbc0118ee85d4e65826f0beaf65}{\index{\+: Common Buttons functions@{\+: Common Buttons functions}!B\+U\+T\+T\+O\+N\+S\+\_\+\+Read@{B\+U\+T\+T\+O\+N\+S\+\_\+\+Read}}
+\index{B\+U\+T\+T\+O\+N\+S\+\_\+\+Read@{B\+U\+T\+T\+O\+N\+S\+\_\+\+Read}!\+: Common Buttons functions@{\+: Common Buttons functions}}
+\subsubsection[{B\+U\+T\+T\+O\+N\+S\+\_\+\+Read}]{\setlength{\rightskip}{0pt plus 5cm}unsigned int B\+U\+T\+T\+O\+N\+S\+\_\+\+Read (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{mask}
+\end{DoxyParamCaption}
+)}}\label{group___buttons_ga41f83cbc0118ee85d4e65826f0beaf65}
+
+
+Read from G\+P\+I\+O ports for a single mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mask} & of pin map from buttons \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+State of buttons, 1 for clicked, 0 for not clicked 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This use G\+P\+I\+O ports for reading L\+P\+C175x/6x devices. 
+\end{DoxyNote}

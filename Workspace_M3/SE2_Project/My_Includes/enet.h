@@ -1,3 +1,9 @@
+/*
+ * @brief Common Ethernet functions
+ */
+#ifndef ethernet
+#define ethernet
+
 #include "LPC1769_Types.h"
 #include "chip.h"
 #include "enet_17xx_40xx.h"
@@ -18,23 +24,62 @@
 #define ENET_TX_BUF(i)           (ENET_TX_BUF_BASE + ENET_ETH_MAX_FLEN * i)
 
 
-/* Initialize MAC descriptors for simple packet receive/transmit */
+/** @defgroup Ethernet : Common Ethernet functions
+ * @ingroup Ethernet
+ * This file contains common Ethernet functions.
+ * @{
+ */
+
+/**
+ * @brief	Initialize MAC descriptors for simple packet receive/transmit
+ * @param	Nothing
+ * @return	Nothing
+ */
 void InitDescriptors(void);
 
-/* Get the pointer to the Rx buffer storing new received frame */
+/**
+ * @brief	Get the pointer to the Rx buffer storing new received frame
+ * @param	Nothing
+ * @return	Nothing
+ */
 void *ENET_RXGet(int32_t *bytes);
 
-/* Release Rx Buffer */
+/**
+ * @brief	Release Rx Buffer
+ * @param	Nothing
+ * @return	Nothing
+ */
 void ENET_RXBuffClaim(void);
 
-/*	 Debugging purposes	*/
+/**
+ * @brief	Debugging purposes
+ * @param	Nothing
+ * @return	Nothing
+ */
 int ENET_checkBuffer(void);
 
-/* Get Tx Buffer for the next transmission */
+/**
+ * @brief	Get Tx Buffer for the next transmission
+ * @param	Nothing
+ * @return	Nothing
+ */
 void *ENET_TXBuffGet(void);
 
-/* Queue a new frame for transmission */
+/**
+ * @brief	Queue a new frame for transmission
+ * @param	Nothing
+ * @return	Nothing
+ */
 void ENET_TXQueue(int32_t bytes);
 
-/* Check if tranmission finished */
+/**
+ * @brief	Check if tranmission finished
+ * @param	Nothing
+ * @return	Nothing
+ */
 bool ENET_IsTXFinish(void);
+
+/**
+ * @}
+ */
+#endif
